@@ -36,3 +36,41 @@
     transform: rotate(360deg);
   }
 }
+
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.header {
+  background-color: lightskyblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+}
+
+.mainContainer {
+  background-color: lightpink;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  height: 850px;
+}
+
+.chatbotContainer {
+  background-color: lightgreen;
+  width: 25%;
+  height: 100%;
+}
+
+.bodyContainer {
+  background-color: grey;
+  width: 75%;
+  height: 100%;
+}
