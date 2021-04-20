@@ -1,5 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, useRef, useEffect } from 'react';
 import {connect} from 'react-redux'
+
+const AlwaysScrollToBottom = () => {
+  const elementRef = useRef();
+  useEffect(() => elementRef.current.scrollIntoView());
+  return <div ref={elementRef} />;
+};
 
 class chatbot extends Component {
 
@@ -7,12 +13,12 @@ class chatbot extends Component {
         super();
         this.state = {
           name: "",
-          messages: {},
           message: ""
         }
-      }
-    
+    }
+      
     componentDidMount = () => {
+      //???
     }
     
     onChange = e => {
@@ -32,32 +38,30 @@ class chatbot extends Component {
         e.preventDefault();
     
         const message = {
+          type: "user",
           message: this.state.message
         }
         this.props.addMessage(message)
-    }
-    
-    checkProps = e => {
-        e.preventDefault();
-    
-        console.log(this.props)
+        this.setState({message: ""})
     }
 
     render() {
         return (
-        <div className="chatbotContainer">   
-            <form onSubmit={this.onSubmit}>
-            <input onChange={this.onChange} value={this.state.name} id="name"></input>
-            <button>submit name</button>
+        <div className="chatbotContainer">
+          <div className="logoHead">
+            Like a logo or something like a face or basta...
+          </div>
+          <div className="chatBot">
+            <div className="chatLog">
+              {this.props.messages.length === 0 ? "" : this.props.messages.map((msg) => <div className={msg.type}>{msg.message}</div>)}
+              <AlwaysScrollToBottom />
+            </div>
+            <form className="messageSendForm" onSubmit={this.onSubmitMessage}>
+              <input type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message"/>
+              <button className="messageButton">Send</button>
             </form>
-            <form onSubmit={this.onSubmitMessage}>
-            <input onChange={this.onChange} value={this.state.message} id="message"></input>
-            <button>submit message</button>
-            </form>
-            <button onClick={this.checkProps}>Check props</button>
-            <pre>
-                {JSON.stringify(this.props.messages)}
-            </pre>
+          </div>
+            
         </div>
         );
     }
