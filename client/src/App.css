@@ -77,6 +77,10 @@ pre {
   background-color: grey;
   width: 75%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .logoHead {
@@ -146,4 +150,10 @@ pre {
   margin-right: 0;
   padding: 5px 5px 5px 5px;
   overflow-wrap: break-word;
+}
+
+.infoContainer {
+  width: 95%;
+  height: 30%;
+  background-color: rosybrown;
 }

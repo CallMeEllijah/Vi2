@@ -12,7 +12,9 @@ class body extends Component {
   render() {
     return (
       <div className="bodyContainer">
-        <button onClick={this.checkProps}>CHECK DATA</button>
+        <div className="infoContainer problem">problem</div>
+        <div className="infoContainer equation">equation</div>
+        <div className="infoContainer dragabols">dragabols</div>
       </div>
     );
   }
