@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cd backend && node server.js",
     "client": "cd client && npm start",
-    "heroku-postbuild": "cd client && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run start"
   },
   "repository": {
     "type": "git",
