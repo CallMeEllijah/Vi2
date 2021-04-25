@@ -28,9 +28,10 @@ app.use(
 app.use(bodyParser.json());
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, '../build')))
 app.get('*', (req, res) => {
-  res.sendFile('/app/client/build/index.html');
-});
+    res.sendFile(path.join(__dirname, '../build'))
+})
 
 app.post('/api/dialogflow/textQuery',async (req, res)=>{
     console.log("kekeke")
