@@ -27,18 +27,8 @@ app.use(
 app.use(bodyParser.json());
 app.use(express.json());
 
-
-
-mongoose.connect("mongodb+srv://admin:1234@maincluster.3efyv.mongodb.net/Vi2DB?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
-
-app.listen(process.env.PORT || 5000,()=>{
-    console.log ( "Server Has Started" );
-})
-
 app.get('*', (req, res) => {
-  res.sendFile("../client/build/index.html");
+  res.sendFile(path.join(_dirname, 'client', 'build', 'index.html'));
 });
 
 app.post('/api/dialogflow/textQuery',async (req, res)=>{
@@ -98,6 +88,14 @@ app.post('/api/dialogflow/eventQuery',async(req,res)=>{
     }
 
     res.send(result);
+})
+
+mongoose.connect("mongodb+srv://admin:1234@maincluster.3efyv.mongodb.net/Vi2DB?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log(err));
+
+app.listen(process.env.PORT || 5000,()=>{
+    console.log ( "Server Has Started" );
 })
 
 module.exports = router;
