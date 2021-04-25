@@ -14,7 +14,7 @@ const sessionId = config.dialogFlowSessionID
 
 // Create a new session
 const sessionClient = new dialogflow.SessionsClient();
-const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+const sessionPath = sessionClient.sessionPath(projectId, "../key.json");
 
 const app = express();
 app.use(cors())
