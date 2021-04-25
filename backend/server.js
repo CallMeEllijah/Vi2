@@ -28,6 +28,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(express.json());
 
+//for deployment
 app.use(express.static(path.join(__dirname, '../client/build/')))
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build'))
