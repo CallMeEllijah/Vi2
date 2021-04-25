@@ -32,8 +32,8 @@ app.use(express.json());
 mongoose.connect("mongodb+srv://admin:1234@maincluster.3efyv.mongodb.net/Vi2DB?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
-
-app.listen(5000,()=>{
+  
+app.listen(process.env.PORT || 5000,()=>{
     console.log ( "Server Has Started" );
 })
 
