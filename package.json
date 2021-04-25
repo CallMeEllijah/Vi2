@@ -2,7 +2,7 @@
   "name": "vi2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "cd backend && node server.js",
     "client": "cd client && npm start",
