@@ -1,9 +1,12 @@
+import Axios from 'axios';
 import React, { Component, useRef, useEffect } from 'react';
 import {connect} from 'react-redux'
 
 const AlwaysScrollToBottom = () => {
   const elementRef = useRef();
-  useEffect(() => elementRef.current.scrollIntoView());
+  useEffect(() => {
+    elementRef.current.scrollIntoView()
+  });
   return <div ref={elementRef} />;
 };
 
@@ -16,9 +19,21 @@ class chatbot extends Component {
           message: ""
         }
     }
-      
-    componentDidMount = () => {
-      //???
+    
+    componentDidMount = async() => {
+      try {
+        const response = await Axios.post('http://localhost:5000/api/dialogflow/eventQuery',{"event":"IntroduceVi2"})
+        const content = response.data.fulfillmentMessages[0]
+        console.log(content.text.text[0])
+        const message2 = {
+          type: "bot",
+          message: content.text.text[0]
+        }
+        
+        this.props.addMessage(message2)
+      } catch (error) {
+        
+      }
     }
     
     onChange = e => {
@@ -34,7 +49,7 @@ class chatbot extends Component {
         this.props.setUser(user)
     }
 
-    onSubmitMessage = e => {
+    onSubmitMessage = async e => {
         e.preventDefault();
     
         const message = {
@@ -42,6 +57,27 @@ class chatbot extends Component {
           message: this.state.message
         }
         this.props.addMessage(message)
+        var input = this.state.message
+        
+        const textQueryVariable = {
+          "text":input
+        }
+
+        console.log(input)
+        try {
+          const response = await Axios.post('http://localhost:5000/api/dialogflow/textQuery',textQueryVariable)
+          const content = response.data.fulfillmentMessages[0]
+          console.log()
+          const message2 = {
+            type: "bot",
+            message: content.text.text[0]
+          }
+          this.props.addMessage(message2)
+        } catch (error) {
+          
+        }
+        
+
         this.setState({message: ""})
     }
 
