@@ -186,7 +186,7 @@ class body extends Component {
     return (
       <div className="bodyContainer">
         <div className="infoContainer problem">"Bob and Ada went to a music store. Bob bought (operand 1) violins while Ada bought (operand 2) trumpets on display. How many instruments did both of them buy in total?"</div>
-        <div className="infoContainer equation">blank blank blank = blank</div>
+        <div className="infoContainer equation"><input type="text"/><input type="text"/><input type="text"/>=<input type="text"/></div>
         <div className="infoContainer dragabols">
         <DragDropContext onDragEnd={this.onDragEnd}>
           {lists.map((list, listIndex) =>
