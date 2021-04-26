@@ -1,6 +1,7 @@
 const initialState = {
     currentUser: {},
-    messages: []
+    messages: [],
+    draggables: {}
 }
 
 function reducer(state=initialState, action){
@@ -14,6 +15,11 @@ function reducer(state=initialState, action){
         return {
             ...state,
             messages: [...state.messages, action.payload]
+        }
+        case "SET_DRAGS":
+        return {
+            ...state,
+            draggables: action.payload
         }
         default: return state
     }

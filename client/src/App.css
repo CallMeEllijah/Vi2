@@ -154,6 +154,25 @@ pre {
 
 .infoContainer {
   width: 95%;
-  height: 30%;
   background-color: rosybrown;
+}
+
+.problem{
+  height: 30%;
+}
+
+.equation{
+  height: 10%;
+}
+
+.dragabols{
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+img {
+  height: 100px;
+  width: 100%;
 }

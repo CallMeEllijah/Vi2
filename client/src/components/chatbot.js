@@ -106,7 +106,8 @@ class chatbot extends Component {
 function mapStateToProps(state){
   return {
     currentUser: state.currentUser,
-    messages: state.messages
+    messages: state.messages,
+    draggables: state.draggables
   }
 }
 
