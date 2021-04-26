@@ -23,7 +23,7 @@ class chatbot extends Component {
     componentDidMount = async() => {
       try {
         console.log(process.env.PORT)
-        const response = await Axios.post('http://localhost:5000/api/dialogflow/eventQuery',{"event":"IntroduceVi2"})
+        const response = await Axios.post('/api/dialogflow/eventQuery',{"event":"IntroduceVi2"})
         const content = response.data.fulfillmentMessages[0]
         console.log(content.text.text[0])
         const message2 = {
@@ -66,7 +66,7 @@ class chatbot extends Component {
 
         console.log(input)
         try {
-          const response = await Axios.post('http://localhost:5000/api/dialogflow/textQuery',textQueryVariable)
+          const response = await Axios.post('/api/dialogflow/textQuery',textQueryVariable)
           const content = response.data.fulfillmentMessages[0]
           console.log()
           const message2 = {
