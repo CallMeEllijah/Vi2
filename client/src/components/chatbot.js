@@ -22,6 +22,7 @@ class chatbot extends Component {
     
     componentDidMount = async() => {
       try {
+        console.log(process.env.PORT)
         const response = await Axios.post('http://localhost:5000/api/dialogflow/eventQuery',{"event":"IntroduceVi2"})
         const content = response.data.fulfillmentMessages[0]
         console.log(content.text.text[0])
