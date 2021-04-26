@@ -8,13 +8,18 @@ const path = require('path');
 
 const config = require('./dev');
 
-const projectId = config.googleProjectID
-const sessionId = config.dialogFlowSessionID
+const projectID = config.googleProjectID;
+const sessionID = config.dialogFlowSessionID;
+const languageCode = config.dialogFlowSessionLanguageCode;
+const credentials = {
+  client_email: config.googleClientEmail,
+  private_key: config.googlePrivateKey
+};
 
 
 // Create a new session
-const sessionClient = new dialogflow.SessionsClient();
-const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+const sessionClient = new dialogflow.SessionsClient({ projectID, credentials });
+const sessionPath = sessionClient.sessionPath(projectID, sessionID);
 
 const app = express();
 app.use(cors())
