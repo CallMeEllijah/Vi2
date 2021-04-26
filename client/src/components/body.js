@@ -219,7 +219,7 @@ class body extends Component {
                             provided.draggableProps.style
                           )}>
                           <div style={{ background: item.color }}>
-                            {<img src={item.thumb}/>}
+                            {<img src={item.thumb} alt={item.name}/>}
                           </div>
                         </div>
                       )}
