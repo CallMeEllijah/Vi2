@@ -185,8 +185,22 @@ class body extends Component {
     ]
     return (
       <div className="bodyContainer">
-        <div className="infoContainer problem">"Bob and Ada went to a music store. Bob bought (operand 1) violins while Ada bought (operand 2) trumpets on display. How many instruments did both of them buy in total?"</div>
-        <div className="infoContainer equation"><input type="text"/><input type="text"/><input type="text"/>=<input type="text"/></div>
+      {/*-------------------------------------------------------------------------------------------*/}
+        <div className="infoContainer problem">
+          <h4 className="probContainer">
+          "Bob and Ada went to a music store. Bob bought (operand 1) violins while Ada bought (operand 2) trumpets on display. How many instruments did both of them buy in total?"
+          </h4>
+        </div>
+        {/*-------------------------------------------------------------------------------------------*/}
+        <div className="infoContainer equation">
+          Input Equation Here:
+          <input type="text" className="equators"/>
+          <input type="text" className="equators"/>
+          <input type="text" className="equators"/>
+          =
+          <input type="text" className="equators"/>
+        </div>
+        {/*-------------------------------------------------------------------------------------------*/}
         <div className="infoContainer dragabols">
         <DragDropContext onDragEnd={this.onDragEnd}>
           {lists.map((list, listIndex) =>
@@ -196,10 +210,13 @@ class body extends Component {
                   ref={provided.innerRef}
                   style={getListStyle(snapshot.isDraggingOver),
                     {
-                      height: "100%",
+                      height: "95%",
                       overflowY: "scroll",
-                      backgroundColor: "red",
-                      minWidth: "20%"
+                      minWidth: "20%",
+                      marginTop: "5px",
+                      marginBottom: "5px",
+                      borderRadius: "5px",
+                      border: "1px solid grey"
                     }}>
                   <h4>
                     {list.title}
