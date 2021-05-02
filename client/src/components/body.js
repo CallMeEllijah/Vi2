@@ -194,11 +194,11 @@ class body extends Component {
         {/*-------------------------------------------------------------------------------------------*/}
         <div className="infoContainer equation">
           Input Equation Here:
-          <input type="text" className="equators"/>
-          <input type="text" className="equators"/>
-          <input type="text" className="equators"/>
+          <input type="text" className="equators" placeholder="10"/>
+          <input type="text" className="equators" placeholder="+"/>
+          <input type="text" className="equators" placeholder="10"/>
           =
-          <input type="text" className="equators"/>
+          <input type="text" className="equators" placeholder="20"/>
         </div>
         {/*-------------------------------------------------------------------------------------------*/}
         <div className="infoContainer dragabols">
