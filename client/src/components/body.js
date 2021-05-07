@@ -237,8 +237,8 @@ class body extends Component {
                             snapshot.isDragging,
                             provided.draggableProps.style
                           )}>
-                          <div style={{ background: item.color }}>
-                            {<img src={item.thumb} alt={item.name}/>}
+                          <div>
+                            {<img src={item.thumb} alt={item.name}/>} {item.name}
                           </div>
                         </div>
                       )}
