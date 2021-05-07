@@ -51,7 +51,7 @@ pre {
 }
 
 .header {
-  background-color: #A4C3D2;
+  background-color: #D2E9FF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,7 +95,7 @@ pre {
 
 .chatBot {
   margin-top: 10%;
-  background-color: #A4C3D2;
+  background-color: #D2E9FF;
   padding: 10% 5px 5px 5px;
   height: 65%;
   width: 80%;
@@ -109,7 +109,7 @@ pre {
 .chatLog {
   height: 85%;
   width: 90%;
-  background-color: #A4C3D2;
+  background-color: #D2E9FF;
   overflow-y: scroll;
   padding: 5px 5px 5px 5px;
 }
@@ -146,7 +146,7 @@ pre {
 }
 
 .user{
-  background-color: #a5dacb;
+  background-color: #DDEBD1;
   color: black;
   border-radius: 10px; 
   text-align: right;
@@ -161,9 +161,9 @@ pre {
 
 .infoContainer {
   width: 95%;
-  background-color: #A4C3D2;
   border-radius: 5px;
   border: 2px solid black;
+  background-color: #D2E9FF;
 }
 
 .problem{
@@ -176,6 +176,7 @@ pre {
   justify-content: center;
   align-items: center;
   font-size: x-large;
+  background-color: #EFE1FC;
 }
 
 .dragabols{
@@ -183,6 +184,7 @@ pre {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  background-color: #F7E4CB;
 }
 
 img {
@@ -200,4 +202,5 @@ img {
   border-radius: 5px;
   margin-left: 10px;
   margin-right: 10px;
+  font-size: xx-large;
 }

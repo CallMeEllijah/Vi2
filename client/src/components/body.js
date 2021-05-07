@@ -90,7 +90,29 @@ class body extends Component {
       list1: trumpets,
       list2: [],
       list3: [],
-      list4: []
+      list4: [],
+      lists: [
+        {
+          droppableId: 'droppable1',
+          listId: 'list1',
+          title: 'Inventory'
+        },
+        {
+          droppableId: 'droppable2',
+          listId: 'list2',
+          title: 'Operand 1'
+        },
+        {
+          droppableId: 'droppable3',
+          listId: 'list3',
+          title: 'Operand 2'
+        },
+        {
+          droppableId: 'droppable4',
+          listId: 'list4',
+          title: 'Total'
+        }
+      ]
     }
   }
 
@@ -146,56 +168,36 @@ class body extends Component {
     }
   }
 
-  submit = e => {
-    e.preventDefault();
+  componentDidUpdate(){
     const dragObjs = {
       operand1: this.state.list2.length,
       operand2: this.state.list3.length,
       finalAns: this.state.list4.length
     }
-    this.props.setDrags(dragObjs)
-  }
-  checkAns = e => {
-    e.preventDefault();
-    console.log(this.props)
+    try{
+      this.props.setDrags(dragObjs)
+    }catch{}
   }
 
   render() {
-    const lists = [
-      {
-        droppableId: 'droppable1',
-        listId: 'list1',
-        title: 'Inventory'
-      },
-      {
-        droppableId: 'droppable2',
-        listId: 'list2',
-        title: 'Operand 1'
-      },
-      {
-        droppableId: 'droppable3',
-        listId: 'list3',
-        title: 'Operand 2'
-      },
-      {
-        droppableId: 'droppable4',
-        listId: 'list4',
-        title: 'Final Answer'
-      }
-    ]
     return (
       <div className="bodyContainer">
       {/*-------------------------------------------------------------------------------------------*/}
         <div className="infoContainer problem">
-          <h4 className="probContainer">
+          <h2 className="probContainer">
           "Bob and Ada went to a music store. Bob bought (operand 1) violins while Ada bought (operand 2) trumpets on display. How many instruments did both of them buy in total?"
-          </h4>
+          </h2>
         </div>
         {/*-------------------------------------------------------------------------------------------*/}
         <div className="infoContainer equation">
-          Input Equation Here:
+          <h2>EQUATION:</h2>
           <input type="text" className="equators" placeholder="10"/>
-          <input type="text" className="equators" placeholder="+"/>
+          <select id="operators" className="equators">
+            <option value="add">+</option>
+            <option value="sub">-</option>
+            <option value="div">÷</option>
+            <option value="mul">x</option>
+          </select>
           <input type="text" className="equators" placeholder="10"/>
           =
           <input type="text" className="equators" placeholder="20"/>
@@ -203,7 +205,7 @@ class body extends Component {
         {/*-------------------------------------------------------------------------------------------*/}
         <div className="infoContainer dragabols">
         <DragDropContext onDragEnd={this.onDragEnd}>
-          {lists.map((list, listIndex) =>
+          {this.state.lists.map((list, listIndex) =>
             <Droppable key={'list-droppable-' + listIndex} droppableId={list.droppableId}>
               {(provided, snapshot) => (
                 <div
@@ -249,8 +251,6 @@ class body extends Component {
           )}
         </DragDropContext>
         <div style={{display:"flex", flexDirection:"column"}}>
-        <button onClick={this.submit}>Submit</button>
-        <button onClick={this.checkAns}>check</button>
         </div>
         </div>
       </div>
