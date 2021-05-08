@@ -55,7 +55,7 @@ pre {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
+  max-height: 33px;
   border-bottom: 2px solid black;
 }
 
@@ -64,7 +64,7 @@ pre {
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
-  height: 850px;
+  height: 600px;
   margin-top: 20px;
 }
 
@@ -167,7 +167,7 @@ pre {
 }
 
 .problem{
-  height: 30%;
+  height: 25%;
 }
 
 .equation{
@@ -188,8 +188,8 @@ pre {
 }
 
 img {
-  height: 100px;
-  width: 50%;
+  height: 50px;
+  width: 30%;
 }
 
 .probContainer {

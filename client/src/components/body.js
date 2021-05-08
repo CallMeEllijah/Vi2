@@ -189,20 +189,6 @@ class body extends Component {
           </h2>
         </div>
         {/*-------------------------------------------------------------------------------------------*/}
-        <div className="infoContainer equation">
-          <h2>EQUATION:</h2>
-          <input type="text" className="equators" placeholder="10"/>
-          <select id="operators" className="equators">
-            <option value="add">+</option>
-            <option value="sub">-</option>
-            <option value="div">÷</option>
-            <option value="mul">x</option>
-          </select>
-          <input type="text" className="equators" placeholder="10"/>
-          =
-          <input type="text" className="equators" placeholder="20"/>
-        </div>
-        {/*-------------------------------------------------------------------------------------------*/}
         <div className="infoContainer dragabols">
         <DragDropContext onDragEnd={this.onDragEnd}>
           {this.state.lists.map((list, listIndex) =>
@@ -252,6 +238,20 @@ class body extends Component {
         </DragDropContext>
         <div style={{display:"flex", flexDirection:"column"}}>
         </div>
+        </div>
+        {/*-------------------------------------------------------------------------------------------*/}
+        <div className="infoContainer equation">
+          <h2>NUMBER SENTENCE:</h2>
+          <input type="text" className="equators" placeholder="10"/>
+          <select id="operators" className="equators">
+            <option value="add">+</option>
+            <option value="sub">-</option>
+            <option value="div">÷</option>
+            <option value="mul">x</option>
+          </select>
+          <input type="text" className="equators" placeholder="10"/>
+          =
+          <input type="text" className="equators" placeholder="20"/>
         </div>
       </div>
     );
