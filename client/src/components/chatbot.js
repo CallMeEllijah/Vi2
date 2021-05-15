@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import React, { Component, useRef, useEffect } from 'react';
 import {connect} from 'react-redux'
+import cblogo from '../media/cblogo.jpg'
 
 const AlwaysScrollToBottom = () => {
   const elementRef = useRef();
@@ -85,16 +86,15 @@ class chatbot extends Component {
     render() {
         return (
         <div className="chatbotContainer">
-          <div className="logoHead">
-            Like a logo or something like a face or basta...
-          </div>
+        <img src={cblogo} style={{minHeight:"200px", minWidth:"200px"}}/>
           <div className="chatBot">
+            <h3 style={{margin:"0px 0px 0px 0px"}}>Chat with Vi2 below!</h3>
             <div className="chatLog">
               {this.props.messages.length === 0 ? "" : this.props.messages.map((msg) => <div className={msg.type}>{msg.message}</div>)}
               <AlwaysScrollToBottom />
             </div>
             <form className="messageSendForm" onSubmit={this.onSubmitMessage}>
-              <input type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message"/>
+              <input type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message" placeholder="Enter your message here!"/>
               <button className="messageButton">Send</button>
             </form>
           </div>

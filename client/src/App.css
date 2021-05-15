@@ -89,6 +89,9 @@ pre {
 .logoHead {
   height: 20%;
   width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 5px;
   border: 2px solid black;
 }
@@ -96,20 +99,21 @@ pre {
 .chatBot {
   margin-top: 10%;
   background-color: #D2E9FF;
-  padding: 10% 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
   height: 65%;
   width: 80%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
   border-radius: 5px;
   border: 2px solid black;
 }
 
 .chatLog {
-  height: 85%;
+  height: 90%;
   width: 90%;
-  background-color: #D2E9FF;
+  background-color: #bbd1e7;
   overflow-y: scroll;
   padding: 5px 5px 5px 5px;
 }
@@ -189,7 +193,7 @@ pre {
 
 img {
   height: 50px;
-  width: 30%;
+  width: 50%;
 }
 
 .probContainer {
@@ -203,4 +207,9 @@ img {
   margin-left: 10px;
   margin-right: 10px;
   font-size: xx-large;
+}
+
+.cblogo{
+  min-height: 50px;
+  width: 100px;
 }

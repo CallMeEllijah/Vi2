@@ -67,6 +67,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: 'none',
   padding: 0,
   margin: `0 0 1px 0`,
+  width: "100%",
 
   // change background colour if dragging
   background: isDragging ? 'lightgreen' : 'lightgrey',
@@ -177,6 +178,17 @@ class body extends Component {
     try{
       this.props.setDrags(dragObjs)
     }catch{}
+  } 
+
+  //function will contain passing of the dragabols data
+  dragCheck = e => {
+    e.preventDefault();
+    console.log(this.props);
+  }
+  //function will contain passing of the number setnence data
+  numSenCheck = e => {
+    e.preventDefault();
+    console.log(this.props);
   }
 
   render() {
@@ -236,10 +248,16 @@ class body extends Component {
             </Droppable>
           )}
         </DragDropContext>
-        <div style={{display:"flex", flexDirection:"column"}}>
+        <div style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
+          <button onClick={this.dragCheck}>Check</button>
         </div>
         </div>
         {/*-------------------------------------------------------------------------------------------*/}
+        {/*
+          please add onchange function
+          add the ff: inputs to have a value in this.state
+          create a function to pass the state of 'equators'
+        */}
         <div className="infoContainer equation">
           <h2>NUMBER SENTENCE:</h2>
           <input type="text" className="equators" placeholder="10"/>
@@ -252,6 +270,7 @@ class body extends Component {
           <input type="text" className="equators" placeholder="10"/>
           =
           <input type="text" className="equators" placeholder="20"/>
+          <button>Submit</button>
         </div>
       </div>
     );
