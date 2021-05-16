@@ -41,7 +41,6 @@ app.get('/', (req, res) => {
 })
 
 app.post('/api/dialogflow/textQuery',async (req, res)=>{
-    console.log("kekeke")
     // The text query request.
     const request = {
       session: sessionPath,
