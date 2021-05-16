@@ -69,7 +69,7 @@ class chatbot extends Component {
         try {
           const response = await Axios.post('/api/dialogflow/textQuery',textQueryVariable)
           const content = response.data.fulfillmentMessages[0]
-          console.log()
+          console.log(response.data)
           const message2 = {
             type: "bot",
             message: content.text.text[0]
