@@ -8,7 +8,7 @@ const UserSchema = new Schema({
     required: true
   },
   assessmentLevel: {
-    type: Number,
+    type: Array,
     required: true
   },
   corrects: {

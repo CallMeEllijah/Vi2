@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, { Component, useRef, useEffect } from 'react';
 import {connect} from 'react-redux'
-import cblogo from '../media/cblogo.jpg'
+import cblogo from '../media/cblogo.png'
 
 const AlwaysScrollToBottom = () => {
   const elementRef = useRef();
@@ -23,11 +23,11 @@ class chatbot extends Component {
     
     componentDidMount = async() => {
       try {
-        console.log(process.env.PORT)
         const response = await Axios.post('/api/dialogflow/eventQuery',{"event":"IntroduceVi2"})
         const content = response.data.fulfillmentMessages[0]
         console.log(content.text.text[0])
         const message2 = {
+          key: this.props.messages.length,
           type: "bot",
           message: content.text.text[0]
         }
@@ -55,6 +55,7 @@ class chatbot extends Component {
         e.preventDefault();
     
         const message = {
+          key: this.props.messages.length,
           type: "user",
           message: this.state.message
         }
@@ -71,6 +72,7 @@ class chatbot extends Component {
           const content = response.data.fulfillmentMessages[0]
           
           const message2 = {
+            key: this.props.messages.length,
             type: "bot",
             message: content.text.text[0]
           }
@@ -86,11 +88,11 @@ class chatbot extends Component {
     render() {
         return (
         <div className="chatbotContainer">
-        <img src={cblogo} style={{minHeight:"200px", minWidth:"200px"}}/>
+          <img src={cblogo} style={{marginBottom:"-50px", marginTop:"-50px", minHeight:"260px", minWidth:"250px"}}/>
           <div className="chatBot">
             <h3 style={{margin:"0px 0px 0px 0px"}}>Chat with Vi2 below!</h3>
             <div className="chatLog">
-              {this.props.messages.length === 0 ? "" : this.props.messages.map((msg) => <div className={msg.type}>{msg.message}</div>)}
+              {this.props.messages.length === 0 ? "" : this.props.messages.map((msg) => <div className={msg.type} key={msg.key}>{msg.message}</div>)}
               <AlwaysScrollToBottom />
             </div>
             <form className="messageSendForm" onSubmit={this.onSubmitMessage}>

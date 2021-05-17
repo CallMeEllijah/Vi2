@@ -7,9 +7,9 @@ const trumpets = [
         thumb: appleImage
     },
     {
-          id: '2',
-          name: 'Apple',
-          thumb: appleImage
+        id: '2',
+        name: 'Apple',
+        thumb: appleImage
     },
     {
         id: '3',

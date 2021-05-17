@@ -33,22 +33,27 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
-  padding: 0,
-  margin: `0 0 1px 0`,
-  width: "100%",
+  width: "98%",
 
   // change background colour if dragging
-  background: isDragging ? 'lightgreen' : 'lightgrey',
+  background: isDragging ? 'lightgreen' : '',
+  borderRadius: '5px',
+  border: '2px solid black',
 
   // styles we need to apply on draggables
   ...draggableStyle
 })
 
 const getListStyle = isDraggingOver => ({
-  background: isDraggingOver ? 'lightblue' : '#eee',
-  padding: 0,
-  margin: '3px',
-  width: 250
+  background: isDraggingOver ? 'lightblue' : '',
+  width: '15%',
+  height: "95%",
+  overflowY: "scroll",
+  minWidth: "20%",
+  marginTop: "5px",
+  marginBottom: "5px",
+  borderRadius: "5px",
+  border: "1px solid grey"
 })
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 class body extends Component {
@@ -56,7 +61,7 @@ class body extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: "",
+      question: "Talk to Vi at the chatbox on the lower right of the screen to start!",
       nsO1: "",
       nsOP: "",
       nsO2: "",
@@ -73,12 +78,12 @@ class body extends Component {
         {
           droppableId: 'droppable2',
           listId: 'list2',
-          title: 'Operand 1'
+          title: ''
         },
         {
           droppableId: 'droppable3',
           listId: 'list3',
-          title: 'Operand 2'
+          title: ''
         }
       ]
     }
@@ -138,21 +143,84 @@ class body extends Component {
     if(prevProps.messages !== this.props.messages){
       if(this.props.messages[this.props.messages.length-1].message === "trumpets"){ //change such that if question contains
         this.setState({
-          question: "Bob and ada", //put question here
+          question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?", //put question here
           list1: trumpetInvetory,
           list2: [],
-          list3: []
+          list3: [],
+          lists: [
+            {
+              droppableId: 'droppable1',
+              listId: 'list1',
+              title: 'Inventory'
+            },
+            {
+              droppableId: 'droppable2',
+              listId: 'list2',
+              title: "Bob's Items"
+            },
+            {
+              droppableId: 'droppable3',
+              listId: 'list3',
+              title: "Ada's Items"
+            }
+          ]
         })
       }
       if(this.props.messages[this.props.messages.length-1].message === "apples"){
         this.setState({
-          question: "sum aplez",
+          question: "Joe and Sam went to the market to buy apples. Joe bought 2 apples and Sam bought 3 apples. How many apples did they buy in total?",
           list1: appleInvetory,
           list2: [],
-          list3: []
+          list3: [],
+          lists: [
+            {
+              droppableId: 'droppable1',
+              listId: 'list1',
+              title: 'Inventory'
+            },
+            {
+              droppableId: 'droppable2',
+              listId: 'list2',
+              title: "Joe's Items"
+            },
+            {
+              droppableId: 'droppable3',
+              listId: 'list3',
+              title: "Sams's Items"
+            }
+          ]
         })
       }
-    } else {
+      if(this.props.messages[this.props.messages.length-1].message === "finish"){
+        this.setState({
+          question: "Continue talking to Vi at the chatbox on the lower right of the screen to continue!",
+          list1: [],
+          list2: [],
+          list3: [],
+          lists: [
+            {
+              droppableId: 'droppable1',
+              listId: 'list1',
+              title: 'Inventory'
+            },
+            {
+              droppableId: 'droppable2',
+              listId: 'list2',
+              title: ""
+            },
+            {
+              droppableId: 'droppable3',
+              listId: 'list3',
+              title: ""
+            }
+          ],
+          nsO1: "",
+          nsO2: "",
+          nsO3: "",
+          nsOP: ""
+        })
+      }
+    } else if(prevProps.draggables.operand1 !== this.state.list2.length || prevProps.draggables.operand2 !== this.state.list3.length){
       const dragObjs = {
         operand1: this.state.list2.length,
         operand2: this.state.list3.length
@@ -193,22 +261,14 @@ class body extends Component {
         </div>
         {/*-------------------------------------------------------------------------------------------*/}
         <div className="infoContainer dragabols">
+        <h1>DRAG</h1>
         <DragDropContext onDragEnd={this.onDragEnd}>
           {this.state.lists.map((list, listIndex) =>
             <Droppable key={'list-droppable-' + listIndex} droppableId={list.droppableId}>
               {(provided, snapshot) => (
                 <div
                   ref={provided.innerRef}
-                  style={getListStyle(snapshot.isDraggingOver),
-                    {
-                      height: "95%",
-                      overflowY: "scroll",
-                      minWidth: "20%",
-                      marginTop: "5px",
-                      marginBottom: "5px",
-                      borderRadius: "5px",
-                      border: "1px solid grey"
-                    }}>
+                  style={getListStyle(snapshot.isDraggingOver)}>
                   <h4>
                     {list.title}
                   </h4>
@@ -239,16 +299,14 @@ class body extends Component {
             </Droppable>
           )}
         </DragDropContext>
-        <div style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
-          <button onClick={this.dragCheck} className="bodyButton">Check</button>
-        </div>
+        <button onClick={this.dragCheck} className="bodyButton">Check</button>
         </div>
         {/*-------------------------------------------------------------------------------------------*/}
         <form className="infoContainer equation" onSubmit={this.onSubmit}>
           <h3>NUMBER SENTENCE:</h3>
           <input type="number" className="equators" placeholder="10" value={this.state.nsO1} id="nsO1" onChange={this.onChange}/>
           <select id="nsOP" className="equators" value={this.state.nsOP} onChange={this.onChange}>
-            <option value="" disabled selected>select</option>
+            <option value="" disabled defaultValue>select</option>
             <option value="+">+</option>
             <option value="-">-</option>
             <option value="/">÷</option>
@@ -257,7 +315,7 @@ class body extends Component {
           <input type="number" className="equators" placeholder="10" value={this.state.nsO2} id="nsO2" onChange={this.onChange}/>
           =
           <input type="number" className="equators" placeholder="10" value={this.state.nsO3} id="nsO3" onChange={this.onChange}/>
-          <button className="bodyButton">Submit</button>
+          <button className="bodyButton">Check</button>
         </form>
       </div>
     );
