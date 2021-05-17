@@ -1,41 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import trumpetImage from '../media/trumpet.png'
-
-// fake data
-const trumpets = [
-  {
-    id: 'trumpet1',
-    name: 'Trumpet',
-    thumb: trumpetImage
-  },
-  {
-      id: 'trumpet2',
-      name: 'Trumpet',
-      thumb: trumpetImage
-  },
-  {
-      id: 'trumpet3',
-      name: 'Trumpet',
-      thumb: trumpetImage
-  },
-  {
-      id: 'trumpet4',
-      name: 'Trumpet',
-      thumb: trumpetImage
-  },
-  {
-      id: 'trumpet5',
-      name: 'Trumpet',
-      thumb: trumpetImage
-  },
-  {
-      id: 'trumpet6',
-      name: 'Trumpet',
-      thumb: trumpetImage
-  }
-]
+import trumpetInvetory from '../datas/trumpets'
+import appleInvetory from '../datas/apples'
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -88,10 +55,14 @@ class body extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list1: trumpets,
+      question: "",
+      nsO1: "",
+      nsOP: "",
+      nsO2: "",
+      nsO3: "",
+      list1: [],
       list2: [],
       list3: [],
-      list4: [],
       lists: [
         {
           droppableId: 'droppable1',
@@ -107,11 +78,6 @@ class body extends Component {
           droppableId: 'droppable3',
           listId: 'list3',
           title: 'Operand 2'
-        },
-        {
-          droppableId: 'droppable4',
-          listId: 'list4',
-          title: 'Total'
         }
       ]
     }
@@ -120,8 +86,7 @@ class body extends Component {
   droppableIds = {
     droppable1: 'list1',
     droppable2: 'list2',
-    droppable3: 'list3',
-    droppable4: 'list4'
+    droppable3: 'list3'
   }
   getList = id => this.state[this.droppableIds[id]]
 
@@ -146,8 +111,6 @@ class body extends Component {
         copiedState.list2 = items
       } else if (source.droppableId === 'droppable3') {
         copiedState.list3 = items
-      } else if (source.droppableId === 'droppable4') {
-        copiedState.list4 = items
       }
 
       this.setState(copiedState)
@@ -163,23 +126,49 @@ class body extends Component {
       this.setState({
         list1: result.droppable1 ? result.droppable1 : this.state.list1,
         list2: result.droppable2 ? result.droppable2 : this.state.list2,
-        list3: result.droppable3 ? result.droppable3 : this.state.list3,
-        list4: result.droppable4 ? result.droppable4 : this.state.list4
+        list3: result.droppable3 ? result.droppable3 : this.state.list3
       })
     }
   }
 
-  componentDidUpdate(){
-    const dragObjs = {
-      operand1: this.state.list2.length,
-      operand2: this.state.list3.length,
-      finalAns: this.state.list4.length
+  componentDidUpdate(prevProps){
+    //change such that if question contains trumpets then change to trumpets... so on and so forth
+    if(prevProps.messages !== this.props.messages){
+      if(this.props.messages[this.props.messages.length-1].message === "trumpets"){ //change such that if question contains
+        this.setState({
+          question: "Bob and ada", //put question here
+          list1: trumpetInvetory,
+          list2: [],
+          list3: []
+        })
+      }
+      if(this.props.messages[this.props.messages.length-1].message === "apples"){
+        this.setState({
+          question: "sum aplez",
+          list1: appleInvetory,
+          list2: [],
+          list3: []
+        })
+      }
+    } else {
+      const dragObjs = {
+        operand1: this.state.list2.length,
+        operand2: this.state.list3.length
+      }
+      try{
+        this.props.setDrags(dragObjs)
+      }catch{}
     }
-    try{
-      this.props.setDrags(dragObjs)
-    }catch{}
-  } 
-
+  }
+  //for typing in inputs
+  onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+  //to send inputs from local to backend
+  onSubmit = e => {
+    e.preventDefault();
+    console.log(this.state)
+  }
   //function will contain passing of the dragabols data
   dragCheck = e => {
     e.preventDefault();
@@ -197,7 +186,7 @@ class body extends Component {
       {/*-------------------------------------------------------------------------------------------*/}
         <div className="infoContainer problem">
           <h2 className="probContainer">
-          "Bob and Ada went to a music store. Bob bought (operand 1) violins while Ada bought (operand 2) trumpets on display. How many instruments did both of them buy in total?"
+          {this.state.question}
           </h2>
         </div>
         {/*-------------------------------------------------------------------------------------------*/}
@@ -249,7 +238,7 @@ class body extends Component {
           )}
         </DragDropContext>
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
-          <button onClick={this.dragCheck}>Check</button>
+          <button onClick={this.dragCheck} className="bodyButton">Check</button>
         </div>
         </div>
         {/*-------------------------------------------------------------------------------------------*/}
@@ -258,20 +247,20 @@ class body extends Component {
           add the ff: inputs to have a value in this.state
           create a function to pass the state of 'equators'
         */}
-        <div className="infoContainer equation">
-          <h2>NUMBER SENTENCE:</h2>
-          <input type="text" className="equators" placeholder="10"/>
-          <select id="operators" className="equators">
-            <option value="add">+</option>
-            <option value="sub">-</option>
-            <option value="div">÷</option>
-            <option value="mul">x</option>
+        <form className="infoContainer equation" onSubmit={this.onSubmit}>
+          <h3>NUMBER SENTENCE:</h3>
+          <input type="number" className="equators" placeholder="10" value={this.state.nsO1} id="nsO1" onChange={this.onChange}/>
+          <select id="nsOP" className="equators" value={this.state.nsOP} onChange={this.onChange}>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="/">÷</option>
+            <option value="x">x</option>
           </select>
-          <input type="text" className="equators" placeholder="10"/>
+          <input type="number" className="equators" placeholder="10" value={this.state.nsO2} id="nsO2" onChange={this.onChange}/>
           =
-          <input type="text" className="equators" placeholder="20"/>
-          <button>Submit</button>
-        </div>
+          <input type="number" className="equators" placeholder="10" value={this.state.nsO3} id="nsO3" onChange={this.onChange}/>
+          <button className="bodyButton">Submit</button>
+        </form>
       </div>
     );
   }
