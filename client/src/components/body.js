@@ -4,6 +4,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import trumpetInvetory from '../datas/trumpets'
 import appleInvetory from '../datas/apples'
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------- for draggables
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list)
@@ -49,7 +50,7 @@ const getListStyle = isDraggingOver => ({
   margin: '3px',
   width: 250
 })
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
 class body extends Component {
 
   constructor(props) {
@@ -82,7 +83,7 @@ class body extends Component {
       ]
     }
   }
-
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------- for draggables
   droppableIds = {
     droppable1: 'list1',
     droppable2: 'list2',
@@ -130,7 +131,8 @@ class body extends Component {
       })
     }
   }
-
+  //---------------------------------------------------------------------------------------------------------------------------------------------------------
+  //checks everytime components or props changes
   componentDidUpdate(prevProps){
     //change such that if question contains trumpets then change to trumpets... so on and so forth
     if(prevProps.messages !== this.props.messages){
@@ -242,15 +244,11 @@ class body extends Component {
         </div>
         </div>
         {/*-------------------------------------------------------------------------------------------*/}
-        {/*
-          please add onchange function
-          add the ff: inputs to have a value in this.state
-          create a function to pass the state of 'equators'
-        */}
         <form className="infoContainer equation" onSubmit={this.onSubmit}>
           <h3>NUMBER SENTENCE:</h3>
           <input type="number" className="equators" placeholder="10" value={this.state.nsO1} id="nsO1" onChange={this.onChange}/>
           <select id="nsOP" className="equators" value={this.state.nsOP} onChange={this.onChange}>
+            <option value="" disabled selected>select</option>
             <option value="+">+</option>
             <option value="-">-</option>
             <option value="/">÷</option>

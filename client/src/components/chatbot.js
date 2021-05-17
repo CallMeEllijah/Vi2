@@ -94,7 +94,7 @@ class chatbot extends Component {
               <AlwaysScrollToBottom />
             </div>
             <form className="messageSendForm" onSubmit={this.onSubmitMessage}>
-              <input type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message" placeholder="Enter your message here!"/>
+              <input required type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message" placeholder="Enter your message here!"/>
               <button className="messageButton">Send</button>
             </form>
           </div>
