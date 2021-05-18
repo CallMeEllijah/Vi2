@@ -23,3 +23,7 @@ Do the ff to start:
 -- first 8 - conceptual understanding and strategic competence
 -- last 4 - procedural fluency skill
 -- expert being 12 point = intermediate being 8 points = beginner being 4 points
+- everytime mag checheck check points
+-- this is done by checking muna if wrong kung sinabi na wrong sorry try again or something ganun subtract points
+-- if reply is like wanna go to the next question then add points
+-- then at the pinaka end where the bot says we dont foo we calculate point then update user model
