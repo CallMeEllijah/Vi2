@@ -1,6 +1,6 @@
 const initialState = {
     currentUser: {},
-    question:{},
+    questiontype:{},
     messages: [],
     draggables: {}
 }
@@ -12,10 +12,10 @@ function reducer(state=initialState, action){
             ...state,
             currentUser: action.payload
         }
-        case "SET_QUESTION":
+        case "SET_QUESTION_TYPE":
         return {
             ...state,
-            question: action.payload
+            questiontype: action.payload
         }
         case "ADD_MESSAGE":
         return {

@@ -1,32 +1,35 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-// Create Schema
-const QuestionSchema = new Schema({
-  problem: {
-    type: String,
-    required: true
-  },
-  number: {
-    type: Number,
-    required: true
-  },
-  numberofquestions: {
-    type: Number,
-    required: true
-  },
-  questions: {
-    type: Array,
-    required: true
-  },
-  questionanswers: {
-    type: Array,
-    required: true
-  },
-  questiontypes: {
-    type: Array,
-    required: true
-  }
-});
+const questionSchema = new Schema({
+    _id:{
+        type: String,
+        required: true
+    },
+    problem:{
+        type: String,
+        required: true
+    },
+    number:{
+        type: Number,
+        required: true
+    },
+    numberofquestions:{
+        type: Number,
+        required: true
+    },
+    questions:[{
+        type: String,
+        required:true
+    }],
+    questionanswers:[{
+        type: String,
+        required:true
+    }],
+    questiontypes:[{
+        type: String,
+        required:true
+    }],
+})
 
-module.exports = User = mongoose.model("questions", QuestionSchema);
+module.exports = mongoose.model('questions',questionSchema)

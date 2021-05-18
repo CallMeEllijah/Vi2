@@ -68,15 +68,43 @@ class chatbot extends Component {
 
         try {
           const response = await Axios.post('/api/dialogflow/textQuery',textQueryVariable)
-          console.log(response.data.outputContexts[0].parameters.fields.questiontype.stringValue)
-          const content = response.data.fulfillmentMessages[0]
           
+          const content = response.data.fulfillmentMessages[0]
+          const intent = response.data.intent.displayName
           const message2 = {
             key: this.props.messages.length,
             type: "bot",
             message: content.text.text[0]
           }
-          this.props.addMessage(message2)
+          if(intent === "Show First Problem"){
+            Axios.post("/getProblem",{"number":response.data.outputContexts[0].parameters.fields.problemnumber.numberValue}).then(problem =>{
+              const message3 = {
+                key: this.props.messages.length,
+                type: "bot",
+                message: "Problem number " + problem.data + content.text.text[0]
+              }
+              this.props.addMessage(message3)
+            })
+          }
+          else if(intent === "Show Succeding Problem"){
+            Axios.post("/getProblem",{"number":response.data.outputContexts[0].parameters.fields.problemnumber.numberValue}).then(problem =>{
+              const message3 = {
+                key: this.props.messages.length,
+                type: "bot",
+                message: "Problem number " + problem.data + content.text.text[0]
+              }
+              this.props.addMessage(message3)
+            })
+          }
+          else if(intent === "Ask Succeding Question"){
+            this.props.setQuestionType(response.data.outputContexts[0].parameters.fields.questiontype.stringValue)
+            this.props.addMessage(message2)
+          }
+          else{
+            this.props.addMessage(message2)
+          }
+          
+          
         } catch (error) {
           
         }
@@ -110,7 +138,8 @@ function mapStateToProps(state){
   return {
     currentUser: state.currentUser,
     messages: state.messages,
-    draggables: state.draggables
+    draggables: state.draggables,
+    questiontype: state.questiontype
   }
 }
 
@@ -121,6 +150,9 @@ function mapDispatchToProps(dispatch){
       },
       addMessage: (msgObject) => {
         dispatch({type: "ADD_MESSAGE", payload: msgObject})
+      },
+      setQuestionType: (msgObject) => {
+        dispatch({type: "SET_QUESTION_TYPE", payload: msgObject})
       }
     }
 }

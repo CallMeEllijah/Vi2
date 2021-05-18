@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -141,7 +142,7 @@ class body extends Component {
   componentDidUpdate(prevProps){
     //change such that if question contains trumpets then change to trumpets... so on and so forth
     if(prevProps.messages !== this.props.messages){
-      if(this.props.messages[this.props.messages.length-1].message === "trumpets"){ //change such that if question contains
+      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 1")){ //change such that if question contains
         this.setState({
           question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?", //put question here
           list1: trumpetInvetory,
@@ -166,7 +167,7 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.messages[this.props.messages.length-1].message === "apples"){
+      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 2")){
         this.setState({
           question: "Joe and Sam went to the market to buy apples. Joe bought 2 apples and Sam bought 3 apples. How many apples did they buy in total?",
           list1: appleInvetory,
@@ -240,14 +241,77 @@ class body extends Component {
     console.log(this.state)
   }
   //function will contain passing of the dragabols data
-  dragCheck = e => {
+  dragCheck = async e => {
     e.preventDefault();
-    console.log(this.props);
+    const questionType = this.props.questiontype
+    
+    if(questionType === "firstbox"){
+        const response = await Axios.post('/api/dialogflow/textQuery',{text:this.props.draggables.operand1})
+        const content = response.data.fulfillmentMessages[0]
+        const message = {
+          key: this.props.messages.length,
+          type: "bot",
+          message: content.text.text[0]
+        }
+        this.props.addMessage(message)
+    }
+    else if(questionType === "secondbox"){
+        const response = await Axios.post('/api/dialogflow/textQuery',{text:this.props.draggables.operand2})
+        const content = response.data.fulfillmentMessages[0]
+        const message = {
+          key: this.props.messages.length,
+          type: "bot",
+          message: content.text.text[0]
+        }
+        this.props.addMessage(message)
+    }
+    
   }
   //function will contain passing of the number setnence data
-  numSenCheck = e => {
+  numSenCheck = async e => {
     e.preventDefault();
-    console.log(this.props);
+    const questionType = this.props.questiontype
+    console.log(questionType)
+    if(questionType === "operation"){
+      const response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.nsOP})
+        const content = response.data.fulfillmentMessages[0]
+        const message = {
+          key: this.props.messages.length,
+          type: "bot",
+          message: content.text.text[0]
+        }
+        this.props.addMessage(message)
+    }
+    else if(questionType === "firstoperand"){
+      const response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.nsO1})
+        const content = response.data.fulfillmentMessages[0]
+        const message = {
+          key: this.props.messages.length,
+          type: "bot",
+          message: content.text.text[0]
+        }
+        this.props.addMessage(message)
+    }
+    else if(questionType === "secondoperand"){
+      const response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.nsO2})
+        const content = response.data.fulfillmentMessages[0]
+        const message = {
+          key: this.props.messages.length,
+          type: "bot",
+          message: content.text.text[0]
+        }
+        this.props.addMessage(message)
+    }
+    else if(questionType === "finalanswer"){
+      const response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.nsO3})
+        const content = response.data.fulfillmentMessages[0]
+        const message = {
+          key: this.props.messages.length,
+          type: "bot",
+          message: content.text.text[0]
+        }
+        this.props.addMessage(message)
+    }
   }
 
   render() {
@@ -302,7 +366,7 @@ class body extends Component {
         <button onClick={this.dragCheck} className="bodyButton">Check</button>
         </div>
         {/*-------------------------------------------------------------------------------------------*/}
-        <form className="infoContainer equation" onSubmit={this.onSubmit}>
+        <form className="infoContainer equation" onSubmit={this.numSenCheck}>
           <h3>NUMBER SENTENCE:</h3>
           <input type="number" className="equators" placeholder="10" value={this.state.nsO1} id="nsO1" onChange={this.onChange}/>
           <select id="nsOP" className="equators" value={this.state.nsOP} onChange={this.onChange}>
@@ -326,7 +390,8 @@ function mapStateToProps(state){
   return {
     currentUser: state.currentUser,
     messages: state.messages,
-    draggables: state.draggables
+    draggables: state.draggables,
+    questiontype : state.questiontype
   }
 }
 
@@ -334,6 +399,9 @@ function mapDispatchToProps(dispatch){
   return {
     setDrags: (dragObj) => {
       dispatch({type: "SET_DRAGS", payload: dragObj})
+    },
+    addMessage: (msgObject) => {
+      dispatch({type: "ADD_MESSAGE", payload: msgObject})
     }
   }
 }

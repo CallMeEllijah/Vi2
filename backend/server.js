@@ -5,8 +5,10 @@ const dialogflow = require('dialogflow');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const QUESTIONS = require('./models/Question')
 
 const config = require('./dev');
+const Question = require("./models/Question");
 
 const projectID = config.googleProjectID;
 const sessionID = config.dialogFlowSessionID;
@@ -102,6 +104,17 @@ app.post('/api/dialogflow/eventQuery',async(req,res)=>{
 
     res.send(result);
 })
+
+// MONGODB ROUTES ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+app.post('/getProblem',(req,res)=>{
+    const number = req.body.number + ""
+    QUESTIONS.findOne({number : number}).then(question => {
+      res.send(question.number + "")
+    })
+})
+
+// MONGODB ROUTES ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 mongoose.connect("mongodb+srv://admin:1234@maincluster.3efyv.mongodb.net/Vi2DB?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
