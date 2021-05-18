@@ -6,9 +6,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const QUESTIONS = require('./models/Question')
+const USER = require('./models/User')
 
 const config = require('./dev');
 const Question = require("./models/Question");
+const User = require("./models/User");
 
 const projectID = config.googleProjectID;
 const sessionID = config.dialogFlowSessionID;
@@ -112,6 +114,33 @@ app.post('/getProblem',(req,res)=>{
     QUESTIONS.findOne({number : number}).then(question => {
       res.send(question.number + "")
     })
+})
+
+app.post('/addUser',(req,res)=>{
+  const newUser = new User({
+    name: req.body.name,
+    assessmentLevel1: "",
+    assessmentLevel2: "",
+    assessmentLevel3: "",
+    assessmentLevel4: "",
+    assessmentLevel5: "",
+    assessmentLevel6: "",
+  });
+
+  newUser.save()
+    .then(user => res.json(user))
+    .catch(err => console.log(err));
+})
+
+app.post('/updateAssessmentLevel',(req,res)=>{
+  //add checking to know where and when to put on assessmentlevel1
+  USER.findOne({name: req.body.name}).then(user => {
+    if(user){
+      user.updateOne({
+        assessmentLevel1: "expert"
+      }).then(rep => res.send(rep))
+    }
+  })
 })
 
 // MONGODB ROUTES ------------------------------------------------------------------------------------------------------------------------------------------------------------------

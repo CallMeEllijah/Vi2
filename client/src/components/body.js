@@ -191,6 +191,12 @@ class body extends Component {
             }
           ]
         })
+        //start method of assessmentlevel
+        try{
+          Axios.post("/updateAssessmentLevel", {name: this.props.currentUser})
+        } catch {
+          console.log("welp no workie")
+        }
       }
       if(this.props.messages[this.props.messages.length-1].message === "finish"){
         this.setState({
