@@ -30,6 +30,22 @@ const questionSchema = new Schema({
         type: String,
         required:true
     }],
+    positiveresponses:[{
+        type: String,
+        required:true
+    }],
+    negativeresponses:[{
+        type: String,
+        required:true
+    }],
+    hints:[{
+        type: String,
+        required:true
+    }],
+    requestions:[{
+        type: String,
+        required:true
+    }],
 })
 
 module.exports = mongoose.model('questions',questionSchema)
