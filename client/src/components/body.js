@@ -193,7 +193,7 @@ class body extends Component {
         })
         //start method of assessmentlevel
         try{
-          Axios.post("/updateAssessmentLevel", {name: this.props.currentUser})
+          Axios.post("/updateAssessmentLevel", {_id: this.props.currentUser})
         } catch {
           console.log("welp no workie")
         }

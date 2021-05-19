@@ -133,8 +133,7 @@ app.post('/addUser',(req,res)=>{
 })
 
 app.post('/updateAssessmentLevel',(req,res)=>{
-  //add checking to know where and when to put on assessmentlevel1
-  USER.findOne({name: req.body.name}).then(user => {
+  USER.findOne({_id: req.body._id}).then(user => {
     if(user){
       user.updateOne({
         assessmentLevel1: "expert"

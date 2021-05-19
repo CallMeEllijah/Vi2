@@ -116,9 +116,10 @@ class chatbot extends Component {
     //for updates
     componentDidUpdate(prevProps){
       if(prevProps.messages !== this.props.messages){
-        if(this.props.messages[this.props.messages.length-1].message.includes("Hello ")){
+        if(this.props.messages[this.props.messages.length-1].message.includes("Are you ready to start ?")){
           Axios.post("/addUser", {name: this.props.messages[this.props.messages.length-2].message}).then(res => {
-            this.props.setUser(this.props.messages[this.props.messages.length-2].message);
+            console.log(res)
+            this.props.setUser(res.data._id);
           })
         }
       }
