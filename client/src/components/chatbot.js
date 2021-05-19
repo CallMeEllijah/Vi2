@@ -104,6 +104,7 @@ class chatbot extends Component {
           }
           else if(content.text.text[0] === "Congratulations! You got the correct answer!"){
             this.props.addMessage(message2)
+            this.props.setMistake(response.data.outputContexts[0].parameters.fields.mistake.numberValue)
             const response1 = await Axios.post('/api/dialogflow/textQuery',{
               "text":"yes"
             })
@@ -180,7 +181,10 @@ function mapDispatchToProps(dispatch){
       },
       setQuestionType: (msgObject) => {
         dispatch({type: "SET_QUESTION_TYPE", payload: msgObject})
-      }
+      },
+      setMistake: (msgObject) => {
+        dispatch({type: "SET_MISTAKE", payload: msgObject})
+      },
     }
 }
 
