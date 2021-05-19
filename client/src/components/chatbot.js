@@ -102,19 +102,18 @@ class chatbot extends Component {
             this.props.setQuestionType(response.data.outputContexts[0].parameters.fields.questiontype.stringValue)
             this.props.addMessage(message2)
           }
-          else if(content.text.text[0] === "Congratulations! You got the correct answer!"){
+          else if(content.text.text[0] == "Congratulations! You got the correct answer!"){
             this.props.addMessage(message2)
-            this.props.setMistake(response.data.outputContexts[0].parameters.fields.mistake.numberValue)
-            const response1 = await Axios.post('/api/dialogflow/textQuery',{
-              "text":"yes"
-            })
-            const content = response1.data.fulfillmentMessages[0]
+            
+            const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"yes"})
+            const content1 = response1.data.fulfillmentMessages[0]
             const message3 = {
               key: this.props.messages.length,
               type: "bot",
-              message: content.text.text[0]
+              message: content1.text.text[0]
             }
             this.props.addMessage(message3)
+            this.props.setMistake(response1.data.outputContexts[0].parameters.fields.mistake.numberValue)
           }
           else{
             this.props.addMessage(message2)
