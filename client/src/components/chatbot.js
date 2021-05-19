@@ -71,11 +71,13 @@ class chatbot extends Component {
           
           const content = response.data.fulfillmentMessages[0]
           const intent = response.data.intent.displayName
+      
           const message2 = {
             key: this.props.messages.length,
             type: "bot",
             message: content.text.text[0]
           }
+          console.log(content.text.text[0])
           if(intent === "Show First Problem"){
             Axios.post("/getProblem",{"number":response.data.outputContexts[0].parameters.fields.problemnumber.numberValue}).then(problem =>{
               const message3 = {
@@ -99,6 +101,19 @@ class chatbot extends Component {
           else if(intent === "Ask Succeding Question"){
             this.props.setQuestionType(response.data.outputContexts[0].parameters.fields.questiontype.stringValue)
             this.props.addMessage(message2)
+          }
+          else if(content.text.text[0] === "Congratulations! You got the correct answer!"){
+            this.props.addMessage(message2)
+            const response1 = await Axios.post('/api/dialogflow/textQuery',{
+              "text":"yes"
+            })
+            const content = response1.data.fulfillmentMessages[0]
+            const message3 = {
+              key: this.props.messages.length,
+              type: "bot",
+              message: content.text.text[0]
+            }
+            this.props.addMessage(message3)
           }
           else{
             this.props.addMessage(message2)
