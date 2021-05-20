@@ -165,6 +165,7 @@ function mapStateToProps(state){
   return {
     currentUser: state.currentUser,
     messages: state.messages,
+    mistakes: state.mistakes,
     draggables: state.draggables,
     questiontype: state.questiontype
   }

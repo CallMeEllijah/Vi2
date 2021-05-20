@@ -135,9 +135,20 @@ app.post('/addUser',(req,res)=>{
 app.post('/updateAssessmentLevel',(req,res)=>{
   USER.findOne({_id: req.body._id}).then(user => {
     if(user){
-      user.updateOne({
-        assessmentLevel1: "expert"
-      }).then(rep => res.send(rep))
+      var score = 12/req.body.mistakes;
+      if(score === 1){
+        user.updateOne({
+          assessmentLevel1: "expert"
+        }).then(rep => res.send(rep))
+      } else if(score > 0.75 && score < 1 ){
+        user.updateOne({
+          assessmentLevel1: "intermediate"
+        }).then(rep => res.send(rep))
+      } else if(score < 0.75 ){
+        user.updateOne({
+          assessmentLevel1: "beginner"
+        }).then(rep => res.send(rep))
+      }
     }
   })
 })
