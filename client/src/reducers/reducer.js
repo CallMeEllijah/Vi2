@@ -26,7 +26,7 @@ function reducer(state=initialState, action){
         case "SET_MISTAKE":
         return {
             ...state,
-            mistakes: [...state.messages, action.payload]
+            mistakes: action.payload
         }
         case "SET_DRAGS":
         return {
