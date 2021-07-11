@@ -17,8 +17,7 @@ class chatbot extends Component {
         super();
         this.state = {
           name: "",
-          message: "",
-          currQuestionType 
+          message: ""
         }
     }
     

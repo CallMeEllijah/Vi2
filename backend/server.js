@@ -119,36 +119,38 @@ app.post('/getProblem',(req,res)=>{
 app.post('/addUser',(req,res)=>{
   const newUser = new User({
     name: req.body.name,
-    assessmentLevel1: {
+    assessmentLevels: [
+      {
       cuLevel: "",
       pcLevel: "",
       scLevel: ""
-    },
-    assessmentLevel2: {
+      },
+      {
+        cuLevel: "",
+        pcLevel: "",
+        scLevel: ""
+      },
+      {
       cuLevel: "",
       pcLevel: "",
       scLevel: ""
-    },
-    assessmentLevel3: {
+      },
+      {
+        cuLevel: "",
+        pcLevel: "",
+        scLevel: ""
+      },
+      {
       cuLevel: "",
       pcLevel: "",
       scLevel: ""
-    },
-    assessmentLevel4: {
-      cuLevel: "",
-      pcLevel: "",
-      scLevel: ""
-    },
-    assessmentLevel5: {
-      cuLevel: "",
-      pcLevel: "",
-      scLevel: ""
-    },
-    assessmentLevel6: {
-      cuLevel: "",
-      pcLevel: "",
-      scLevel: ""
-    },
+      },
+      {
+        cuLevel: "",
+        pcLevel: "",
+        scLevel: ""
+      }
+    ]
   });
 
   newUser.save()
