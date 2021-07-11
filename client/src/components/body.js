@@ -127,13 +127,6 @@ class body extends Component {
     }
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------------------
-  //-------------------------------------FUNCTION TO GENERATE RANDOM NUMBER
-  genVal = e =>{
-    var num = Math.ceil(Math.random() * (10 - 1));
-    console.log(num);
-  }
-
-  //---------------------------------------------------------------------------------------------------------------------------------------------------------
   //checks everytime components or props changes
   componentDidUpdate(prevProps){
     //change such that if question contains trumpets then change to trumpets... so on and so forth
@@ -238,6 +231,7 @@ class body extends Component {
       }catch{}
     }
   }
+  //--------------------------------------------------------------------------------------
   //for typing in inputs
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -248,7 +242,6 @@ class body extends Component {
   //FOR TESTING PURPOSES FOR TESTING PURPOSESFOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSESFOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES 
   onSubmit = e => {
     e.preventDefault();
-    this.genVal();
   }
   //FOR TESTING PURPOSES FOR TESTING PURPOSESFOR TESTING PURPOSESFOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES 
 
