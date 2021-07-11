@@ -113,7 +113,9 @@ class chatbot extends Component {
               message: content1.text.text[0]
             }
             this.props.addMessage(message3)
+            // ----------------------------replace setmistake to the proper mistake field
             this.props.setMistake(response1.data.outputContexts[0].parameters.fields.mistake.numberValue)
+            // ---------------------------- if questione type = 1 or 2 or 3 or 4 or 5 and so on then setmistake either to U / F / C
           }
           else{
             this.props.addMessage(message2)
@@ -165,7 +167,9 @@ function mapStateToProps(state){
   return {
     currentUser: state.currentUser,
     messages: state.messages,
-    mistakes: state.mistakes,
+    mistakesU: state.mistakesU,
+    mistakesF: state.mistakesF,
+    mistakesC: state.mistakesC,
     draggables: state.draggables,
     questiontype: state.questiontype
   }
@@ -182,8 +186,14 @@ function mapDispatchToProps(dispatch){
       setQuestionType: (msgObject) => {
         dispatch({type: "SET_QUESTION_TYPE", payload: msgObject})
       },
-      setMistake: (msgObject) => {
-        dispatch({type: "SET_MISTAKE", payload: msgObject})
+      setMistakeU: (msgObject) => {
+        dispatch({type: "SET_MISTAKEU", payload: msgObject})
+      },
+      setMistakeF: (msgObject) => {
+        dispatch({type: "SET_MISTAKEF", payload: msgObject})
+      },
+      setMistakeC: (msgObject) => {
+        dispatch({type: "SET_MISTAKEC", payload: msgObject})
       },
     }
 }

@@ -1,7 +1,9 @@
 const initialState = {
     currentUser: {},
-    questiontype:{},
-    mistakes:{},
+    questiontype: {},
+    mistakesU: {},
+    mistakesF: {},
+    mistakesC: {},
     messages: [],
     draggables: {}
 }
@@ -23,10 +25,20 @@ function reducer(state=initialState, action){
             ...state,
             messages: [...state.messages, action.payload]
         }
-        case "SET_MISTAKE":
+        case "SET_MISTAKEU":
         return {
             ...state,
-            mistakes: action.payload
+            mistakesU: action.payload
+        }
+        case "SET_MISTAKEF":
+        return {
+            ...state,
+            mistakesF: action.payload
+        }
+        case "SET_MISTAKEC":
+        return {
+            ...state,
+            mistakesC: action.payload
         }
         case "SET_DRAGS":
         return {

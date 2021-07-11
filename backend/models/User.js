@@ -8,27 +8,27 @@ const UserSchema = new Schema({
     required: true
   },
   assessmentLevel1: {
-    type: String,
+    type: Array,
     required: false
   },
   assessmentLevel2: {
-    type: String,
+    type: Array,
     required: false
   },
   assessmentLevel3: {
-    type: String,
+    type: Array,
     required: false
   },
   assessmentLevel4: {
-    type: String,
+    type: Array,
     required: false
   },
   assessmentLevel5: {
-    type: String,
+    type: Array,
     required: false
   },
   assessmentLevel6: {
-    type: String,
+    type: Array,
     required: false
   }
 });

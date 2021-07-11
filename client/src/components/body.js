@@ -21,13 +21,10 @@ const move = (source, destination, droppableSource, droppableDestination) => {
   const sourceClone = Array.from(source)
   const destClone = Array.from(destination)
   const [removed] = sourceClone.splice(droppableSource.index, 1)
-
   destClone.splice(droppableDestination.index, 0, removed)
-
   const result = {}
   result[droppableSource.droppableId] = sourceClone
   result[droppableDestination.droppableId] = destClone
-
   return result
 }
 
@@ -35,12 +32,10 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
   width: "98%",
-
   // change background colour if dragging
   background: isDragging ? 'lightgreen' : '',
   borderRadius: '5px',
   border: '2px solid black',
-
   // styles we need to apply on draggables
   ...draggableStyle
 })
@@ -56,12 +51,16 @@ const getListStyle = isDraggingOver => ({
   borderRadius: "5px",
   border: "1px solid grey"
 })
-//---------------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------end draggables--------------------------------------------------------------------------------- 
+
 class body extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      //add problem number
+      //add first value placeholder
+      //add second value placeholder
       question: "Talk to Vi at the chatbox on the lower right of the screen to start!",
       nsO1: "",
       nsOP: "",
@@ -96,22 +95,17 @@ class body extends Component {
     droppable3: 'list3'
   }
   getList = id => this.state[this.droppableIds[id]]
-
   onDragEnd = result => {
     const { source, destination } = result
-
     // dropped outside the list
     if (!destination) { return }
-
     if (source.droppableId === destination.droppableId) {
       const items = reorder(
         this.getList(source.droppableId),
         source.index,
         destination.index
       )
-
       let copiedState = Object.assign({}, this.state)
-
       if (source.droppableId === 'droppable1') {
         copiedState.list1 = items
       } else if (source.droppableId === 'droppable2') {
@@ -119,7 +113,6 @@ class body extends Component {
       } else if (source.droppableId === 'droppable3') {
         copiedState.list3 = items
       }
-
       this.setState(copiedState)
     } else {
       const result = move(
@@ -128,7 +121,6 @@ class body extends Component {
         source,
         destination
       )
-
       console.warn('result', result)
       this.setState({
         list1: result.droppable1 ? result.droppable1 : this.state.list1,
@@ -138,13 +130,23 @@ class body extends Component {
     }
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------------------
+  //-------------------------------------FUNCTION TO GENERATE RANDOM NUMBER
+  genVal = e =>{
+    var num = Math.ceil(Math.random() * (10 - 1));
+    console.log(num);
+  }
+
+  //---------------------------------------------------------------------------------------------------------------------------------------------------------
   //checks everytime components or props changes
   componentDidUpdate(prevProps){
     //change such that if question contains trumpets then change to trumpets... so on and so forth
     if(prevProps.messages !== this.props.messages){
-      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 1")){ //change such that if question contains
+      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 1")){
+        //after getting the problem, manipulate the question and change {_ or underscores} into randomly generated numbers which will be put in local variable
+        //remove number in those local variables as well
         this.setState({
-          question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?", //put question here
+          //change problem number
+          question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
           list1: trumpetInvetory,
           list2: [],
           list3: [],
@@ -191,13 +193,14 @@ class body extends Component {
             }
           ]
         })
-        //start method of assessmentlevel
+        //start method of assessmentlevel-------------------------------------------------------------------------------------
         try{
           console.log(this.props)
-          Axios.post("/updateAssessmentLevel", {_id: this.props.currentUser, mistakes: this.props.mistakes})
+          Axios.post("/updateAssessmentLevel", {_id: this.props.currentUser, problemno: this.props.problemno, mistakesU: this.props.mistakesU, mistakesF: this.props.mistakesF, mistakesC: this.props.mistakesC})
         } catch {
           console.log("welp no workie")
         }
+         //-------------------------------------------------------------------------------------
       }
       if(this.props.messages[this.props.messages.length-1].message === "finish"){
         this.setState({
@@ -242,12 +245,18 @@ class body extends Component {
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
-  //to send inputs from local to backend
+   //-------------------------------------------------------------------------------------
+
+
+  //FOR TESTING PURPOSES FOR TESTING PURPOSESFOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSESFOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES 
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state)
+    this.genVal();
   }
-  //function will contain passing of the dragabols data
+  //FOR TESTING PURPOSES FOR TESTING PURPOSESFOR TESTING PURPOSESFOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES FOR TESTING PURPOSES 
+
+
+  //----------------------------------function will contain passing of the dragabols data
   dragCheck = async e => {
     e.preventDefault();
     const questionType = this.props.questiontype
@@ -272,8 +281,8 @@ class body extends Component {
         }
         this.props.addMessage(message)
     }
-    
   }
+  //-------------------------------------------------------------------------------------
   //function will contain passing of the number setnence data
   numSenCheck = async e => {
     e.preventDefault();
@@ -320,6 +329,7 @@ class body extends Component {
         this.props.addMessage(message)
     }
   }
+   //-------------------------------------------------------------------------------------
 
   render() {
     return (
@@ -397,6 +407,10 @@ function mapStateToProps(state){
   return {
     currentUser: state.currentUser,
     messages: state.messages,
+    mistakesU: state.mistakesU,
+    mistakesF: state.mistakesF,
+    mistakesC: state.mistakesC,
+    problemno: state.problemno,
     draggables: state.draggables,
     questiontype : state.questiontype
   }
@@ -404,8 +418,11 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
+    setProblemNo: (msgObject) => {
+      dispatch({type: "ADD_MESSAGE", payload: msgObject})
+    },
     setDrags: (dragObj) => {
-      dispatch({type: "SET_DRAGS", payload: dragObj})
+      dispatch({type: "SET_PROBLEMNO", payload: dragObj})
     },
     addMessage: (msgObject) => {
       dispatch({type: "ADD_MESSAGE", payload: msgObject})

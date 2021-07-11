@@ -119,12 +119,36 @@ app.post('/getProblem',(req,res)=>{
 app.post('/addUser',(req,res)=>{
   const newUser = new User({
     name: req.body.name,
-    assessmentLevel1: "",
-    assessmentLevel2: "",
-    assessmentLevel3: "",
-    assessmentLevel4: "",
-    assessmentLevel5: "",
-    assessmentLevel6: "",
+    assessmentLevel1: {
+      cuLevel: "",
+      pcLevel: "",
+      scLevel: ""
+    },
+    assessmentLevel2: {
+      cuLevel: "",
+      pcLevel: "",
+      scLevel: ""
+    },
+    assessmentLevel3: {
+      cuLevel: "",
+      pcLevel: "",
+      scLevel: ""
+    },
+    assessmentLevel4: {
+      cuLevel: "",
+      pcLevel: "",
+      scLevel: ""
+    },
+    assessmentLevel5: {
+      cuLevel: "",
+      pcLevel: "",
+      scLevel: ""
+    },
+    assessmentLevel6: {
+      cuLevel: "",
+      pcLevel: "",
+      scLevel: ""
+    },
   });
 
   newUser.save()
@@ -135,20 +159,82 @@ app.post('/addUser',(req,res)=>{
 app.post('/updateAssessmentLevel',(req,res)=>{
   USER.findOne({_id: req.body._id}).then(user => {
     if(user){
-      var score = 12/req.body.mistakes;
-      if(score === 1){
-        user.updateOne({
-          assessmentLevel1: "expert"
-        }).then(rep => res.send(rep))
-      } else if(score > 0.75 && score < 1 ){
-        user.updateOne({
-          assessmentLevel1: "intermediate"
-        }).then(rep => res.send(rep))
-      } else if(score < 0.75 ){
-        user.updateOne({
-          assessmentLevel1: "beginner"
-        }).then(rep => res.send(rep))
+      var levelu = "";
+      var levelf = "";
+      var levelc = "";
+      var cuMistakes = req.body.mistakesU;
+      var pcMistakes = req.body.mistakesF;
+      var scMistakes = req.body.mistakesC;
+      //cu mistakes
+      if(cuMistakes >= 0 && cuMistakes <= 2){
+        levelu = "expert";
       }
+      //cu mistakes
+      if(pcMistakes >= 0 && pcMistakes <= 2){
+        levelf = "expert";
+      }
+      //cu mistakes
+      if(scMistakes >= 0 && scMistakes <= 2){
+        levelc = "expert";
+      }
+      //-------------------start update db assessment level----------
+      switch(req.body.problemno){
+        case 1:
+          user.updateOne({
+            assessmentLevel1: {
+              cuLevel: levelu,
+              pcLevel: levelf,
+              scLevel: levelc
+            }
+          })
+          break; 
+        case 2:
+          user.updateOne({
+            assessmentLevel2: {
+              cuLevel: levelu,
+              pcLevel: levelf,
+              scLevel: levelc
+            }
+          })
+          break; 
+        case 3:
+          user.updateOne({
+            assessmentLevel3: {
+              cuLevel: levelu,
+              pcLevel: levelf,
+              scLevel: levelc
+            }
+          })
+          break;
+        case 4:
+          user.updateOne({
+            assessmentLevel4: {
+              cuLevel: levelu,
+              pcLevel: levelf,
+              scLevel: levelc
+            }
+          })
+          break; 
+        case 5:
+          user.updateOne({
+            assessmentLevel5: {
+              cuLevel: levelu,
+              pcLevel: levelf,
+              scLevel: levelc
+            }
+          })
+          break; 
+        case 6:
+          user.updateOne({
+            assessmentLevel6: {
+              cuLevel: levelu,
+              pcLevel: levelf,
+              scLevel: levelc
+            }
+          })
+          break; 
+      }
+      //-----------------------------end-------------------
     }
   })
 })
