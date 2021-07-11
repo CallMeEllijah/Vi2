@@ -58,12 +58,14 @@ class body extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //current question type for 1/2/3 for mathematical strands (assessment level)
-      curQType: "",
       //add first value placeholder
       value1: "",
       //add second value placeholder
       value2: "",
+      //add first person placeholder
+      person1: "",
+      //add second person placeholder
+      person2: "",
       question: "Talk to Vi at the chatbox on the lower right of the screen to start!",
       nsO1: "",
       nsOP: "",
