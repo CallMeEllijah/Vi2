@@ -17,7 +17,8 @@ class chatbot extends Component {
         super();
         this.state = {
           name: "",
-          message: ""
+          message: "",
+          currQuestionType 
         }
     }
     
@@ -167,6 +168,10 @@ function mapStateToProps(state){
   return {
     currentUser: state.currentUser,
     messages: state.messages,
+    value1: state.value1,
+    value2: state.value2,
+    person1: state.person1,
+    person2: state.person2,
     mistakesU: state.mistakesU,
     mistakesF: state.mistakesF,
     mistakesC: state.mistakesC,
@@ -182,6 +187,18 @@ function mapDispatchToProps(dispatch){
       },
       addMessage: (msgObject) => {
         dispatch({type: "ADD_MESSAGE", payload: msgObject})
+      },
+      setValue1: (msgObject) => {
+        dispatch({type: "SET_VALUE1", payload: msgObject})
+      },
+      setValue2: (msgObject) => {
+        dispatch({type: "SET_VALUE2", payload: msgObject})
+      },
+      setPerson1: (msgObject) => {
+        dispatch({type: "SET_PERSON1", payload: msgObject})
+      },
+      setPerson2: (msgObject) => {
+        dispatch({type: "SET_PERSON2", payload: msgObject})
       },
       setQuestionType: (msgObject) => {
         dispatch({type: "SET_QUESTION_TYPE", payload: msgObject})

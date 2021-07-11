@@ -1,6 +1,10 @@
 const initialState = {
     currentUser: {},
     questiontype: {},
+    value1: {},
+    value2: {},
+    person1: {},
+    person2: {},
     mistakesU: {},
     mistakesF: {},
     mistakesC: {},
@@ -19,6 +23,26 @@ function reducer(state=initialState, action){
         return {
             ...state,
             questiontype: action.payload
+        }
+        case "SET_VALUE1":
+        return {
+            ...state,
+            value1: action.payload
+        }
+        case "SET_VALUE2":
+        return {
+            ...state,
+            value2: action.payload
+        }
+        case "SET_PERSON1":
+        return {
+            ...state,
+            person1: action.payload
+        }
+        case "SET_PERSON2":
+        return {
+            ...state,
+            person2: action.payload
         }
         case "ADD_MESSAGE":
         return {

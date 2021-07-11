@@ -58,14 +58,6 @@ class body extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //add first value placeholder
-      value1: "",
-      //add second value placeholder
-      value2: "",
-      //add first person placeholder
-      person1: "",
-      //add second person placeholder
-      person2: "",
       question: "Talk to Vi at the chatbox on the lower right of the screen to start!",
       nsO1: "",
       nsOP: "",
@@ -412,6 +404,10 @@ function mapStateToProps(state){
   return {
     currentUser: state.currentUser,
     messages: state.messages,
+    value1: state.value1,
+    value2: state.value2,
+    person1: state.person1,
+    person2: state.person2,
     mistakesU: state.mistakesU,
     mistakesF: state.mistakesF,
     mistakesC: state.mistakesC,
