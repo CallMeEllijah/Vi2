@@ -78,7 +78,7 @@ class chatbot extends Component {
             message: content.text.text[0]
           }
           console.log(content.text.text[0])
-          if(intent === "Show First Problem"){
+          if(intent === "Show Problem"){
             Axios.post("/getProblem",{"number":response.data.outputContexts[0].parameters.fields.problemnumber.numberValue}).then(problem =>{
               const message3 = {
                 key: this.props.messages.length,
@@ -88,24 +88,14 @@ class chatbot extends Component {
               this.props.addMessage(message3)
             })
           }
-          else if(intent === "Show Succeding Problem"){
-            Axios.post("/getProblem",{"number":response.data.outputContexts[0].parameters.fields.problemnumber.numberValue}).then(problem =>{
-              const message3 = {
-                key: this.props.messages.length,
-                type: "bot",
-                message: "Problem number " + problem.data + content.text.text[0]
-              }
-              this.props.addMessage(message3)
-            })
-          }
-          else if(intent === "Ask Succeding Question"){
+          else if(intent === "Ask Question"){
             this.props.setQuestionType(response.data.outputContexts[0].parameters.fields.questiontype.stringValue)
             this.props.addMessage(message2)
           }
           else if(content.text.text[0] === "Congratulations! You solved the problem!"){
             this.props.addMessage(message2)
             
-            const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"yes"})
+            const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary"})
             const content1 = response1.data.fulfillmentMessages[0]
             const message3 = {
               key: this.props.messages.length,
