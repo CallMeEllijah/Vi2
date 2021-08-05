@@ -2,8 +2,12 @@ import Axios from 'axios';
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import trumpetInvetory from '../datas/trumpets'
-import appleInvetory from '../datas/apples'
+import eggInvetory from '../datas/egg'
+import marbleInvetory from '../datas/marble'
+import fishInvetory from '../datas/fish'
+import flowerInvetory from '../datas/flower'
+import guavaInvetory from '../datas/guava'
+import pencilInvetory from '../datas/pencil'
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------- for draggables
 // a little function to help us with reordering the result
@@ -135,9 +139,8 @@ class body extends Component {
         //after getting the problem, manipulate the question and change {_ or underscores} into randomly generated numbers which will be put in local variable
         //remove number in those local variables as well
         this.setState({
-          //change problem number
-          question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
-          list1: trumpetInvetory,
+          //question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
+          list1: fishInvetory, //fish
           list2: [],
           list3: [],
           lists: [
@@ -149,20 +152,20 @@ class body extends Component {
             {
               droppableId: 'droppable2',
               listId: 'list2',
-              title: "Bob's Items"
+              title: "Mang Rudy's galunggong"
             },
             {
               droppableId: 'droppable3',
               listId: 'list3',
-              title: "Ada's Items"
+              title: "Mang Rudy's bangus"
             }
           ]
         })
       }
       if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 2")){
         this.setState({
-          question: "Joe and Sam went to the market to buy apples. Joe bought 2 apples and Sam bought 3 apples. How many apples did they buy in total?",
-          list1: appleInvetory,
+          //question: "Joe and Sam went to the market to buy apples. Joe bought 2 apples and Sam bought 3 apples. How many apples did they buy in total?",
+          list1: marbleInvetory, //marbles
           list2: [],
           list3: [],
           lists: [
@@ -174,23 +177,131 @@ class body extends Component {
             {
               droppableId: 'droppable2',
               listId: 'list2',
-              title: "Joe's Items"
+              title: "Maria's Items"
             },
             {
               droppableId: 'droppable3',
               listId: 'list3',
-              title: "Sams's Items"
+              title: "Raul's Items"
             }
           ]
         })
         //start method of assessmentlevel-------------------------------------------------------------------------------------
-        try{
-          console.log(this.props)
-          Axios.post("/updateAssessmentLevel", {_id: this.props.currentUser, problemno: this.props.problemno, mistakesU: this.props.mistakesU, mistakesF: this.props.mistakesF, mistakesC: this.props.mistakesC})
-        } catch {
-          console.log("welp no workie")
-        }
-         //-------------------------------------------------------------------------------------
+        //try{
+        //  console.log(this.props)
+        //  Axios.post("/updateAssessmentLevel", {_id: this.props.currentUser, problemno: this.props.problemno, mistakesU: this.props.mistakesU, mistakesF: this.props.mistakesF, mistakesC: this.props.mistakesC})
+        //} catch {
+        //  console.log("welp no workie")
+        //}
+        //-------------------------------------------------------------------------------------
+      }
+      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 3")){
+        //after getting the problem, manipulate the question and change {_ or underscores} into randomly generated numbers which will be put in local variable
+        //remove number in those local variables as well
+        this.setState({
+          //question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
+          list1: pencilInvetory, //pencils
+          list2: [],
+          list3: [],
+          lists: [
+            {
+              droppableId: 'droppable1',
+              listId: 'list1',
+              title: 'Inventory'
+            },
+            {
+              droppableId: 'droppable2',
+              listId: 'list2',
+              title: "Maria's pencils"
+            },
+            {
+              droppableId: 'droppable3',
+              listId: 'list3',
+              title: "Petra's pencils"
+            }
+          ]
+        })
+      }
+      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 4")){
+        //after getting the problem, manipulate the question and change {_ or underscores} into randomly generated numbers which will be put in local variable
+        //remove number in those local variables as well
+        this.setState({
+          //question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
+          list1: guavaInvetory, //guava
+          list2: [],
+          list3: [],
+          lists: [
+            {
+              droppableId: 'droppable1',
+              listId: 'list1',
+              title: 'Inventory'
+            },
+            {
+              droppableId: 'droppable2',
+              listId: 'list2',
+              title: "Guava per bayong"
+            },
+            {
+              droppableId: 'droppable3',
+              listId: 'list3',
+              title: "Paula's guavas"
+            }
+          ]
+        })
+      }
+      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 5")){
+        //after getting the problem, manipulate the question and change {_ or underscores} into randomly generated numbers which will be put in local variable
+        //remove number in those local variables as well
+        this.setState({
+          //question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
+          list1: eggInvetory, //eggs
+          list2: [],
+          list3: [],
+          lists: [
+            {
+              droppableId: 'droppable1',
+              listId: 'list1',
+              title: 'Inventory'
+            },
+            {
+              droppableId: 'droppable2',
+              listId: 'list2',
+              title: "Ate Lory's eggs"
+            },
+            {
+              droppableId: 'droppable3',
+              listId: 'list3',
+              title: "Eggs per Bibingka"
+            }
+          ]
+        })
+      }
+      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 6")){
+        //after getting the problem, manipulate the question and change {_ or underscores} into randomly generated numbers which will be put in local variable
+        //remove number in those local variables as well
+        this.setState({
+          //question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
+          list1: flowerInvetory, //flowers
+          list2: [],
+          list3: [],
+          lists: [
+            {
+              droppableId: 'droppable1',
+              listId: 'list1',
+              title: 'Inventory'
+            },
+            {
+              droppableId: 'droppable2',
+              listId: 'list2',
+              title: "Basket #1"
+            },
+            {
+              droppableId: 'droppable3',
+              listId: 'list3',
+              title: "Basket #2"
+            }
+          ]
+        })
       }
       if(this.props.messages[this.props.messages.length-1].message === "finish"){
         this.setState({
