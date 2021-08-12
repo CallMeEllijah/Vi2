@@ -1,4 +1,4 @@
-import guavaImage from '../media/guava.jpg'
+import guavaImage from '../media/Guava.png'
 
 const guava = [
     {

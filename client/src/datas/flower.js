@@ -1,4 +1,4 @@
-import flowerImage from '../media/flower.jpg'
+import flowerImage from '../media/Flower.png'
 
 const flower = [
     {

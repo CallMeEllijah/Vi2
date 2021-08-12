@@ -1,4 +1,4 @@
-import eggImage from '../media/egg.jpg'
+import eggImage from '../media/Egg.png'
 
 const eggs = [
     {

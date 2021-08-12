@@ -1,4 +1,4 @@
-import FishImage from '../media/fish.jpg'
+import FishImage from '../media/Fish.png'
 
 const fish = [
     {

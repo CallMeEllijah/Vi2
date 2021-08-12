@@ -1,4 +1,4 @@
-import pencilImage from '../media/pencil.jpg'
+import pencilImage from '../media/Pencil.png'
 
 const pencil = [
     {

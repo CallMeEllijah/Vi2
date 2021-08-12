@@ -1,4 +1,4 @@
-import marbleImage from '../media/marble.jpg'
+import marbleImage from '../media/Marble.png'
 
 const marble = [
     {

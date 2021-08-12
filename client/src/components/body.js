@@ -8,6 +8,10 @@ import fishInvetory from '../datas/fish'
 import flowerInvetory from '../datas/flower'
 import guavaInvetory from '../datas/guava'
 import pencilInvetory from '../datas/pencil'
+import flower from '../datas/flower';
+import marble from '../datas/marble';
+import guava from '../datas/guava';
+import fish from '../datas/fish';
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------- for draggables
 // a little function to help us with reordering the result
@@ -37,7 +41,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: 'none',
   width: "98%",
   // change background colour if dragging
-  background: isDragging ? 'lightgreen' : '',
+  background: isDragging ? 'lightgreen' : '#EDE9E8',
   borderRadius: '5px',
   border: '2px solid black',
   // styles we need to apply on draggables
@@ -53,7 +57,8 @@ const getListStyle = isDraggingOver => ({
   marginTop: "5px",
   marginBottom: "5px",
   borderRadius: "5px",
-  border: "1px solid grey"
+  border: "1px solid grey",
+  padding: "0px 10px 0px 10px"
 })
 //------------------------------------------------end draggables--------------------------------------------------------------------------------- 
 
@@ -67,7 +72,7 @@ class body extends Component {
       nsOP: "",
       nsO2: "",
       nsO3: "",
-      list1: [],
+      list1: fish,
       list2: [],
       list3: [],
       lists: [
