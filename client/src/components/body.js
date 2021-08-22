@@ -67,12 +67,12 @@ class body extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: "Talk to Vi at the chatbox on the lower right of the screen to start!",
+      question: this.props.problem,
       nsO1: "",
       nsOP: "",
       nsO2: "",
       nsO3: "",
-      list1: fish,
+      list1: [],
       list2: [],
       list3: [],
       lists: [
@@ -140,11 +140,10 @@ class body extends Component {
   componentDidUpdate(prevProps){
     //change such that if question contains trumpets then change to trumpets... so on and so forth
     if(prevProps.messages !== this.props.messages){
-      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 1")){
-        //after getting the problem, manipulate the question and change {_ or underscores} into randomly generated numbers which will be put in local variable
-        //remove number in those local variables as well
+      if(this.props.problem.includes("fishes")){
+        console.log(prevProps)
         this.setState({
-          //question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
+          question: this.props.problem,
           list1: fishInvetory, //fish
           list2: [],
           list3: [],
@@ -167,9 +166,9 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 2")){
+      if(this.props.problem.includes("marbles")){
         this.setState({
-          //question: "Joe and Sam went to the market to buy apples. Joe bought 2 apples and Sam bought 3 apples. How many apples did they buy in total?",
+          question: this.props.question,
           list1: marbleInvetory, //marbles
           list2: [],
           list3: [],
@@ -200,11 +199,9 @@ class body extends Component {
         //}
         //-------------------------------------------------------------------------------------
       }
-      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 3")){
-        //after getting the problem, manipulate the question and change {_ or underscores} into randomly generated numbers which will be put in local variable
-        //remove number in those local variables as well
+      if(this.props.problem.includes("pencils")){
         this.setState({
-          //question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
+          question: this.props.question,
           list1: pencilInvetory, //pencils
           list2: [],
           list3: [],
@@ -227,11 +224,9 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 4")){
-        //after getting the problem, manipulate the question and change {_ or underscores} into randomly generated numbers which will be put in local variable
-        //remove number in those local variables as well
+      if(this.props.problem.includes("guava")){
         this.setState({
-          //question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
+          question: this.props.question,
           list1: guavaInvetory, //guava
           list2: [],
           list3: [],
@@ -254,11 +249,9 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 5")){
-        //after getting the problem, manipulate the question and change {_ or underscores} into randomly generated numbers which will be put in local variable
-        //remove number in those local variables as well
+      if(this.props.problem.includes("egg")){
         this.setState({
-          //question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
+          question: this.props.question,
           list1: eggInvetory, //eggs
           list2: [],
           list3: [],
@@ -281,11 +274,9 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.messages[this.props.messages.length-1].message.includes("Problem number 6")){
-        //after getting the problem, manipulate the question and change {_ or underscores} into randomly generated numbers which will be put in local variable
-        //remove number in those local variables as well
+      if(this.props.problem.includes("flower")){
         this.setState({
-          //question: "Bob and Ada went to a music store. Bob bought 5 trumpets while Ada bought 3 trumpets on display. How many trumpets did both of them buy in total?",
+          question: this.props.question,
           list1: flowerInvetory, //flowers
           list2: [],
           list3: [],
@@ -308,6 +299,7 @@ class body extends Component {
           ]
         })
       }
+      /* when finished just fix how it detects
       if(this.props.messages[this.props.messages.length-1].message === "finish"){
         this.setState({
           question: "Continue talking to Vi at the chatbox on the lower right of the screen to continue!",
@@ -337,6 +329,7 @@ class body extends Component {
           nsOP: ""
         })
       }
+      */
     } else if(prevProps.draggables.operand1 !== this.state.list2.length || prevProps.draggables.operand2 !== this.state.list3.length){
       const dragObjs = {
         operand1: this.state.list2.length,
@@ -522,7 +515,8 @@ function mapStateToProps(state){
     mistakesC: state.mistakesC,
     problemno: state.problemno,
     draggables: state.draggables,
-    questiontype : state.questiontype
+    questiontype : state.questiontype,
+    problem : state.problem
   }
 }
 
@@ -530,6 +524,9 @@ function mapDispatchToProps(dispatch){
   return {
     setProblemNo: (msgObject) => {
       dispatch({type: "ADD_MESSAGE", payload: msgObject})
+    },
+    setProblem: (msgObject) => {
+      dispatch({type: "SET_PROBLEM", payload: msgObject})
     },
     setDrags: (dragObj) => {
       dispatch({type: "SET_PROBLEMNO", payload: dragObj})

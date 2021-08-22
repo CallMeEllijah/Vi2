@@ -80,7 +80,6 @@ class chatbot extends Component {
           
           if(intent === "Show Problem"){
             this.props.setProblem(response.data.outputContexts[0].parameters.fields.problem.stringValue)
-            console.log(this.props)
             this.props.addMessage(message2)
           }
           else if(intent === "Show Succeding Problem"){
