@@ -77,16 +77,11 @@ class chatbot extends Component {
             type: "bot",
             message: content.text.text[0]
           }
-          console.log(content.text.text[0])
-          if(intent === "Show First Problem"){
-            Axios.post("/getProblem",{"number":response.data.outputContexts[0].parameters.fields.problemnumber.numberValue}).then(problem =>{
-              const message3 = {
-                key: this.props.messages.length,
-                type: "bot",
-                message: "Problem number " + problem.data + content.text.text[0]
-              }
-              this.props.addMessage(message3)
-            })
+          
+          if(intent === "Show Problem"){
+            this.props.setProblem(response.data.outputContexts[0].parameters.fields.problem.stringValue)
+            console.log(this.props)
+            this.props.addMessage(message2)
           }
           else if(intent === "Show Succeding Problem"){
             Axios.post("/getProblem",{"number":response.data.outputContexts[0].parameters.fields.problemnumber.numberValue}).then(problem =>{
@@ -175,7 +170,8 @@ function mapStateToProps(state){
     mistakesF: state.mistakesF,
     mistakesC: state.mistakesC,
     draggables: state.draggables,
-    questiontype: state.questiontype
+    questiontype: state.questiontype,
+    problem: state.problem
   }
 }
 
@@ -201,6 +197,9 @@ function mapDispatchToProps(dispatch){
       },
       setQuestionType: (msgObject) => {
         dispatch({type: "SET_QUESTION_TYPE", payload: msgObject})
+      },
+      setProblem: (msgObject) => {
+        dispatch({type: "SET_PROBLEM", payload: msgObject})
       },
       setMistakeU: (msgObject) => {
         dispatch({type: "SET_MISTAKEU", payload: msgObject})
