@@ -362,7 +362,7 @@ class body extends Component {
     console.log("pasok sa drag check")
     console.log("question Type" + questionType)
     if(questionType === "firstdragbox"){
-
+      
         const response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.list2.length})
         const content = response.data.fulfillmentMessages[0]
         const message = {
