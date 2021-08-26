@@ -11,6 +11,7 @@ const USER = require('./models/User')
 const config = require('./dev');
 const Question = require("./models/Question");
 const User = require("./models/User");
+const Chatlogs = require("./models/Chatlogs");
 
 const projectID = config.googleProjectID;
 const sessionID = config.dialogFlowSessionID;
@@ -119,38 +120,34 @@ app.post('/getProblem',(req,res)=>{
 app.post('/addUser',(req,res)=>{
   const newUser = new User({
     name: req.body.name,
-    assessmentLevels: [
-      {
-      cuLevel: "",
-      pcLevel: "",
-      scLevel: ""
-      },
-      {
-        cuLevel: "",
-        pcLevel: "",
-        scLevel: ""
-      },
-      {
-      cuLevel: "",
-      pcLevel: "",
-      scLevel: ""
-      },
-      {
-        cuLevel: "",
-        pcLevel: "",
-        scLevel: ""
-      },
-      {
-      cuLevel: "",
-      pcLevel: "",
-      scLevel: ""
-      },
-      {
-        cuLevel: "",
-        pcLevel: "",
-        scLevel: ""
-      }
-    ]
+    assessmentLevel1cu: "",
+    assessmentLevel1pf: "",
+    assessmentLevel1sc: "",
+  
+  
+    assessmentLevel2cu: "",
+    assessmentLevel2pf: "",
+    assessmentLevel2sc: "",
+  
+  
+    assessmentLevel3cu: "",
+    assessmentLevel3pf: "",
+    assessmentLevel3sc: "",
+  
+  
+    assessmentLevel4cu: "",
+    assessmentLevel4pf: "",
+    assessmentLevel4sc: "",
+
+  
+    assessmentLevel5cu: "",
+    assessmentLevel5pf: "",
+    assessmentLevel5sc: "",
+  
+  
+    assessmentLevel6cu: "",
+    assessmentLevel6pf: "",
+    assessmentLevel6sc: "",
   });
 
   newUser.save()
@@ -158,8 +155,19 @@ app.post('/addUser',(req,res)=>{
     .catch(err => console.log(err));
 })
 
+app.post('/addchatlog', (req,res)=> {
+  const newChatlog = new Chatlogs({
+    userID: req.body.id,
+    messages: req.body.messages
+  });
+
+  newChatlog.save()
+    .then(chatlog => res.json(chatlog))
+    .catch(err => res.json(err))
+})
+
 app.post('/updateAssessmentLevel',(req,res)=>{
-  USER.findOne({_id: req.body._id}).then(user => {
+  USER.findById({_id: req.body.id}).then(user => {
     if(user){
       var levelu = "";
       var levelf = "";
@@ -182,56 +190,98 @@ app.post('/updateAssessmentLevel',(req,res)=>{
       //-------------------start update db assessment level----------
       switch(req.body.problemno){
         case 1:
-          user.updateOne({
-            assessmentLevel1: {
-              cuLevel: levelu,
-              pcLevel: levelf,
-              scLevel: levelc
+          USER.findByIdAndUpdate({_id: req.body.id}, {
+            $set:{
+            assessmentLevel1cu: levelu,
+            assessmentLevel1pf: levelf,
+            assessmentLevel1sc: levelc
+            }
+          }, function(err, result){
+            if(err){
+                console.log("oof")
+            }
+            else{
+              console.log("nice")
             }
           })
           break; 
         case 2:
-          user.updateOne({
-            assessmentLevel2: {
-              cuLevel: levelu,
-              pcLevel: levelf,
-              scLevel: levelc
+          USER.findByIdAndUpdate({_id: req.body.id}, {
+            $set:{
+            assessmentLevel2cu: levelu,
+            assessmentLevel2pf: levelf,
+            assessmentLevel2sc: levelc
+            }
+          }, function(err, result){
+            if(err){
+                console.log("oof")
+            }
+            else{
+              console.log("nice")
             }
           })
           break; 
         case 3:
-          user.updateOne({
-            assessmentLevel3: {
-              cuLevel: levelu,
-              pcLevel: levelf,
-              scLevel: levelc
+          USER.findByIdAndUpdate({_id: req.body.id}, {
+            $set:{
+            assessmentLevel3cu: levelu,
+            assessmentLevel3pf: levelf,
+            assessmentLevel3sc: levelc
+            }
+          }, function(err, result){
+            if(err){
+                console.log("oof")
+            }
+            else{
+              console.log("nice")
             }
           })
-          break;
+          break; 
         case 4:
-          user.updateOne({
-            assessmentLevel4: {
-              cuLevel: levelu,
-              pcLevel: levelf,
-              scLevel: levelc
+          USER.findByIdAndUpdate({_id: req.body.id}, {
+            $set:{
+            assessmentLevel4cu: levelu,
+            assessmentLevel4pf: levelf,
+            assessmentLevel4sc: levelc
+            }
+          }, function(err, result){
+            if(err){
+                console.log("oof")
+            }
+            else{
+              console.log("nice")
             }
           })
           break; 
         case 5:
-          user.updateOne({
-            assessmentLevel5: {
-              cuLevel: levelu,
-              pcLevel: levelf,
-              scLevel: levelc
+          USER.findByIdAndUpdate({_id: req.body.id}, {
+            $set:{
+            assessmentLevel5cu: levelu,
+            assessmentLevel5pf: levelf,
+            assessmentLevel5sc: levelc
+            }
+          }, function(err, result){
+            if(err){
+                console.log("oof")
+            }
+            else{
+              console.log("nice")
             }
           })
           break; 
         case 6:
-          user.updateOne({
-            assessmentLevel6: {
-              cuLevel: levelu,
-              pcLevel: levelf,
-              scLevel: levelc
+          USER.findByIdAndUpdate({_id: req.body.id}, {
+            $set:{
+            assessmentLevel6cu: levelu,
+            assessmentLevel6pf: levelf,
+            assessmentLevel6sc: levelc
+            }
+          }, function(err, result){
+            if(err){
+                console.log("oof")
+            }
+            else{
+              console.log("nice")
             }
           })
           break; 
