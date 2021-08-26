@@ -25,7 +25,6 @@ class chatbot extends Component {
       try {
         const response = await Axios.post('/api/dialogflow/eventQuery',{"event":"IntroduceVi2"})
         const content = response.data.fulfillmentMessages[0]
-        console.log(content.text.text[0])
         const message2 = {
           key: this.props.messages.length,
           type: "bot",
@@ -71,13 +70,13 @@ class chatbot extends Component {
           
           const content = response.data.fulfillmentMessages[0]
           const intent = response.data.intent.displayName
-      
+          
           const message2 = {
             key: this.props.messages.length,
             type: "bot",
             message: content.text.text[0]
           }
-          
+
           if(intent === "Show Problem"){
             this.props.setProblem(response.data.outputContexts[0].parameters.fields.problem.stringValue)
             this.props.addMessage(message2)
@@ -92,8 +91,32 @@ class chatbot extends Component {
               this.props.addMessage(message3)
             })
           }
-          else if(intent === "Ask Succeding Question"){
-            this.props.setQuestionType(response.data.outputContexts[0].parameters.fields.questiontype.stringValue)
+          else if(intent === "Check Question Answer"){
+            this.props.addMessage(message2)
+            console.log("kekw")
+            if(typeof response.data.outputContexts[0].parameters.fields.requestion !== "undefined"){
+              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE"})
+              const content1 = response1.data.fulfillmentMessages[0]
+              const message3 = {
+                key: this.props.messages.length,
+                type: "bot",
+                message: content1.text.text[0]
+              }
+              this.props.addMessage(message3)
+            }
+            else if(typeof response.data.outputContexts[0].parameters.fields.summary !== "undefined"){
+              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary"})
+              const content1 = response1.data.fulfillmentMessages[0]
+              const message3 = {
+                key: this.props.messages.length,
+                type: "bot",
+                message: content1.text.text[0]
+              }
+              this.props.addMessage(message3)
+            }
+          }
+          else if(intent === "Ask Question"){
+            this.props.setQuestionType(response.data.outputContexts[0].parameters.fields.inputtype.stringValue)
             this.props.addMessage(message2)
           }
           else if(content.text.text[0] === "Congratulations! You solved the problem!"){
@@ -120,7 +143,6 @@ class chatbot extends Component {
           
         }
         
-
         this.setState({message: ""})
     }
 
@@ -129,7 +151,6 @@ class chatbot extends Component {
       if(prevProps.messages !== this.props.messages){
         if(this.props.messages[this.props.messages.length-1].message.includes("Are you ready to start ?")){
           Axios.post("/addUser", {name: this.props.messages[this.props.messages.length-2].message}).then(res => {
-            console.log(res)
             this.props.setUser(res.data._id);
           })
         }

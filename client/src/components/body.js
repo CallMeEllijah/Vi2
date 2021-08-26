@@ -140,7 +140,7 @@ class body extends Component {
   componentDidUpdate(prevProps){
     //change such that if question contains trumpets then change to trumpets... so on and so forth
     if(prevProps.messages !== this.props.messages){
-      if(this.props.problem.includes("fishes")){
+      if(this.props.problem.includes("fishes") && this.props.messages[this.props.messages.length-1].message.includes("Problem number 1")){
         console.log(prevProps)
         this.setState({
           question: this.props.problem,
@@ -151,7 +151,7 @@ class body extends Component {
             {
               droppableId: 'droppable1',
               listId: 'list1',
-              title: 'Inventory'
+              title: 'Fish'
             },
             {
               droppableId: 'droppable2',
@@ -168,7 +168,7 @@ class body extends Component {
       }
       if(this.props.problem.includes("marbles")){
         this.setState({
-          question: this.props.question,
+          question: this.props.problem,
           list1: marbleInvetory, //marbles
           list2: [],
           list3: [],
@@ -359,9 +359,11 @@ class body extends Component {
   dragCheck = async e => {
     e.preventDefault();
     const questionType = this.props.questiontype
-    
-    if(questionType === "firstbox"){
-        const response = await Axios.post('/api/dialogflow/textQuery',{text:this.props.draggables.operand1})
+    console.log("pasok sa drag check")
+    console.log("question Type" + questionType)
+    if(questionType === "firstdragbox"){
+
+        const response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.list2.length})
         const content = response.data.fulfillmentMessages[0]
         const message = {
           key: this.props.messages.length,
@@ -370,8 +372,9 @@ class body extends Component {
         }
         this.props.addMessage(message)
     }
-    else if(questionType === "secondbox"){
-        const response = await Axios.post('/api/dialogflow/textQuery',{text:this.props.draggables.operand2})
+    else if(questionType === "seconddragbox"){
+
+        const response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.list3.length})
         const content = response.data.fulfillmentMessages[0]
         const message = {
           key: this.props.messages.length,
@@ -386,46 +389,48 @@ class body extends Component {
   numSenCheck = async e => {
     e.preventDefault();
     const questionType = this.props.questiontype
-    console.log(questionType)
-    if(questionType === "operation"){
-      const response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.nsOP})
-        const content = response.data.fulfillmentMessages[0]
-        const message = {
-          key: this.props.messages.length,
-          type: "bot",
-          message: content.text.text[0]
-        }
-        this.props.addMessage(message)
+    var response
+
+    if(questionType === "operationbox"){
+      var operation
+
+      if(this.state.nsOP == "+")
+        operation = "addition"
+      else if(this.state.nsOP == "-")
+        operation = "subtraction"
+      else if(this.state.nsOP == "*")
+        operation = "multiplication"
+      else if(this.state.nsOP == "/")
+        operation = "division"
+      
+      response = await Axios.post('/api/dialogflow/textQuery',{text:operation})
     }
-    else if(questionType === "firstoperand"){
-      const response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.nsO1})
-        const content = response.data.fulfillmentMessages[0]
-        const message = {
-          key: this.props.messages.length,
-          type: "bot",
-          message: content.text.text[0]
-        }
-        this.props.addMessage(message)
+    else if(questionType === "firstnumberbox"){
+      response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.nsO1})
     }
-    else if(questionType === "secondoperand"){
-      const response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.nsO2})
-        const content = response.data.fulfillmentMessages[0]
-        const message = {
-          key: this.props.messages.length,
-          type: "bot",
-          message: content.text.text[0]
-        }
-        this.props.addMessage(message)
+    else if(questionType === "secondnumberbox"){
+      response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.nsO2})
     }
-    else if(questionType === "finalanswer"){
-      const response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.nsO3})
-        const content = response.data.fulfillmentMessages[0]
-        const message = {
-          key: this.props.messages.length,
-          type: "bot",
-          message: content.text.text[0]
-        }
-        this.props.addMessage(message)
+    else if(questionType === "finalanswerbox"){
+      response = await Axios.post('/api/dialogflow/textQuery',{text:this.state.nsO3})
+    }
+
+    const content = response.data.fulfillmentMessages[0]
+    const message = {
+      key: this.props.messages.length,
+      type: "bot",
+      message: content.text.text[0]
+    }
+    this.props.addMessage(message)
+    if(typeof response.data.outputContexts[0].parameters.fields.requestion !== "undefined"){
+      const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE"})
+      const content1 = response1.data.fulfillmentMessages[0]
+      const message3 = {
+        key: this.props.messages.length,
+        type: "bot",
+        message: content1.text.text[0]
+      }
+      this.props.addMessage(message3)
     }
   }
    //-------------------------------------------------------------------------------------
