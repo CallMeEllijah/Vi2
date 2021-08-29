@@ -13,4 +13,4 @@ const ChatlogSchema = new Schema({
   }
 });
 
-module.exports = User = mongoose.model("chatlogs", ChatlogSchema);
+module.exports = Chatlog = mongoose.model("chatlogs", ChatlogSchema);

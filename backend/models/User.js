@@ -7,30 +7,88 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  assessmentLevel1: {
+  assessmentLevel1cu: {
     type: String,
     required: false
   },
-  assessmentLevel2: {
+  assessmentLevel1pf: {
     type: String,
     required: false
   },
-  assessmentLevel3: {
+  assessmentLevel1sc: {
     type: String,
     required: false
   },
-  assessmentLevel4: {
+
+
+  assessmentLevel2cu: {
     type: String,
     required: false
   },
-  assessmentLevel5: {
+  assessmentLevel2pf: {
     type: String,
     required: false
   },
-  assessmentLevel6: {
+  assessmentLevel2sc: {
     type: String,
     required: false
-  }
+  },
+
+
+  assessmentLevel3cu: {
+    type: String,
+    required: false
+  },
+  assessmentLevel3pf: {
+    type: String,
+    required: false
+  },
+  assessmentLevel3sc: {
+    type: String,
+    required: false
+  },
+
+
+  assessmentLevel4cu: {
+    type: String,
+    required: false
+  },
+  assessmentLevel4pf: {
+    type: String,
+    required: false
+  },
+  assessmentLevel4sc: {
+    type: String,
+    required: false
+  },
+
+
+  assessmentLevel5cu: {
+    type: String,
+    required: false
+  },
+  assessmentLevel5pf: {
+    type: String,
+    required: false
+  },
+  assessmentLevel5sc: {
+    type: String,
+    required: false
+  },
+
+
+  assessmentLevel6cu: {
+    type: String,
+    required: false
+  },
+  assessmentLevel6pf: {
+    type: String,
+    required: false
+  },
+  assessmentLevel6sc: {
+    type: String,
+    required: false
+  },
 });
 
 module.exports = User = mongoose.model("users", UserSchema);

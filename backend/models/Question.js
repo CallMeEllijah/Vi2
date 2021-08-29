@@ -27,10 +27,10 @@ const questionSchema = new Schema({
         required:true
     }],
     questionanswers:[[
-        {
-            type: String,
-            required:true
-        }
+    {
+        type: String,
+        required:true
+    }
     ]],
     questiontypes:[{
         type: String,
