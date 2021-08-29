@@ -108,7 +108,7 @@ class chatbot extends Component {
             this.props.setQuestionType(response.data.outputContexts[0].parameters.fields.inputtype.stringValue)
             this.props.addMessage(message2)
           }
-          else if(content.text.text[0] === "Congratulations! You solved the problem!"){
+          else if(content.text.text[0] === "Congratulations!You solved the problem!"){
             this.props.addMessage(message2)
             
             const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary"})
