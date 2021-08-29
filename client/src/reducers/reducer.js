@@ -1,7 +1,7 @@
 const initialState = {
     currentUser: {},
     questiontype: {},
-    problem: "Talk to Vi at the chatbox on the lower right of the screen to start!",
+    problem: "Talk to Vi2 at the chatbox on the lower right of the screen to start!",
     value1: {},
     value2: {},
     person1: {},
