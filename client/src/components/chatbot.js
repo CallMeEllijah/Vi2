@@ -80,16 +80,6 @@ class chatbot extends Component {
             this.props.setProblem(response.data.outputContexts[0].parameters.fields.problem.stringValue)
             this.props.addMessage(message2)
           }
-          else if(intent === "Show Succeding Problem"){
-            Axios.post("/getProblem",{"number":response.data.outputContexts[0].parameters.fields.problemnumber.numberValue}).then(problem =>{
-              const message3 = {
-                key: this.props.messages.length,
-                type: "bot",
-                message: "Problem number " + problem.data + content.text.text[0]
-              }
-              this.props.addMessage(message3)
-            })
-          }
           else if(intent === "Check Question Answer"){
             this.props.addMessage(message2)
             if(typeof response.data.outputContexts[0].parameters.fields.requestion !== "undefined"){
