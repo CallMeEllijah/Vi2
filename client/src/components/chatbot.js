@@ -52,7 +52,6 @@ class chatbot extends Component {
 
     onSubmitMessage = async e => {
         e.preventDefault();
-        
         const message = {
           key: this.props.messages.length,
           type: "user",
@@ -64,7 +63,7 @@ class chatbot extends Component {
         const textQueryVariable = {
           "text":input
         }
-
+        
         try {
           const response = await Axios.post('/api/dialogflow/textQuery',textQueryVariable)
           
@@ -93,7 +92,6 @@ class chatbot extends Component {
           }
           else if(intent === "Check Question Answer"){
             this.props.addMessage(message2)
-            console.log("kekw")
             if(typeof response.data.outputContexts[0].parameters.fields.requestion !== "undefined"){
               const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE"})
               const content1 = response1.data.fulfillmentMessages[0]
@@ -116,6 +114,7 @@ class chatbot extends Component {
             }
           }
           else if(intent === "Ask Question"){
+            console.log(response.data)
             this.props.setQuestionType(response.data.outputContexts[0].parameters.fields.inputtype.stringValue)
             this.props.addMessage(message2)
           }

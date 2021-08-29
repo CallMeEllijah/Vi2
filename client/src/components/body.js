@@ -389,8 +389,9 @@ class body extends Component {
   numSenCheck = async e => {
     e.preventDefault();
     const questionType = this.props.questiontype
+    console.log(questionType)
     var response
-
+    console.log(this.state.nsO3)
     if(questionType === "operationbox"){
       var operation
 
@@ -424,6 +425,16 @@ class body extends Component {
     this.props.addMessage(message)
     if(typeof response.data.outputContexts[0].parameters.fields.requestion !== "undefined"){
       const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE"})
+      const content1 = response1.data.fulfillmentMessages[0]
+      const message3 = {
+        key: this.props.messages.length,
+        type: "bot",
+        message: content1.text.text[0]
+      }
+      this.props.addMessage(message3)
+    }
+    else if(typeof response.data.outputContexts[0].parameters.fields.summary !== "undefined"){
+      const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary"})
       const content1 = response1.data.fulfillmentMessages[0]
       const message3 = {
         key: this.props.messages.length,
