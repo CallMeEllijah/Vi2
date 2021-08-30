@@ -442,6 +442,16 @@ class body extends Component {
         message: content1.text.text[0]
       }
       this.props.addMessage(message3)
+      if(typeof response1.data.outputContexts[0].parameters.fields.endlesson !== "undefined"){
+        const response2 = await Axios.post('/api/dialogflow/textQuery',{"text":"end"})
+        const content2 = response2.data.fulfillmentMessages[0]
+        const message4 = {
+          key: this.props.messages.length,
+          type: "bot",
+          message: content2.text.text[0]
+        }
+        this.props.addMessage(message4)
+      }
     }
   }
    //-------------------------------------------------------------------------------------
