@@ -124,12 +124,14 @@ pre {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 95%;
 }
 
 .messageInput{
   min-height: 69%;
   width: 70%;
   border-radius: 5px;
+  font-size: 0.9em;
 }
 
 .messageButton{
@@ -185,6 +187,10 @@ pre {
   background-color: #EFE1FC;
 }
 
+.equation h3{
+  font-size: 1em;
+}
+
 .dragabols{
   height: 50%;
   display: flex;
@@ -197,6 +203,8 @@ pre {
 img {
   height: 50px;
   width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 .probContainer {
@@ -217,4 +225,39 @@ img {
   max-width: 15%;
   border-radius: 5px;
   background-color: white;
+  font-size: 1em;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+::-webkit-input-placeholder { /* Edge */
+  color:#c2c2c2;
+  font-family: 'Comic Neue', cursive;
+}
+
+:-ms-input-placeholder { /* Internet Explorer */
+  color: #c2c2c2;
+  font-family: 'Comic Neue', cursive;
+}
+
+::placeholder {
+  color: #c2c2c2;
+  font-family: 'Comic Neue', cursive;
+}
+
+select{
+  font-family: 'Comic Neue', cursive;
+}
+
+button{
+  font-family: 'Comic Neue', cursive;
+  font-size: 1em;
+}
+
+.equation button{
+  font-size: 0.68em;
+}
+
+h4{
+  text-align: center;
 }

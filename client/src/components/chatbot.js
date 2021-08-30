@@ -108,7 +108,7 @@ class chatbot extends Component {
             this.props.setQuestionType(response.data.outputContexts[0].parameters.fields.inputtype.stringValue)
             this.props.addMessage(message2)
           }
-          else if(content.text.text[0] === "Congratulations! You solved the problem!"){
+          else if(content.text.text[0] === "Congratulations!You solved the problem!"){
             this.props.addMessage(message2)
             
             const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary"})
@@ -167,8 +167,7 @@ class chatbot extends Component {
               <AlwaysScrollToBottom />
             </div>
             <form className="messageSendForm" onSubmit={this.onSubmitMessage}>
-              <input required type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message" placeholder="Enter your message here!"/>
-              <button className="messageButton">Send</button>
+              <input required type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message" placeholder="Your message here!"/>
             </form>
           </div>
             
