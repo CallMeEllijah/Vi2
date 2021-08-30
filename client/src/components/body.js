@@ -500,17 +500,17 @@ class body extends Component {
         {/*-------------------------------------------------------------------------------------------*/}
         <form className="infoContainer equation" onSubmit={this.numSenCheck}>
           <h3>NUMBER SENTENCE:</h3>
-          <input type="number" className="equators" placeholder="10" value={this.state.nsO1} id="nsO1" onChange={this.onChange}/>
-          <select id="nsOP" className="equators" value={this.state.nsOP} onChange={this.onChange}>
-            <option value="" disabled defaultValue>select</option>
+      	  <input type="number" className="equators" placeholder="1st no." value={this.state.nsO1} id="nsO1" onChange={this.onChange}/>
+          <select id="nsOP" className="equators" value={this.state.nsOP} onChange={this.onChange} style={{width: 130 + 'px'}}>
+            <option value="" disabled defaultValue>Operation</option>
             <option value="+">+</option>
             <option value="-">-</option>
             <option value="/">÷</option>
             <option value="x">x</option>
           </select>
-          <input type="number" className="equators" placeholder="10" value={this.state.nsO2} id="nsO2" onChange={this.onChange}/>
+            <input type="number" className="equators" placeholder="2nd no." value={this.state.nsO2} id="nsO2" onChange={this.onChange}/>
           =
-          <input type="number" className="equators" placeholder="10" value={this.state.nsO3} id="nsO3" onChange={this.onChange}/>
+          <input type="number" className="equators" placeholder="Ans." value={this.state.nsO3} id="nsO3" onChange={this.onChange}/>
           <button className="bodyButton">Check</button>
         </form>
       </div>
