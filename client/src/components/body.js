@@ -166,7 +166,7 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.problem.includes("marbles")){
+      if(this.props.problem.includes("marbles")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number 2")){
         this.setState({
           question: this.props.problem,
           list1: marbleInvetory, //marbles
@@ -176,17 +176,17 @@ class body extends Component {
             {
               droppableId: 'droppable1',
               listId: 'list1',
-              title: 'Inventory'
+              title: 'Marbles'
             },
             {
               droppableId: 'droppable2',
               listId: 'list2',
-              title: "Maria's Items"
+              title: "Maria's marbles at the start"
             },
             {
               droppableId: 'droppable3',
               listId: 'list3',
-              title: "Raul's Items"
+              title: "Maria's marbles after giving to Raul"
             }
           ]
         })
@@ -199,7 +199,7 @@ class body extends Component {
         //}
         //-------------------------------------------------------------------------------------
       }
-      if(this.props.problem.includes("pencils")){
+      if(this.props.problem.includes("pencils")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number 3")){
         this.setState({
           question: this.props.question,
           list1: pencilInvetory, //pencils
@@ -224,7 +224,7 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.problem.includes("guava")){
+      if(this.props.problem.includes("guava")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number 4")){
         this.setState({
           question: this.props.question,
           list1: guavaInvetory, //guava
@@ -249,7 +249,7 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.problem.includes("egg")){
+      if(this.props.problem.includes("egg")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number 5")){
         this.setState({
           question: this.props.question,
           list1: eggInvetory, //eggs
@@ -274,7 +274,7 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.problem.includes("flower")){
+      if(this.props.problem.includes("flower")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number 6")){
         this.setState({
           question: this.props.question,
           list1: flowerInvetory, //flowers
