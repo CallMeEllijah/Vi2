@@ -168,6 +168,7 @@ class chatbot extends Component {
             </div>
             <form className="messageSendForm" onSubmit={this.onSubmitMessage}>
               <input required type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message" placeholder="Your message here!"/>
+                  <button className="messageButton">Send</button>
             </form>
           </div>
             
