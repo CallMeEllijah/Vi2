@@ -13,8 +13,11 @@ const Question = require("./models/Question");
 const User = require("./models/User");
 const Chatlogs = require("./models/Chatlogs");
 
+const { v4: uuidv4 } = require('uuid');
+var id = uuidv4()
+
 const projectID = config.googleProjectID;
-const sessionID = config.dialogFlowSessionID;
+const sessionID = id;
 const languageCode = config.dialogFlowSessionLanguageCode;
 const credentials = {
   client_email: config.googleClientEmail,

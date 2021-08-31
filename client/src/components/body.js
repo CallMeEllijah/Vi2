@@ -289,12 +289,12 @@ class body extends Component {
             {
               droppableId: 'droppable2',
               listId: 'list2',
-              title: "Basket #1"
+              title: "Flowers"
             },
             {
               droppableId: 'droppable3',
               listId: 'list3',
-              title: "Basket #2"
+              title: "Flowers in each basket"
             }
           ]
         })
