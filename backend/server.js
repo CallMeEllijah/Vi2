@@ -186,6 +186,10 @@ app.post('/updateAssessmentLevel',(req,res)=>{
       var pcMistakes = req.body.mistakesF;
       var scMistakes = req.body.mistakesC;
 
+      console.log(cuMistakes)
+      console.log(pcMistakes)
+      console.log(scMistakes)
+
       if(scMistakes >=0 && scMistakes <=2){
         levelc = "expert";
       }
@@ -199,20 +203,20 @@ app.post('/updateAssessmentLevel',(req,res)=>{
       if(cuMistakes >= 0 && cuMistakes <=1){
         levelu = "expert";
       }
-      else if(cuMistakes >= 2 && cuMistakes <=3){
+      else if(cuMistakes == 2){
         levelu = "intermediate";
       }
-      else if(cuMistakes > 3){
+      else if(cuMistakes > 2){
         levelu = "beginner";
       }
 
       if(pcMistakes >= 0 && pcMistakes <=1){
         levelf = "expert";
       }
-      else if(pcMistakes >= 2 && pcMistakes <=3){
+      else if(pcMistakes == 2){
         levelf = "intermediate";
       }
-      else if(pcMistakes > 3){
+      else if(pcMistakes > 2){
         levelf = "beginner";
       }
       

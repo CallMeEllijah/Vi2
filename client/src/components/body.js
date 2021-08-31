@@ -469,11 +469,7 @@ class body extends Component {
 
       var mistakeC = response1.data.outputContexts[0].parameters.fields.mistakeC.numberValue
       var mistakeF = response1.data.outputContexts[0].parameters.fields.mistakeF.numberValue
-      var mistakeU = response1.data.outputContexts[0].parameters.fields.mistakeF.numberValue
-      
-      console.log(mistakeC)
-      console.log(mistakeF)
-      console.log(mistakeU)
+      var mistakeU = response1.data.outputContexts[0].parameters.fields.mistakeU.numberValue
 
       Axios.post("/updateAssessmentLevel", {id: this.props.currentUser, problemno : response1.data.outputContexts[0].parameters.fields.problemnumber.numberValue - 1, mistakesU: mistakeU, mistakesF: mistakeF, mistakesC: mistakeC}).then(res => {
         console.log("updated assessment levels")
