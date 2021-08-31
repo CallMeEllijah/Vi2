@@ -575,6 +575,7 @@ function mapStateToProps(state){
   return {
     currentUser: state.currentUser,
     messages: state.messages,
+    sessionID: state.sessionID,
     value1: state.value1,
     value2: state.value2,
     person1: state.person1,
