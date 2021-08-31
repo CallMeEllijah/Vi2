@@ -6,9 +6,18 @@ import Header from '../src/components/header';
 import Body from '../src/components/body';
 import Chatbot from '../src/components/chatbot';
 
+const { v4: uuidv4 } = require('uuid');
+var id = uuidv4()
+
 class App extends Component {
 
+  componentDidMount(){
+    //console.log(id); uuidv4 generation check
+    this.props.setSession(id);
+  }
+
   render() {
+    //console.log(this.props); session ID check
     return (
       <div>
         <Header />
@@ -23,9 +32,16 @@ class App extends Component {
 
 function mapStateToProps(state){
   return {
-    currentUser: state.currentUser,
-    messages: state.messages
+    sessionID: state.sessionID
   }
 }
 
-export default connect(mapStateToProps)(App)
+function mapDispatchToProps(dispatch){
+    return {
+      setSession: (userObject) => {
+        dispatch({type: "SET_SESSION", payload: userObject})
+      }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

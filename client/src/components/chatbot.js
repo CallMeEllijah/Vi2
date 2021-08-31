@@ -213,6 +213,7 @@ class chatbot extends Component {
 function mapStateToProps(state){
   return {
     currentUser: state.currentUser,
+    sessionID: state.sessionID,
     userName : state.userName,
     messages: state.messages,
     value1: state.value1,

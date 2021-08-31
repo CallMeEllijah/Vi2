@@ -76,11 +76,6 @@ app.post('/api/dialogflow/textQuery',async (req, res)=>{
     console.log(`  Query: ${result.queryText}`);
     console.log(`  Response: ${result.fulfillmentText}`);
     if (result.intent) {
-      //if else correct or incorrect then add to 12 points divided by 12 all the time each addition of wrong 12 divided by 13, so on and so forth -----------------------------------------------------------------------------------
-        //make sure that only when asking questions that are legit and not social interactive questions
-        //should start when asking who are the characters ganun
-        
-      //if else finished then add to mongodb chatlog, so on and so forth --------------------------------------------------------------------------------------------------------------------------------------------------------
       console.log(`  Intent: ${result.intent.displayName}`);
     } else {
       console.log(`  No intent matched.`);
