@@ -187,6 +187,34 @@ app.post('/updateAssessmentLevel',(req,res)=>{
       if(scMistakes >= 0 && scMistakes <= 2){
         levelc = "expert";
       }
+      if(scMistakes >=0 && scMistakes <=2){
+        levelc = "expert";
+      }
+      else if(scMistakes > 2 && scMistakes <=4){
+        levelc = "intermediate";
+      }
+      else if(scMistakes > 4){
+        levelc = "beginner";
+      }
+      if(cuMistakes >= 0 && cuMistakes <=1){
+        levelu = "expert";
+      }
+      else if(cuMistakes >= 2 && cuMistakes <=3){
+        levelu = "intermediate";
+      }
+      else if(cuMistakes > 3){
+        levelu = "beginner";
+      }
+      if(pcMistakes >= 0 && pcMistakes <=1){
+        levelf = "expert";
+      }
+      else if(pcMistakes >= 2 && pcMistakes <=3){
+        levelf = "intermediate";
+      }
+      else if(pcMistakes > 3){
+        levelf = "beginner";
+      }
+      
       //-------------------start update db assessment level----------
       switch(req.body.problemno){
         case 1:
