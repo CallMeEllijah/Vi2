@@ -6,14 +6,10 @@ import Header from '../src/components/header';
 import Body from '../src/components/body';
 import Chatbot from '../src/components/chatbot';
 
-const { v4: uuidv4 } = require('uuid');
-var id = uuidv4()
-
 class App extends Component {
 
   componentDidMount(){
     //console.log(id); uuidv4 generation check
-    this.props.setSession(id);
   }
 
   render() {

@@ -71,16 +71,41 @@ const detectIntent = async (languageCode, queryText, sessionId) => {
   };
 
   const responses = await sessionClient.detectIntent(request);
-  console.log(responses);
+  //console.log(responses);
   const result = responses[0].queryResult;
-  console.log(result);
+  //console.log(result);
 
   return {
-      response: result.fulfillmentText
+      response: result
   };
 
 }
 
+const detectEvent = async (languageCode, queryEvent, sessionId) => {
+  let sessionPath = sessionClient.projectAgentSessionPath(projectID, sessionId);
+
+  let request = {
+    session: sessionPath,
+    queryInput: {
+        event: {
+          // The query to send to the dialogflow agent
+          name: queryEvent,
+          // The language used by the client (en-US)
+          languageCode: languageCode,
+      },
+    },
+  };
+
+  const responses = await sessionClient.detectIntent(request);
+  //console.log(responses);
+  const result = responses[0].queryResult;
+  //console.log(result);
+
+  return {
+      response: result
+  };
+
+}
 
 app.post('/api/dialogflow/textQuery',async (req, res)=>{
     // // The text query request.
@@ -115,37 +140,45 @@ app.post('/api/dialogflow/textQuery',async (req, res)=>{
 
     let responseData = await detectIntent(languageCode, queryText, sessionId);
 
-    res.send(responseData.response);
+    res.send(responseData);
 
 })
 
 app.post('/api/dialogflow/eventQuery',async(req,res)=>{
 
-    const request = {
-      session: sessionPath,
-      queryInput: {
-        event: {
-          // The query to send to the dialogflow agent
-          name: req.body.event,
-          // The language used by the client (en-US)
-          languageCode: 'en-US',
-        },
-      },
-    };
+    // const request = {
+    //   session: sessionPath,
+    //   queryInput: {
+    //     event: {
+    //       // The query to send to the dialogflow agent
+    //       name: req.body.event,
+    //       // The language used by the client (en-US)
+    //       languageCode: 'en-US',
+    //     },
+    //   },
+    // };
 
-    // Send request and log result
-    const responses = await sessionClient.detectIntent(request);
-    //console.log('Detected intent');
-    const result = responses[0].queryResult;
-    //console.log(`  Query: ${result.queryText}`);
-    //console.log(`  Response: ${result.fulfillmentText}`);
-    if (result.intent) {
-      //console.log(`  Intent: ${result.intent.displayName}`);
-    } else {
-      //console.log(`  No intent matched.`);
-    }
+    // // Send request and log result
+    // const responses = await sessionClient.detectIntent(request);
+    // //console.log('Detected intent');
+    // const result = responses[0].queryResult;
+    // //console.log(`  Query: ${result.queryText}`);
+    // //console.log(`  Response: ${result.fulfillmentText}`);
+    // if (result.intent) {
+    //   //console.log(`  Intent: ${result.intent.displayName}`);
+    // } else {
+    //   //console.log(`  No intent matched.`);
+    // }
 
-    res.send(result);
+    // res.send(result);
+
+    let languageCode = 'en-US';
+    let queryEvent = req.body.queryEvent;
+    let sessionId = req.body.sessionId;
+
+    let responseData = await detectEvent(languageCode, queryEvent, sessionId);
+
+    res.send(responseData);
 })
 
 // MONGODB ROUTES ------------------------------------------------------------------------------------------------------------------------------------------------------------------

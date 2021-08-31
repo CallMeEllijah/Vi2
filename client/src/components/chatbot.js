@@ -3,6 +3,9 @@ import React, { Component, useRef, useEffect } from 'react';
 import {connect} from 'react-redux'
 import cblogo from '../media/cblogo.png'
 
+const { v4: uuidv4 } = require('uuid');
+var id = uuidv4()
+
 const AlwaysScrollToBottom = () => {
   const elementRef = useRef();
   useEffect(() => {
@@ -22,18 +25,21 @@ class chatbot extends Component {
     }
     
     componentDidMount = async() => {
+      try{
+        this.props.setSession(id);
+      }catch(err){}
+
       try {
-        const response = await Axios.post('/api/dialogflow/eventQuery',{"event":"IntroduceVi2"})
-        const content = response.data.fulfillmentMessages[0]
+        const response = await Axios.post('/api/dialogflow/eventQuery',{"queryEvent":"IntroduceVi2", "sessionId":this.props.sessionID})
+        const content = response.data.response
         const message2 = {
           key: this.props.messages.length,
           type: "bot",
-          message: content.text.text[0]
+          message: content.fulfillmentText
         }
-        
         this.props.addMessage(message2)
       } catch (error) {
-        
+        console.log(error);
       }
     }
     
@@ -61,14 +67,16 @@ class chatbot extends Component {
         var input = this.state.message
         
         const textQueryVariable = {
-          "text":input
+          "queryText":input,
+          "sessionId":this.props.sessionID
         }
         
         try {
           const response = await Axios.post('/api/dialogflow/textQuery',textQueryVariable)
           console.log(response)
-          const content = response.data.fulfillmentMessages[0]
+          const content = response.data.response.fulfillmentText
           const intent = response.data.intent.displayName
+          console.log(content)
           
           const message2 = {
             key: this.props.messages.length,
@@ -88,7 +96,7 @@ class chatbot extends Component {
             this.props.setProblem(response.data.outputContexts[0].parameters.fields.problem.stringValue)
             this.props.addMessage(message2)
             if(typeof response.data.outputContexts[0].parameters.fields.requestion !== "undefined"){
-              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE"})
+              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE", "sessionId":this.props.sessionID})
               const content1 = response1.data.fulfillmentMessages[0]
               const message3 = {
                 key: this.props.messages.length,
@@ -97,7 +105,7 @@ class chatbot extends Component {
               }
               this.props.addMessage(message3)
               if(typeof response.data.outputContexts[0].parameters.fields.requestion !== "undefined"){
-                const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE"})
+                const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE", "sessionId":this.props.sessionID})
                 const content1 = response1.data.fulfillmentMessages[0]
                 const message3 = {
                   key: this.props.messages.length,
@@ -107,7 +115,7 @@ class chatbot extends Component {
                 this.props.addMessage(message3)
               }
               else if(typeof response.data.outputContexts[0].parameters.fields.summary !== "undefined"){
-                const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary"})
+                const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary", "sessionId":this.props.sessionID})
                 const content1 = response1.data.fulfillmentMessages[0]
                 const message3 = {
                   key: this.props.messages.length,
@@ -118,7 +126,7 @@ class chatbot extends Component {
               }
             }
             else if(typeof response.data.outputContexts[0].parameters.fields.summary !== "undefined"){
-              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary"})
+              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary", "sessionId":this.props.sessionID})
               const content1 = response1.data.fulfillmentMessages[0]
               const message3 = {
                 key: this.props.messages.length,
@@ -131,7 +139,7 @@ class chatbot extends Component {
           else if(intent === "Check Question Answer"){
             this.props.addMessage(message2)
             if(typeof response.data.outputContexts[0].parameters.fields.requestion !== "undefined"){
-              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE"})
+              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE", "sessionId":this.props.sessionID})
               const content1 = response1.data.fulfillmentMessages[0]
               const message3 = {
                 key: this.props.messages.length,
@@ -141,7 +149,7 @@ class chatbot extends Component {
               this.props.addMessage(message3)
             }
             else if(typeof response.data.outputContexts[0].parameters.fields.summary !== "undefined"){
-              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary"})
+              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary", "sessionId":this.props.sessionID})
               const content1 = response1.data.fulfillmentMessages[0]
               const message3 = {
                 key: this.props.messages.length,
@@ -159,7 +167,7 @@ class chatbot extends Component {
           else if(content.text.text[0] === "Congratulations!You solved the problem!"){
             this.props.addMessage(message2)
             
-            const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary"})
+            const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary", "sessionId":this.props.sessionID})
             const content1 = response1.data.fulfillmentMessages[0]
             const message3 = {
               key: this.props.messages.length,
@@ -233,6 +241,9 @@ function mapDispatchToProps(dispatch){
     return {
       setUser: (userObject) => {
         dispatch({type: "SET_USER", payload: userObject})
+      },
+      setSession: (userObject) => {
+        dispatch({type: "SET_SESSION", payload: userObject})
       },
       setName: (userObject) => {
         dispatch({type: "SET_NAME", payload: userObject})
