@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
-const dialogflow = require('dialogflow');
+const dialogflow = require('@google-cloud/dialogflow');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
@@ -27,9 +27,8 @@ const credentials = {
 // Create a new session
 const sessionClient = new dialogflow.SessionsClient({ projectID, credentials });
 
-var sessionID = "";
-var sessionPath = {};
-
+// var sessionID = "";
+// var sessionPath = {};
 
 const app = express();
 app.use(cors());
@@ -49,39 +48,75 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build'))
 })
 
-app.post('/setSessionID', (req, res) => {
-  sessionID = req.body.seshID;
-  console.log(req.body);
-  sessionPath = sessionClient.sessionPath(projectID, sessionID);
-})
+// app.post('/setSessionID', (req, res) => {
+//   sessionID = req.body.seshID;
+//   console.log(req.body);
+//   sessionPath = sessionClient.sessionPath(projectID, sessionID);
+// })
 
-app.post('/api/dialogflow/textQuery',async (req, res)=>{
-    // The text query request.
-    const request = {
-      session: sessionPath,
-      queryInput: {
+
+const detectIntent = async (languageCode, queryText, sessionId) => {
+  let sessionPath = sessionClient.projectAgentSessionPath(projectID, sessionId);
+
+  let request = {
+    session: sessionPath,
+    queryInput: {
         text: {
           // The query to send to the dialogflow agent
-          text: req.body.text,
+          text: queryText,
           // The language used by the client (en-US)
-          languageCode: 'en-US',
-        },
+          languageCode: languageCode,
       },
-    };
-  
-    // Send request and log result
-    const responses = await sessionClient.detectIntent(request);
-    console.log('Detected intent');
-    const result = responses[0].queryResult;
-    console.log(`  Query: ${result.queryText}`);
-    console.log(`  Response: ${result.fulfillmentText}`);
-    if (result.intent) {
-      console.log(`  Intent: ${result.intent.displayName}`);
-    } else {
-      console.log(`  No intent matched.`);
-    }
+    },
+  };
 
-    res.send(result);
+  const responses = await sessionClient.detectIntent(request);
+  console.log(responses);
+  const result = responses[0].queryResult;
+  console.log(result);
+
+  return {
+      response: result.fulfillmentText
+  };
+
+}
+
+
+app.post('/api/dialogflow/textQuery',async (req, res)=>{
+    // // The text query request.
+    // const request = {
+    //   session: sessionPath,
+    //   queryInput: {
+    //     text: {
+    //       // The query to send to the dialogflow agent
+    //       text: req.body.text,
+    //       // The language used by the client (en-US)
+    //       languageCode: 'en-US',
+    //     },
+    //   },
+    // };
+  
+    // // Send request and log result
+    // const responses = await sessionClient.detectIntent(request);
+    // console.log('Detected intent');
+    // const result = responses[0].queryResult;
+    // console.log(`  Query: ${result.queryText}`);
+    // console.log(`  Response: ${result.fulfillmentText}`);
+    // if (result.intent) {
+    //   console.log(`  Intent: ${result.intent.displayName}`);
+    // } else {
+    //   console.log(`  No intent matched.`);
+    // }
+    // res.send(result);
+
+    let languageCode = 'en-US';
+    let queryText = req.body.queryText;
+    let sessionId = req.body.sessionId;
+
+    let responseData = await detectIntent(languageCode, queryText, sessionId);
+
+    res.send(responseData.response);
+
 })
 
 app.post('/api/dialogflow/eventQuery',async(req,res)=>{
