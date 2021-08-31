@@ -140,7 +140,7 @@ class body extends Component {
   componentDidUpdate(prevProps){
     //change such that if question contains trumpets then change to trumpets... so on and so forth
     if(prevProps.messages !== this.props.messages){
-      if(this.props.problem.includes("fishes") && this.props.messages[this.props.messages.length-1].message.includes("Problem number 1")){
+      if(this.props.problem.includes("fishes") && this.props.messages[this.props.messages.length-1].message.includes("Problem number")){
         console.log(prevProps)
         this.setState({
           question: this.props.problem,
@@ -166,7 +166,7 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.problem.includes("marbles")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number 2")){
+      if(this.props.problem.includes("marbles")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number")){
         this.setState({
           question: this.props.problem,
           list1: marbleInvetory, //marbles
@@ -199,9 +199,9 @@ class body extends Component {
         //}
         //-------------------------------------------------------------------------------------
       }
-      if(this.props.problem.includes("pencils")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number 3")){
+      if(this.props.problem.includes("pencils")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number")){
         this.setState({
-          question: this.props.question,
+          question: this.props.problem,
           list1: pencilInvetory, //pencils
           list2: [],
           list3: [],
@@ -214,7 +214,7 @@ class body extends Component {
             {
               droppableId: 'droppable2',
               listId: 'list2',
-              title: "Maria's pencils"
+              title: "Angelica's pencils"
             },
             {
               droppableId: 'droppable3',
@@ -224,9 +224,9 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.problem.includes("guava")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number 4")){
+      if(this.props.problem.includes("guava")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number")){
         this.setState({
-          question: this.props.question,
+          question: this.props.problem,
           list1: guavaInvetory, //guava
           list2: [],
           list3: [],
@@ -239,19 +239,19 @@ class body extends Component {
             {
               droppableId: 'droppable2',
               listId: 'list2',
-              title: "Guava per bayong"
+              title: "Guavas Planted"
             },
             {
               droppableId: 'droppable3',
               listId: 'list3',
-              title: "Paula's guavas"
+              title: "Guava per harvest"
             }
           ]
         })
       }
-      if(this.props.problem.includes("egg")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number 5")){
+      if(this.props.problem.includes("egg")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number")){
         this.setState({
-          question: this.props.question,
+          question: this.props.problem,
           list1: eggInvetory, //eggs
           list2: [],
           list3: [],
@@ -274,9 +274,9 @@ class body extends Component {
           ]
         })
       }
-      if(this.props.problem.includes("flower")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number 6")){
+      if(this.props.problem.includes("flower")&& this.props.messages[this.props.messages.length-1].message.includes("Problem number")){
         this.setState({
-          question: this.props.question,
+          question: this.props.problem,
           list1: flowerInvetory, //flowers
           list2: [],
           list3: [],
@@ -399,11 +399,11 @@ class body extends Component {
         operation = "addition"
       else if(this.state.nsOP == "-")
         operation = "subtraction"
-      else if(this.state.nsOP == "*")
+      else if(this.state.nsOP == "x")
         operation = "multiplication"
-      else if(this.state.nsOP == "/")
+      else if(this.state.nsOP == "÷")
         operation = "division"
-      
+      console.log(operation)
       response = await Axios.post('/api/dialogflow/textQuery',{text:operation})
     }
     else if(questionType === "firstnumberbox"){
@@ -533,7 +533,7 @@ class body extends Component {
             <option value="" disabled defaultValue>Operation</option>
             <option value="+">+</option>
             <option value="-">-</option>
-            <option value="/">÷</option>
+            <option value="÷">÷</option>
             <option value="x">x</option>
           </select>
             <input type="number" className="equators" placeholder="2nd no." value={this.state.nsO2} id="nsO2" onChange={this.onChange}/>
