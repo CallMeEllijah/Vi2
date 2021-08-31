@@ -87,6 +87,46 @@ class chatbot extends Component {
           else if(intent === "Show Problem"){
             this.props.setProblem(response.data.outputContexts[0].parameters.fields.problem.stringValue)
             this.props.addMessage(message2)
+            if(typeof response.data.outputContexts[0].parameters.fields.requestion !== "undefined"){
+              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE"})
+              const content1 = response1.data.fulfillmentMessages[0]
+              const message3 = {
+                key: this.props.messages.length,
+                type: "bot",
+                message: content1.text.text[0]
+              }
+              this.props.addMessage(message3)
+              if(typeof response.data.outputContexts[0].parameters.fields.requestion !== "undefined"){
+                const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"RE"})
+                const content1 = response1.data.fulfillmentMessages[0]
+                const message3 = {
+                  key: this.props.messages.length,
+                  type: "bot",
+                  message: content1.text.text[0]
+                }
+                this.props.addMessage(message3)
+              }
+              else if(typeof response.data.outputContexts[0].parameters.fields.summary !== "undefined"){
+                const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary"})
+                const content1 = response1.data.fulfillmentMessages[0]
+                const message3 = {
+                  key: this.props.messages.length,
+                  type: "bot",
+                  message: content1.text.text[0]
+                }
+                this.props.addMessage(message3)
+              }
+            }
+            else if(typeof response.data.outputContexts[0].parameters.fields.summary !== "undefined"){
+              const response1 = await Axios.post('/api/dialogflow/textQuery',{"text":"summary"})
+              const content1 = response1.data.fulfillmentMessages[0]
+              const message3 = {
+                key: this.props.messages.length,
+                type: "bot",
+                message: content1.text.text[0]
+              }
+              this.props.addMessage(message3)
+            }
           }
           else if(intent === "Check Question Answer"){
             this.props.addMessage(message2)
