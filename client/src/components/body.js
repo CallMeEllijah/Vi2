@@ -442,6 +442,11 @@ class body extends Component {
         message: content1.text.text[0]
       }
       
+      this.setState({nsO1:""})
+      this.setState({nsOP:""})
+      this.setState({nsO2:""})
+      this.setState({nsO3:""})
+
       var mistakeC = response1.data.outputContexts[0].parameters.fields.mistakeC.numberValue
       var mistakeF = response1.data.outputContexts[0].parameters.fields.mistakeF.numberValue
       var mistakeU = response1.data.outputContexts[0].parameters.fields.mistakeF.numberValue
@@ -450,7 +455,7 @@ class body extends Component {
       console.log(mistakeF)
       console.log(mistakeU)
 
-      Axios.post("/updateAssessmentLevel", {id: this.props.currentUser, problemno: response1.data.outputContexts[0].parameters.fields.problemnumber.numberValue, mistakesU: mistakeU, mistakesF: mistakeF, mistakesC: mistakeC}).then(res => {
+      Axios.post("/updateAssessmentLevel", {id: this.props.currentUser, problemno : response1.data.outputContexts[0].parameters.fields.problemnumber.numberValue - 1, mistakesU: mistakeU, mistakesF: mistakeF, mistakesC: mistakeC}).then(res => {
         console.log("updated assessment levels")
       })
 
