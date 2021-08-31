@@ -209,7 +209,7 @@ class body extends Component {
             {
               droppableId: 'droppable1',
               listId: 'list1',
-              title: 'Inventory'
+              title: 'Pencils'
             },
             {
               droppableId: 'droppable2',
@@ -219,7 +219,7 @@ class body extends Component {
             {
               droppableId: 'droppable3',
               listId: 'list3',
-              title: "Petra's pencils"
+              title: "Petra's additional pencils"
             }
           ]
         })
@@ -234,7 +234,7 @@ class body extends Component {
             {
               droppableId: 'droppable1',
               listId: 'list1',
-              title: 'Inventory'
+              title: 'Guavas'
             },
             {
               droppableId: 'droppable2',
@@ -259,7 +259,7 @@ class body extends Component {
             {
               droppableId: 'droppable1',
               listId: 'list1',
-              title: 'Inventory'
+              title: 'Eggs'
             },
             {
               droppableId: 'droppable2',
@@ -284,7 +284,7 @@ class body extends Component {
             {
               droppableId: 'droppable1',
               listId: 'list1',
-              title: 'Inventory'
+              title: 'Flowers'
             },
             {
               droppableId: 'droppable2',
@@ -441,8 +441,23 @@ class body extends Component {
         type: "bot",
         message: content1.text.text[0]
       }
+      
+      var mistakeC = response1.data.outputContexts[0].parameters.fields.mistakeC.numberValue
+      var mistakeF = response1.data.outputContexts[0].parameters.fields.mistakeF.numberValue
+      var mistakeU = response1.data.outputContexts[0].parameters.fields.mistakeF.numberValue
+      
+      console.log(mistakeC)
+      console.log(mistakeF)
+      console.log(mistakeU)
+
+      Axios.post("/updateAssessmentLevel", {id: this.props.currentUser, problemno: response1.data.outputContexts[0].parameters.fields.problemnumber.numberValue, mistakesU: mistakeU, mistakesF: mistakeF, mistakesC: mistakeC}).then(res => {
+        console.log("updated assessment levels")
+      })
+
       this.props.addMessage(message3)
+      
       if(typeof response1.data.outputContexts[0].parameters.fields.endlesson !== "undefined"){
+        console.log("kekw")
         const response2 = await Axios.post('/api/dialogflow/textQuery',{"text":"end"})
         const content2 = response2.data.fulfillmentMessages[0]
         const message4 = {
@@ -451,6 +466,9 @@ class body extends Component {
           message: content2.text.text[0]
         }
         this.props.addMessage(message4)
+        Axios.post("/addchatlog", {id: this.props.currentUser, messages: this.props.messages}).then(res => {
+          console.log("added chatlog")
+        })
       }
     }
   }

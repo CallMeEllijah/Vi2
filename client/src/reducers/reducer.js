@@ -1,5 +1,6 @@
 const initialState = {
     currentUser: {},
+    userName:{},
     questiontype: {},
     problem: "Talk to Vi2 at the chatbox on the lower right of the screen to start!",
     value1: {},
@@ -19,6 +20,11 @@ function reducer(state=initialState, action){
         return {
             ...state,
             currentUser: action.payload
+        }
+        case "SET_NAME":
+        return {
+            ...state,
+            userName: action.payload
         }
         case "SET_QUESTION_TYPE":
         return {

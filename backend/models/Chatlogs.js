@@ -7,6 +7,7 @@ const ChatlogSchema = new Schema({
     type: String,
     required: true
   },
+  
   messages: {
     type: Array,
     required: true

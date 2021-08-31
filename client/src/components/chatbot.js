@@ -75,8 +75,16 @@ class chatbot extends Component {
             type: "bot",
             message: content.text.text[0]
           }
-
-          if(intent === "Show Problem"){
+          if(intent === "Get Student Name" || intent === "Get Student Name All"){
+            
+            this.props.addMessage(message2)
+            this.props.setName(response.data.outputContexts[0].parameters.fields.name.stringValue)
+            Axios.post("/addUser", {name: this.props.userName}).then(res => {
+              console.log("kek")
+              this.props.setUser(res.data._id);
+            })
+          }
+          else if(intent === "Show Problem"){
             this.props.setProblem(response.data.outputContexts[0].parameters.fields.problem.stringValue)
             this.props.addMessage(message2)
           }
@@ -138,21 +146,6 @@ class chatbot extends Component {
     //for updates
     componentDidUpdate(prevProps){
       if(prevProps.messages !== this.props.messages){
-        if(this.props.messages[this.props.messages.length-1].message.includes("Do you want to start the lesson?")){
-          Axios.post("/addUser", {name: this.props.messages[this.props.messages.length-2].message}).then(res => {
-            this.props.setUser(res.data._id);
-          })
-        }
-        if(this.props.messages[this.props.messages.length-1].message.includes("next problem")){
-          Axios.post("/updateAssessmentLevel", {id: this.props.currentUser, problemno: this.props.problemno, mistakesU: this.mistakesU, mistakesF: this.mistakesF, mistakesC: this.mistakesC}).then(res => {
-            console.log("updated assessment levels")
-          })
-        }
-        if(this.props.messages[this.props.messages.length-1].message.includes("finished")){
-          Axios.post("/addchatlog", {id: this.props.currentUser, messages: this.props.messages}).then(res => {
-            console.log("added chatlog")
-          })
-        }
       }
     }
 
@@ -180,6 +173,7 @@ class chatbot extends Component {
 function mapStateToProps(state){
   return {
     currentUser: state.currentUser,
+    userName : state.userName,
     messages: state.messages,
     value1: state.value1,
     value2: state.value2,
@@ -198,6 +192,9 @@ function mapDispatchToProps(dispatch){
     return {
       setUser: (userObject) => {
         dispatch({type: "SET_USER", payload: userObject})
+      },
+      setName: (userObject) => {
+        dispatch({type: "SET_NAME", payload: userObject})
       },
       addMessage: (msgObject) => {
         dispatch({type: "ADD_MESSAGE", payload: msgObject})
