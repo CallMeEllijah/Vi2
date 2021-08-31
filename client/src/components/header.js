@@ -1,8 +1,19 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+const { v4: uuidv4 } = require('uuid');
 
 class header extends Component {
-  
+
+  constructor(){
+    super();
+    var id = uuidv4()
+    console.log(id)
+    Axios.post("/setSessionID", {seshID: id}).then(res => {
+      console.log("hakdog");
+    })
+  }
+
   render() {
     return (
       <div className='header'>

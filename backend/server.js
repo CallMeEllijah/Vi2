@@ -14,7 +14,6 @@ const User = require("./models/User");
 const Chatlogs = require("./models/Chatlogs");
 
 const projectID = config.googleProjectID;
-const sessionID = config.dialogFlowSessionID;
 const languageCode = config.dialogFlowSessionLanguageCode;
 const credentials = {
   client_email: config.googleClientEmail,
@@ -24,7 +23,9 @@ const credentials = {
 
 // Create a new session
 const sessionClient = new dialogflow.SessionsClient({ projectID, credentials });
-const sessionPath = sessionClient.sessionPath(projectID, sessionID);
+
+var sessionID = "";
+var sessionPath = {};
 
 
 const app = express();
@@ -43,6 +44,12 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/build/')))
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build'))
+})
+
+app.post('/setSessionID', (req, res) => {
+  sessionID = req.body.seshID;
+  console.log(req.body);
+  sessionPath = sessionClient.sessionPath(projectID, sessionID);
 })
 
 app.post('/api/dialogflow/textQuery',async (req, res)=>{
