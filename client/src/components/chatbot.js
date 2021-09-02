@@ -84,8 +84,10 @@ class chatbot extends Component {
             type: "bot",
             message: content
           }
-
-          if (intent === "Default Fallback Intent"){
+          if (intent === "Not Ready To Proceed Question"|| intent === "Break From Question" || intent === "Break From Problem" || intent === "Not Ready To Proceed Problem" || intent === "Explain Problem"){
+            this.props.addMessage(message2)
+          }
+          else if (intent === "Default Fallback Intent"){
             this.props.addMessage(message2)
           }
           else if(intent === "Get Student Name" || intent === "Get Student Name All"){
