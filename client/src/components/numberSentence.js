@@ -83,7 +83,20 @@ class numberSentence extends Component {
     }
 
     componentDidUpdate(prevProps){
-        
+        if(prevProps.messages !== this.props.messages){
+            if(this.props.messages[this.props.messages.length-1].message === "Next Problem"){
+                this.setState({
+                    addSelected: "operatorUnchosen",
+                    subSelected: "operatorUnchosen",
+                    divSelected: "operatorUnchosen",
+                    mulSelected: "operatorUnchosen",
+                    nsO1: "",
+                    nsOP: "",
+                    nsO2: "",
+                    nsO3: ""
+                })
+            }
+        }
     }
 
     render() {
@@ -127,16 +140,24 @@ class numberSentence extends Component {
 
 function mapStateToProps(state){
 return {
-    currentProgress: state.currentProgress
+    currentProgress: state.currentProgress,
+    messages: state.messages,
+    sessionID: state.sessionID,
+
+
+    problem : state.problem,
+    inventoryOneName: state.inventoryOneName,
+    inventoryTwoName: state.inventoryTwoName,
+    itemName: state.itemName,
+
+    currentUser: state.currentUser,
+    userName : state.userName,
   };
 }
 
 
 function mapDispatchToProps(dispatch){
     return {
-      setProgress: (msgObject) => {
-        dispatch({type: "SET_PROGRESS", payload: msgObject})
-      }
     }
 }
 

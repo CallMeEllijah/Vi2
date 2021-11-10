@@ -59,6 +59,16 @@ class interactables extends Component {
         })
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.messages !== this.props.messages){
+            if(this.props.messages[this.props.messages.length-1].message === "Next Problem"){
+                this.setState({
+                    sampleAmount: [],
+                    sampleAmount2: []
+                })
+            }
+        }
+    }
 
     render() {
         return (

@@ -218,7 +218,9 @@ class chatbox extends Component {
                 </div>
                 <form className="chatTextContainer" onSubmit={this.onSubmitMessage}>
                     <input autoComplete="off" required type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message" placeholder="Type your message here!"/>
-                    <button className="messageSend send"></button>
+                    <div className="messageSend">
+                        <button className="send"></button>
+                    </div>
                 </form>
             </div>
         );
