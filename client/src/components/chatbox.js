@@ -1,67 +1,62 @@
 import Axios from 'axios';
 import React, { Component, useRef, useEffect } from 'react';
 import {connect} from 'react-redux'
-import cblogo from '../media/cblogo.png'
 
+//initialize the unique id used for the chatting with the chatbot
 const { v4: uuidv4 } = require('uuid');
 var id = uuidv4()
 
+//Auto scroll to bottom for chatlogs
 const AlwaysScrollToBottom = () => {
-  const elementRef = useRef();
-  useEffect(() => {
-    elementRef.current.scrollIntoView()
-  });
-  return <div ref={elementRef} />;
-};
+    const elementRef = useRef();
+    useEffect(() => {
+      elementRef.current.scrollIntoView()
+    });
+    return <div ref={elementRef} />;
+  };
 
-class chatbot extends Component {
+class chatbox extends Component {
 
     constructor(){
         super();
         this.state = {
-          name: "",
-          message: ""
-        }
+            name: "",
+            message: ""
+          }
     }
-    
-    componentDidMount = async() => {
-      try{
-        await this.props.setSession(id);
-      }catch(err){}
 
-      try {
-        console.log(this.props)
-        const response = await Axios.post('/api/dialogflow/eventQuery',{"queryEvent":"IntroduceVi2", "sessionId":this.props.sessionID})
-        const content = response.data.response
-        const message2 = {
-          key: this.props.messages.length,
-          type: "bot",
-          message: content.fulfillmentText
+    //initialization and start of vi to chat
+    componentDidMount = async() => {
+        try{
+          await this.props.setSession(id);
+        }catch(err){}
+  
+        try {
+          console.log(this.props)
+          const response = await Axios.post('/api/dialogflow/eventQuery',{"queryEvent":"IntroduceVi2", "sessionId":this.props.sessionID})
+          const content = response.data.response
+          const message2 = {
+            key: this.props.messages.length,
+            type: "botMessageContainer",
+            message: content.fulfillmentText
+          }
+          this.props.addMessage(message2)
+        } catch (error) {
+          console.log(error);
         }
-        this.props.addMessage(message2)
-      } catch (error) {
-        console.log(error);
       }
-    }
-    
+
+    //data manipulation for input boxes
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
-    
-    onSubmit = e => {
-        e.preventDefault();
-    
-        const user = {
-          name: this.state.name
-        }
-        this.props.setUser(user)
-    }
 
+    //Function that will process the users messages
     onSubmitMessage = async e => {
         e.preventDefault();
         const message = {
           key: this.props.messages.length,
-          type: "user",
+          type: "userMessageContainer",
           message: this.state.message
         }
         this.props.addMessage(message)
@@ -81,7 +76,7 @@ class chatbot extends Component {
           
           const message2 = {
             key: this.props.messages.length,
-            type: "bot",
+            type: "botMessageContainer",
             message: content
           }
           if (intent === "Not Ready To Proceed Question"|| intent === "Break From Question" || intent === "Break From Problem" || intent === "Not Ready To Proceed Problem" || intent === "Explain Problem"){
@@ -92,6 +87,7 @@ class chatbot extends Component {
           }
           else if(intent === "Get Student Name" || intent === "Get Student Name All"){
             this.props.addMessage(message2)
+            console.log(response)
             this.props.setName(response.data.response.outputContexts[0].parameters.fields.name.stringValue)
             Axios.post("/addUser", {name: this.props.userName}).then(res => {
               console.log("kek")
@@ -106,7 +102,7 @@ class chatbot extends Component {
               const content1 = response1.data.response.fulfillmentText
               const message3 = {
                 key: this.props.messages.length,
-                type: "bot",
+                type: "botMessageContainer",
                 message: content1
               }
               this.props.addMessage(message3)
@@ -115,7 +111,7 @@ class chatbot extends Component {
                 const content1 = response1.data.response.fulfillmentText
                 const message3 = {
                   key: this.props.messages.length,
-                  type: "bot",
+                  type: "botMessageContainer",
                   message: content1
                 }
                 this.props.addMessage(message3)
@@ -125,7 +121,7 @@ class chatbot extends Component {
                 const content1 = response1.data.response.fulfillmentText
                 const message3 = {
                   key: this.props.messages.length,
-                  type: "bot",
+                  type: "botMessageContainer",
                   message: content1
                 }
                 this.props.addMessage(message3)
@@ -136,7 +132,7 @@ class chatbot extends Component {
               const content1 = response1.data.response.fulfillmentText
               const message3 = {
                 key: this.props.messages.length,
-                type: "bot",
+                type: "botMessageContainer",
                 message: content1
               }
               this.props.addMessage(message3)
@@ -149,7 +145,7 @@ class chatbot extends Component {
               const content1 = response1.data.response.fulfillmentText
               const message3 = {
                 key: this.props.messages.length,
-                type: "bot",
+                type: "botMessageContainer",
                 message: content1
               }
               
@@ -160,7 +156,7 @@ class chatbot extends Component {
               const content1 = response1.data.response.fulfillmentText
               const message3 = {
                 key: this.props.messages.length,
-                type: "bot",
+                type: "botMessageContainer",
                 message: content1
               }
               this.props.addMessage(message3)
@@ -176,13 +172,11 @@ class chatbot extends Component {
             const content1 = response1.data.response.fulfillmentText
             const message3 = {
               key: this.props.messages.length,
-              type: "bot",
+              type: "botMessageContainer",
               message: content1
             }
             this.props.addMessage(message3)
-            // ----------------------------replace setmistake to the proper mistake field
             this.props.setMistake(response1.data.outputContexts[0].parameters.fields.mistake.numberValue)
-            // ---------------------------- if questione type = 1 or 2 or 3 or 4 or 5 and so on then setmistake either to U / F / C
           }
           else{
             this.props.addMessage(message2)
@@ -194,96 +188,95 @@ class chatbot extends Component {
         }
         
         this.setState({message: ""})
+        console.log(this.props)
     }
 
-    //for updates
     componentDidUpdate(prevProps){
-      if(prevProps.messages !== this.props.messages){
-      }
+        if(prevProps.messages !== this.props.messages){
+            //change the problem and its variable names
+            if(this.props.messages[this.props.messages.length-1].message === "Next Problem"){
+                this.props.setProgress();
+                this.props.setProblem("Problem N");
+                this.props.setInventory1Name("Inventory 1");
+                this.props.setInventory2Name("Inventory 2");
+                if(this.props.itemName === "pish"){
+                    this.props.setItemName("towel");
+                } else {
+                    this.props.setItemName("pish");
+                }
+            }
+        }
     }
 
     render() {
         return (
-        <div className="chatbotContainer">
-          <img src={cblogo} style={{marginBottom:"-50px", marginTop:"-50px", minHeight:"260px", minWidth:"250px"}}/>
-          <div className="chatBot">
-            <h3 style={{margin:"0px 0px 0px 0px"}}>Chat with Vi2 below!</h3>
-            <div className="chatLog">
-              {this.props.messages.length === 0 ? "" : this.props.messages.map((msg) => <div className={msg.type} key={msg.key}>{msg.message}</div>)}
-              <AlwaysScrollToBottom />
+            <div className="chatContainer">
+                <div className="textBox">Chatbox</div>
+                <div className="chatLogContainer">
+                {this.props.messages.length === 0 ? "" : this.props.messages.map((msg) => <div className={msg.type} key={msg.key}>{msg.message}</div>)}
+                    <AlwaysScrollToBottom />
+                </div>
+                <form className="chatTextContainer" onSubmit={this.onSubmitMessage}>
+                    <input autoComplete="off" required type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message" placeholder="Type your message here!"/>
+                    <button className="messageSend send"></button>
+                </form>
             </div>
-            <form className="messageSendForm" onSubmit={this.onSubmitMessage}>
-              <input required type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message" placeholder="Your message here!"/>
-                  <button className="messageButton">Send</button>
-            </form>
-          </div>
-            
-        </div>
         );
     }
 }
 
 function mapStateToProps(state){
-  return {
-    currentUser: state.currentUser,
-    sessionID: state.sessionID,
-    userName : state.userName,
-    messages: state.messages,
-    value1: state.value1,
-    value2: state.value2,
-    person1: state.person1,
-    person2: state.person2,
-    mistakesU: state.mistakesU,
-    mistakesF: state.mistakesF,
-    mistakesC: state.mistakesC,
-    draggables: state.draggables,
-    questiontype: state.questiontype,
-    problem: state.problem
-  }
+    return {
+        currentProgress: state.currentProgress,
+        messages: state.messages,
+        sessionID: state.sessionID,
+
+
+        problem : state.problem,
+        inventoryOneName: state.inventoryOneName,
+        inventoryTwoName: state.inventoryTwoName,
+        itemName: state.itemName,
+
+        currentUser: state.currentUser,
+        userName : state.userName,
+    };
 }
+
 
 function mapDispatchToProps(dispatch){
     return {
-      setUser: (userObject) => {
-        dispatch({type: "SET_USER", payload: userObject})
-      },
-      setSession: (userObject) => {
-        dispatch({type: "SET_SESSION", payload: userObject})
-      },
-      setName: (userObject) => {
-        dispatch({type: "SET_NAME", payload: userObject})
-      },
-      addMessage: (msgObject) => {
-        dispatch({type: "ADD_MESSAGE", payload: msgObject})
-      },
-      setValue1: (msgObject) => {
-        dispatch({type: "SET_VALUE1", payload: msgObject})
-      },
-      setValue2: (msgObject) => {
-        dispatch({type: "SET_VALUE2", payload: msgObject})
-      },
-      setPerson1: (msgObject) => {
-        dispatch({type: "SET_PERSON1", payload: msgObject})
-      },
-      setPerson2: (msgObject) => {
-        dispatch({type: "SET_PERSON2", payload: msgObject})
-      },
-      setQuestionType: (msgObject) => {
-        dispatch({type: "SET_QUESTION_TYPE", payload: msgObject})
-      },
-      setProblem: (msgObject) => {
-        dispatch({type: "SET_PROBLEM", payload: msgObject})
-      },
-      setMistakeU: (msgObject) => {
-        dispatch({type: "SET_MISTAKEU", payload: msgObject})
-      },
-      setMistakeF: (msgObject) => {
-        dispatch({type: "SET_MISTAKEF", payload: msgObject})
-      },
-      setMistakeC: (msgObject) => {
-        dispatch({type: "SET_MISTAKEC", payload: msgObject})
-      },
+        setProgress: (msgObject) => {
+            dispatch({type: "SET_PROGRESS", payload: msgObject})
+        },
+        addMessage: (msgObject) => {
+            dispatch({type: "ADD_MESSAGE", payload: msgObject})
+        },
+        setSession: (userObject) => {
+            dispatch({type: "SET_SESSION", payload: userObject})
+        },
+
+
+        setProblem: (msgObject) => {
+          dispatch({type: "SET_PROBLEM", payload: msgObject})
+        },
+        setInventory1Name: (userObject) => {
+            dispatch({type: "SET_INVENTORY1NAME", payload: userObject})
+        },
+        setInventory2Name: (userObject) => {
+            dispatch({type: "SET_INVENTORY2NAME", payload: userObject})
+        },
+        setItemName: (userObject) => {
+            dispatch({type: "SET_ITEMNAME", payload: userObject})
+        },
+
+
+        setUser: (userObject) => {
+            dispatch({type: "SET_USER", payload: userObject})
+        },
+        setName: (userObject) => {
+            dispatch({type: "SET_NAME", payload: userObject})
+        },
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(chatbot)
+export default connect(mapStateToProps, mapDispatchToProps)(chatbox)

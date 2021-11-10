@@ -1,263 +1,385 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
+/* Region Start: General CSS for whole website*/
 ::-webkit-scrollbar {
   width: 0;
 }
+/* Region End: General CSS for whole website*/
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Region Start: Main CSS for Containers*/
+.mainContainer{
+  min-width: 1200px;
+  height: 700px;
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-top: 10px;
+  margin-left: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.topContainer{
+  background-color: #AFE1FF;
+  height: 200px;
+  min-width: 94.4%;
+  border: 5px solid black;
+  border-radius: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-pre {
-  overflow-x: auto;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
-}
-
-.header {
-  background-color: #D2E9FF;
+.progressBarContainer{
+  background-color: #bdd1c5;
+  height: 50px;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  max-height: 33px;
-  border-bottom: 2px solid black;
-}
-
-.mainContainer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   flex-direction: row;
-  height: 600px;
-  margin-top: 20px;
+  border-bottom: 1px solid black;
 }
 
-.chatbotContainer {
-  width: 25%;
-  height: 100%;
+.problemTextContainer{
+  background-color: #f5f5dc;
+  height: 150px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
-.bodyContainer {
-  width: 75%;
-  height: 100%;
+.botContainer{
+  height: 450px;
+  min-width: 95%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-direction: column;
+  flex-direction: row;
+  margin-top: 10px;
 }
 
-.logoHead {
-  height: 20%;
-  width: 80%;
+/*Chat containers*/
+.chatContainer{
+  background-color: #e8b298;
+  width: 25%;
+  height: 100%;
+  border: 5px solid black;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  border: 2px solid black;
-}
-
-.chatBot {
-  margin-top: 10%;
-  background-color: #93c2f1;
-  padding: 5px 5px 5px 5px;
-  min-height: 65%;
-  max-height: 65%;
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   flex-direction: column;
   border-radius: 5px;
-  border: 2px solid black;
 }
 
-.chatLog {
-  height: 90%;
+.chatLogContainer{
+  height: 80%;
   width: 90%;
-  background-color: #D2E9FF;
+  background-color: white;
   overflow-y: scroll;
-  padding: 5px 5px 5px 5px;
+  border-radius: 5px;
+  border: 1px solid black;
 }
 
-.messageSendForm {
+.chatTextContainer{
   height: 10%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 95%;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
 }
 
-.messageInput{
-  min-height: 69%;
-  width: 70%;
-  border-radius: 5px;
-  font-size: 0.9em;
-}
-
-.messageButton{
-  min-height: 50%;
-  width: 25%;
-  border-radius: 5px;
-}
-
-.bot{
+.botMessageContainer{
   background-color: white;
   color: black;
   border-radius: 10px;
   text-align: left;
   margin-top: 10px;
   max-width: 75%;
-  padding-right: 10px;
+  margin-left: 5px;
   padding: 5px 5px 5px 5px;
   overflow-wrap: break-word;
   border: 1px solid grey;
 }
 
-.user{
-  background-color: #DDEBD1;
+.userMessageContainer{
+  background-color: #eecc8c;
   color: black;
   border-radius: 10px; 
   text-align: right;
   margin-top: 10px;
   max-width: 75%;
   margin-left: auto;
-  margin-right: 0;
+  margin-right: 5px;
   padding: 5px 5px 5px 5px;
   overflow-wrap: break-word;
   border: 1px solid grey;
 }
 
-.infoContainer {
-  width: 95%;
-  border-radius: 5px;
-  border: 2px solid black;
-  background-color: #D2E9FF;
-}
-
-.problem{
-  height: 25%;
-}
-
-.equation{
-  height: 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: x-large;
-  background-color: #EFE1FC;
-}
-
-.equation h3{
-  font-size: 1em;
-}
-
-.dragabols{
-  height: 50%;
+/*Interactables containers*/
+.interactContainer{
+  background-color: #d4a29c;
+  width: 45%;
+  height: 100%;
+  border: 5px solid black;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  background-color: #F7E4CB;
+  border-radius: 5px;
 }
 
-img {
-  height: 50px;
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
+.interactablesRepresentationContainer{
+  width: 75%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-.probContainer {
+.representationContainer{
+  width: 75%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.picsContainer{
+  min-height: 90%;
+  min-width: 90%;
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.individualRepresentationContainer{
+  background-color: #f8ebdb;
+  width: 90%;
+  height: 48%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.interactablesActionContainer{
+  width: 15%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/*numSen containers*/
+.numSenContainer{
+  background-color: #d4c5cc;
+  width: 25%;
+  height: 100%;
+  border: 5px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.operandContainer{
+  width: 90%;
+  height: 16%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.operatorContainer{
+  width: 90%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.nsActionContainer{
+  width: 90%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* Region End: Main CSS for features*/
+
+/* Region Start: Other Misc Items*/
+.circleBase {
+  border-radius: 50%;
+}
+
+.uncheckedCircle {
+  width: 25px;
+  height: 25px;
+  background: white;
+  border: 3px solid #000;
+}
+
+.progressCircle {
+  width: 25px;
+  height: 25px;
+  background: #ededb7;
+  border: 3px solid #000;
+}
+
+.checkedCircle {
+  width: 25px;
+  height: 25px;
+  background: #7da27e;
+  border: 3px solid #000;
+  
+}
+
+.problemText{
   margin: 15px 15px 15px 15px;
 }
 
-.equators {
-  height: 69%;
-  width: 10%;
-  border-radius: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
-  font-size: large;
+.messageInput{
+  width: 80%;
 }
 
-.bodyButton {
-  min-height: 48px;
-  max-width: 15%;
-  border-radius: 5px;
-  background-color: white;
-  font-size: 1em;
+.messageButton{
+  width: 15%;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
-
-::-webkit-input-placeholder { /* Edge */
-  color:#c2c2c2;
-  font-family: 'Comic Neue', cursive;
+.operatorUnchosen{
+  background-color: transparent;
 }
 
-:-ms-input-placeholder { /* Internet Explorer */
-  color: #c2c2c2;
-  font-family: 'Comic Neue', cursive;
+.operatorChosen {
+  background-color: #9d9baf;
 }
 
-::placeholder {
-  color: #c2c2c2;
-  font-family: 'Comic Neue', cursive;
+.upArrow{
+  background-color: transparent;
+  background-image: url(../src/media/upArrow.svg);
+  background-size: 100% 100%;
+  height: 50px;
+  width: 50px;
+  border: 0;
 }
 
-select{
-  font-family: 'Comic Neue', cursive;
+.cancel{
+  background-color: transparent;
+  background-image: url(../src/media/cancel.svg);
+  background-size: 100% 100%;
+  height: 50px;
+  width: 50px;
+  border: 0;
+}
+
+.check{
+  background-color: transparent;
+  background-image: url(../src/media/check.svg);
+  background-size: 100% 100%;
+  height: 50px;
+  width: 50px;
+  border: 0;
+}
+
+.downArrow{
+  background-color: transparent;
+  background-image: url(../src/media/downArrow.svg);
+  background-size: 100% 100%;
+  height: 50px;
+  width: 50px;
+  border: 0;
+}
+
+.send{
+  background-color: transparent;
+  background-image: url(../src/media/send.svg);
+  background-size: 100% 100%;
+  height: 60%;
+  width: 20%;
+  border: 0;
+}
+
+.individualOperatorContainer{
+  background-size: 100% 100%;
+  height: 50px;
+  width: 50px;
+  border: 3px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.add{
+  background-image: url(../src/media/add.svg);
+  background-size: 100% 100%;
+  height: 30px;
+  width: 30px;
+}
+
+.sub{
+  background-image: url(../src/media/sub.svg);
+  background-size: 100% 100%;
+  height: 30px;
+  width: 30px;
+}
+
+.div{
+  background-image: url(../src/media/div.svg);
+  background-size: 100% 100%;
+  height: 30px;
+  width: 30px;
+}
+
+.mul{
+  background-image: url(../src/media/mul.svg);
+  background-size: 100% 100%;
+  height: 30px;
+  width: 30px;
 }
 
 button{
-  font-family: 'Comic Neue', cursive;
-  font-size: 1em;
+  cursor: pointer;
+  border: none;
 }
 
-.equation button{
-  font-size: 0.68em;
+.samplepic{
+  height: 43px;
+  width: 43px;
+  background-color: maroon;
+  margin: 3px 3px 3px 3px;
 }
 
-h4{
-  text-align: center;
+.pish{
+  height: 43px;
+  width: 43px;
+  background-image: url(../src/media/items/pish.jpg);
+  background-size: 100% 100%;
+  margin: 3px 3px 3px 3px;
+}
+.towel{
+  height: 43px;
+  width: 43px;
+  background-image: url(../src/media/items/towel.png);
+  background-size: 100% 100%;
+  margin: 3px 3px 3px 3px;
+}
+
+input {
+  width: 75%;
+  height: 50%;
+  font-size: large;
+}
+
+.textBox{
+  font-weight: bold;
+  font-size: 14pt;
 }

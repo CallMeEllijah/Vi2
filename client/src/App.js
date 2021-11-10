@@ -1,43 +1,44 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
 import './App.css';
+import React, { Component } from 'react';
+import {connect} from 'react-redux'
 
-import Header from '../src/components/header';
-import Body from '../src/components/body';
-import Chatbot from '../src/components/chatbot';
+import ProgressBarComponent from '../src/components/progressBar'
+import ProblemComponent from '../src/components/problem'
+import ChatboxComponent from '../src/components/chatbox'
+import InteractablesComponent from '../src/components/interactables'
+import NumberSentenceComponent from '../src/components/numberSentence'
 
 class App extends Component {
-
-  componentDidMount(){
-    //console.log(id); uuidv4 generation check
-  }
-
-  render() {
-    //console.log(this.props); session ID check
+  render(){
     return (
-      <div>
-        <Header />
-        <div className="mainContainer">
-          <Body />
-          <Chatbot />
+      <div className="mainContainer">
+        <div className="topContainer">
+          <ProgressBarComponent />
+          <ProblemComponent />
+        </div>
+        <div className="botContainer">
+          <ChatboxComponent />
+            <InteractablesComponent />
+            <NumberSentenceComponent />
         </div>
       </div>
     );
   }
 }
 
-function mapStateToProps(state){
+const mapStateToProps = (state) => {
   return {
-    sessionID: state.sessionID
+    currentProgress: state.currentProgress
+  };
+}
+
+
+function mapDispatchToProps(dispatch){
+  return {
+    setProgress: (msgObject) => {
+      dispatch({type: "SET_PROGRESS", payload: msgObject})
+    }
   }
 }
 
-function mapDispatchToProps(dispatch){
-    return {
-      setSession: (userObject) => {
-        dispatch({type: "SET_SESSION", payload: userObject})
-      }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);

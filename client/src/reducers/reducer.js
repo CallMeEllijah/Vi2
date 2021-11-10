@@ -1,9 +1,7 @@
 const initialState = {
     currentUser: {},
-    sessionID: {},
     userName:{},
     questiontype: {},
-    problem: "Talk to Vi2 at the chatbox on the lower right of the screen to start!",
     value1: {},
     value2: {},
     person1: {},
@@ -12,20 +10,64 @@ const initialState = {
     mistakesF: {},
     mistakesC: {},
     messages: [],
-    draggables: {}
+    draggables: {},
+    
+
+    //definition of problem variables
+    problem: "Talk to Vi2 at the chatbox on the lower right of the screen to start!",
+    inventoryOneName: "",
+    inventoryTwoName: "",
+    itemName: "",
+    
+    //tracker for progress of student in questions
+    currentProgress: -1,
+
+    //Used for unique sessions
+    sessionID: {}
 }
 
 function reducer(state=initialState, action){
     switch(action.type){
-        case "SET_USER":
+        case "SET_PROGRESS":
         return {
             ...state,
-            currentUser: action.payload
+            currentProgress: state.currentProgress+1
         }
         case "SET_SESSION":
         return {
             ...state,
             sessionID: action.payload
+        }
+        case "ADD_MESSAGE":
+        return {
+            ...state,
+            messages: [...state.messages, action.payload]
+        }
+
+
+        //set inventory names for interactables
+        case "SET_INVENTORY1NAME":
+        return {
+            ...state,
+            inventoryOneName: action.payload
+        }
+        case "SET_INVENTORY2NAME":
+        return {
+            ...state,
+            inventoryTwoName: action.payload
+        }
+        case "SET_ITEMNAME":
+        return {
+            ...state,
+            itemName: action.payload
+        }
+
+
+
+        case "SET_USER":
+        return {
+            ...state,
+            currentUser: action.payload
         }
         case "SET_NAME":
         return {
@@ -61,11 +103,6 @@ function reducer(state=initialState, action){
         return {
             ...state,
             person2: action.payload
-        }
-        case "ADD_MESSAGE":
-        return {
-            ...state,
-            messages: [...state.messages, action.payload]
         }
         case "SET_MISTAKEU":
         return {
