@@ -23,7 +23,7 @@ class interactables extends Component {
 
     removePic = () => {
         var array = [...this.state.sampleAmount]
-        var index = 0
+        var index = this.state.sampleAmount.length-1
         if(index !== -1){
             array.splice(index, 1)
             this.setState({sampleAmount: array})
@@ -41,7 +41,7 @@ class interactables extends Component {
 
     removePic2 = () => {
         var array = [...this.state.sampleAmount2]
-        var index = 0
+        var index = this.state.sampleAmount2.length-1
         if(index !== -1){
             array.splice(index, 1)
             this.setState({sampleAmount2: array})
@@ -73,6 +73,8 @@ class interactables extends Component {
     render() {
         return (
             <div className="interactContainer">
+                <p className="floater">
+                </p>
                 <div className="interactablesRepresentationContainer">
                     <div className="individualRepresentationContainer">
                         <div className="representationContainer">

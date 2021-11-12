@@ -102,10 +102,8 @@ class numberSentence extends Component {
     render() {
         return (
             <div className="numSenContainer">
-                <div className="textBox">Number Sentence</div>
                 <div className="operandContainer">
-                    <div className="textBox">1st Number:</div>
-                    <input type="number" value={this.state.nsO1} id="nsO1" onChange={this.onChange}/>
+                    <input type="number" value={this.state.nsO1} id="nsO1" onChange={this.onChange}  placeholder="1st Number" className="numSenInput"/>
                 </div>
                 <div className="operatorContainer">
                     <div className={"individualOperatorContainer " + this.state.addSelected}>
@@ -122,12 +120,10 @@ class numberSentence extends Component {
                     </div>
                 </div>
                 <div className="operandContainer">
-                    <div className="textBox">2nd Number:</div>
-                    <input type="number"value={this.state.nsO2} id="nsO2" onChange={this.onChange}/>
+                    <input type="number"value={this.state.nsO2} id="nsO2" onChange={this.onChange} placeholder="2nd Number"  className="numSenInput"/>
                 </div>
                 <div className="operandContainer">
-                    <div className="textBox">Final Answer:</div>
-                    <input type="number" value={this.state.nsO3} id="nsO3" onChange={this.onChange}/>
+                    <input type="number" value={this.state.nsO3} id="nsO3" onChange={this.onChange} placeholder="Final Answer"  className="numSenInput"/>
                 </div>
                 <div className="nsActionContainer">
                     <button className="check" onClick={this.checkInputs}></button>

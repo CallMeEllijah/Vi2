@@ -18,8 +18,10 @@ class App extends Component {
         </div>
         <div className="botContainer">
           <ChatboxComponent />
+          <div className="secondaryBotContainer">
             <InteractablesComponent />
             <NumberSentenceComponent />
+          </div>
         </div>
       </div>
     );
