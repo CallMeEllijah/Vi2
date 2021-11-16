@@ -160,7 +160,7 @@
   max-width: 100%;
   max-height: 100%;
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto;
 }
 
 .individualRepresentationContainer{
@@ -415,50 +415,50 @@ button{
 
 /* Here starts the items css */
 
-.item1{
+.fish{
   height: 60px;
   width: 60px;
-  background-image: url(../src/media/items/pish.jpg);
+  background-image: url(../src/media/items/fish.png);
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
 }
 
-.item2{
-  height: 43px;
-  width: 43px;
-  background-image: url(../src/media/items/pish.jpg);
+.egg{
+  height: 60px;
+  width: 60px;
+  background-image: url(../src/media/items/egg.png);
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
 }
 
-.item3{
-  height: 43px;
-  width: 43px;
-  background-image: url(../src/media/items/pish.jpg);
+.flower{
+  height: 70px;
+  width: 70px;
+  background-image: url(../src/media/items/flower.png);
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
 }
 
-.item4{
-  height: 43px;
-  width: 43px;
-  background-image: url(../src/media/items/pish.jpg);
+.guava{
+  height: 60px;
+  width: 60px;
+  background-image: url(../src/media/items/guava.png);
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
 }
 
-.item5{
-  height: 43px;
-  width: 43px;
-  background-image: url(../src/media/items/pish.jpg);
+.marble{
+  height: 60px;
+  width: 60px;
+  background-image: url(../src/media/items/marble.png);
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
 }
 
-.item6{
-  height: 43px;
-  width: 43px;
-  background-image: url(../src/media/items/pish.jpg);
+.pencil{
+  height: 60px;
+  width: 60px;
+  background-image: url(../src/media/items/pencil.png);
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
 }

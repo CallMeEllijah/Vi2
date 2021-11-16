@@ -199,7 +199,7 @@ class chatbox extends Component {
                 this.props.setProblem("Problem N");
                 this.props.setInventory1Name("Inventory 1");
                 this.props.setInventory2Name("Inventory 2");
-                this.props.setItemName("item1");
+                this.props.setItemName("flower");
             }
         }
     }
