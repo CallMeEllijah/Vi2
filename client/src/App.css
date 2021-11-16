@@ -416,16 +416,16 @@ button{
 /* Here starts the items css */
 
 .fish{
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
   background-image: url(../src/media/items/fish.png);
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
 }
 
 .egg{
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
   background-image: url(../src/media/items/egg.png);
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
@@ -440,24 +440,24 @@ button{
 }
 
 .guava{
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
   background-image: url(../src/media/items/guava.png);
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
 }
 
 .marble{
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
   background-image: url(../src/media/items/marble.png);
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
 }
 
 .pencil{
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
   background-image: url(../src/media/items/pencil.png);
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
