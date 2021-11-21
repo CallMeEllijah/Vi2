@@ -22,10 +22,6 @@ class chatbox extends Component {
         this.state = {
             name: "",
             message: "",
-
-            item: "",
-            inventoryNameOne: "",
-            inventoryNameTwo: ""
           }
     }
 
@@ -101,6 +97,15 @@ class chatbox extends Component {
           else if(intent === "Show Problem"){
             this.props.setProblem(response.data.response.outputContexts[0].parameters.fields.problem.stringValue)
             this.props.addMessage(message2)
+
+            /*
+                this.props.setProgress();
+                this.props.setProblem("data1");
+                this.props.setInventory1Name("data2");
+                this.props.setInventory2Name("data3");
+                this.props.setItemName("data4");
+            */
+
             if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
               const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
               const content1 = response1.data.response.fulfillmentText
