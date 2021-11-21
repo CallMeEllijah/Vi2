@@ -21,7 +21,11 @@ class chatbox extends Component {
         super();
         this.state = {
             name: "",
-            message: ""
+            message: "",
+
+            item: "",
+            inventoryNameOne: "",
+            inventoryNameTwo: ""
           }
     }
 
