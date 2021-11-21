@@ -62,17 +62,22 @@ class interactables extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.messages !== this.props.messages){
-            if(this.props.messages[this.props.messages.length-1].message === "Next Problem"){
-                this.setState({
-                    sampleAmount: [],
-                    sampleAmount2: [],
-                    css: "interactContainerSelected"
-                })
-            } else {
-                this.setState({
-                    css: "interactContainer"
-                })
-            }
+            // if(this.props.messages[this.props.messages.length-1].message === "Next Problem"){
+            //     this.setState({
+            //         sampleAmount: [],
+            //         sampleAmount2: [],
+            //         css: "interactContainerSelected"
+            //     })
+            // } else {
+            //     this.setState({
+            //         css: "interactContainer"
+            //     })
+            // }
+            this.setState({
+                sampleAmount: [],
+                sampleAmount2: [],
+                css: "interactContainerSelected"
+            })
         }
     }
 

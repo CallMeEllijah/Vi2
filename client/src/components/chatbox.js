@@ -97,14 +97,11 @@ class chatbox extends Component {
           else if(intent === "Show Problem"){
             this.props.setProblem(response.data.response.outputContexts[0].parameters.fields.problem.stringValue)
             this.props.addMessage(message2)
-
-            /*
-                this.props.setProgress();
-                this.props.setProblem("data1");
-                this.props.setInventory1Name("data2");
-                this.props.setInventory2Name("data3");
-                this.props.setItemName("data4");
-            */
+            this.props.setProgress();
+            this.props.setInventory1Name(response.data.response.outputContexts[0].parameters.fields.object1label.stringValue);
+            this.props.setInventory2Name(response.data.response.outputContexts[0].parameters.fields.object2label.stringValue);
+            this.props.setItemName("fish");
+            console.log(response.data.response.outputContexts[0].parameters.fields.object.stringValue)
 
             if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
               const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
@@ -203,13 +200,6 @@ class chatbox extends Component {
     componentDidUpdate(prevProps){
         if(prevProps.messages !== this.props.messages){
             //change the problem and its variable names
-            if(this.props.messages[this.props.messages.length-1].message === "Next Problem"){
-                this.props.setProgress();
-                this.props.setProblem("Problem N");
-                this.props.setInventory1Name("Inventory 1");
-                this.props.setInventory2Name("Inventory 2");
-                this.props.setItemName("flower");
-            }
         }
     }
 
