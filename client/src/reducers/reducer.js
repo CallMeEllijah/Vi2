@@ -14,7 +14,7 @@ const initialState = {
     
 
     //definition of problem variables
-    problem: "Talk to Vi2 at the chatbox on the lower right of the screen to start!",
+    problem: "Talk to Vi2 at the chatbox below",
     inventoryOneName: "",
     inventoryTwoName: "",
     itemName: "",
