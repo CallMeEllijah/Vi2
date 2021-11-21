@@ -52,7 +52,56 @@ class interactables extends Component {
     submitAmount = () => {
         console.log("sample amount 1 is " + this.state.sampleAmount.length + " and then sample amount 2 is " + this.state.sampleAmount2.length)
     }
+    //----------------------------------function will contain passing of the dragabols data
+    dragCheck = async e => {
+        e.preventDefault();
+        const questionType = this.props.questiontype
+        console.log("pasok sa drag check")
+        console.log("question Type" + questionType)
+        if(questionType === "firstdragbox"){
+        
+            const response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.list2.length, "sessionId":this.props.sessionID})
+            const content = response.data.response.fulfillmentText
+            const message = {
+            key: this.props.messages.length,
+            type: "bot",
+            message: content
+            }
+            this.props.addMessage(message)
+            if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
+            const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
+            const content1 = response1.data.response.fulfillmentText
+            const message3 = {
+                key: this.props.messages.length,
+                type: "bot",
+                message: content1
+            }
+            this.props.addMessage(message3)
+            }
+        }
+        else if(questionType === "seconddragbox"){
 
+            const response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.list3.length, "sessionId":this.props.sessionID})
+            const content = response.data.response.fulfillmentText
+            const message = {
+            key: this.props.messages.length,
+            type: "bot",
+            message: content
+            }
+            this.props.addMessage(message)
+            if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
+            const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
+            const content1 = response1.data.response.fulfillmentText
+            const message3 = {
+                key: this.props.messages.length,
+                type: "bot",
+                message: content1
+            }
+            this.props.addMessage(message3)
+            }
+        }
+    }
+    //-----------------------------------------
     resetAmount = () => {
         this.setState({
             sampleAmount: [],

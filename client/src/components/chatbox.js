@@ -265,7 +265,9 @@ function mapDispatchToProps(dispatch){
         setItemName: (userObject) => {
             dispatch({type: "SET_ITEMNAME", payload: userObject})
         },
-
+        setUser: (userObject) => {
+          dispatch({type: "SET_QUESTION_TYPE", payload: userObject})
+        },
 
         setUser: (userObject) => {
             dispatch({type: "SET_USER", payload: userObject})
