@@ -18,6 +18,9 @@ class numberSentence extends Component {
             nsOP: "",
             nsO2: "",
             nsO3: "",
+
+            //css
+            css: "numSenContainer"
         }
     }
 
@@ -93,7 +96,12 @@ class numberSentence extends Component {
                     nsO1: "",
                     nsOP: "",
                     nsO2: "",
-                    nsO3: ""
+                    nsO3: "",
+                    css: "numSenContainerSelected"
+                })
+            } else {
+                this.setState({
+                    css: "numSenContainer"
                 })
             }
         }
@@ -101,7 +109,7 @@ class numberSentence extends Component {
 
     render() {
         return (
-            <div className="numSenContainer">
+            <div className={this.state.css}>
                 <div className="operandContainer">
                     <input type="number" value={this.state.nsO1} id="nsO1" onChange={this.onChange}  placeholder="1st Number" className="numSenInput"/>
                 </div>

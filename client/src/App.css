@@ -124,11 +124,25 @@
 
 /*Interactables containers*/
 .interactContainer{
+  background-color: grey;
+  min-width: 95%;
+  max-width: 95%;
+  height: 65%;
+  border: 5px solid Black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.interactContainerSelected{
   background-color: #d4a29c;
   min-width: 95%;
   max-width: 95%;
   height: 65%;
-  border: 5px solid black;
+  border: 5px solid rgb(255, 92, 92);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -186,10 +200,23 @@
 
 /*numSen containers*/
 .numSenContainer{
-  background-color: #d4c5cc;
+  background-color: grey;
   width: 95%;
   height: 30%;
   border: 5px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.numSenContainerSelected{
+  background-color: #d4c5cc;
+  width: 95%;
+  height: 30%;
+  border: 5px solid rgb(255, 92, 92);
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -319,24 +346,19 @@
 }
 
 .messageSend{
-  height: 40px;
-  width: 40px;
-  background: palegreen;
-  border: 1px solid #000;
-  border-radius: 50%;
-  display: flex;
+  height: 50px;
+  width: 50px;
+  background: transparent;
   align-items: center;
   justify-content: center;
 }
-.messageSend:hover{
-  background-color: khaki;
-}
+
 .send{
   background-color: transparent;
-  background-image: url(../src/media/send.svg);
+  background-image: url(../src/media/send2.svg);
   background-size: 100% 100%;
-  height: 75%;
-  width: 75%;
+  height: 100%;
+  width: 100%;
 }
 
 .individualOperatorContainer{
@@ -397,7 +419,7 @@ button{
 .messageInput {
   width: 80%;
   height: 60%;
-  font-size: large;
+  font-size: 15px;
   font-weight: bold;
 }
 

@@ -9,6 +9,7 @@ class interactables extends Component {
         this.state = {
             sampleAmount: [],
             sampleAmount2: [],
+            css: "interactContainer"
         }
     }
 
@@ -64,7 +65,12 @@ class interactables extends Component {
             if(this.props.messages[this.props.messages.length-1].message === "Next Problem"){
                 this.setState({
                     sampleAmount: [],
-                    sampleAmount2: []
+                    sampleAmount2: [],
+                    css: "interactContainerSelected"
+                })
+            } else {
+                this.setState({
+                    css: "interactContainer"
                 })
             }
         }
@@ -72,9 +78,7 @@ class interactables extends Component {
 
     render() {
         return (
-            <div className="interactContainer">
-                <p className="floater">
-                </p>
+            <div className={this.state.css}>
                 <div className="interactablesRepresentationContainer">
                     <div className="individualRepresentationContainer">
                         <div className="representationContainer">
