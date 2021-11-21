@@ -187,6 +187,7 @@
   justify-content: space-evenly;
   border-radius: 5px;
   border: 1px solid black;
+  margin: 1px;
 }
 
 .interactablesActionContainer{
