@@ -14,7 +14,7 @@ const initialState = {
     
 
     //definition of problem variables
-    problem: "Talk to Vi2 at the chatbox below!",
+    problem: "Talk to Vi2 at the chatbox below",
     inventoryOneName: "",
     inventoryTwoName: "",
     itemName: "",
@@ -61,6 +61,11 @@ function reducer(state=initialState, action){
             ...state,
             itemName: action.payload
         }
+        case "SET_QUESTION_TYPE":
+        return {
+            ...state,
+            questiontype: action.payload
+        }
 
 
 
@@ -73,11 +78,6 @@ function reducer(state=initialState, action){
         return {
             ...state,
             userName: action.payload
-        }
-        case "SET_QUESTION_TYPE":
-        return {
-            ...state,
-            questiontype: action.payload
         }
         case "SET_PROBLEM":
         return {
