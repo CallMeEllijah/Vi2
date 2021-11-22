@@ -297,7 +297,7 @@
 }
 
 .operatorChosen {
-  background-color: #9d9baf;
+  background-color: yellow;
 }
 
 .upArrow{
@@ -319,9 +319,6 @@
   background-color: Tomato;
   border-radius: 50%;
 }
-.cancel:hover{
-  background-color: khaki;
-}
 
 .check{
   background-color: transparent;
@@ -332,9 +329,6 @@
   border: 0;
   background-color: palegreen;
   border-radius: 50%;
-}
-.check:hover{
-  background-color: khaki;
 }
 
 .downArrow{
@@ -372,8 +366,8 @@
   justify-content: center;
   border-radius: 50%;
 }
-.individualOperatorContainer:hover, .add:hover, .sub:hover, .div:hover, .mul:hover{
-  background-color: khaki;
+.individualOperatorContainer:hover, .cancel:hover, .check:hover{
+  background-color: rgb(73, 181, 218);
   cursor: pointer;
 }
 
@@ -382,6 +376,7 @@
   background-size: 100% 100%;
   height: 30px;
   width: 30px;
+  background-color: transparent;
 }
 
 .sub{
@@ -389,6 +384,7 @@
   background-size: 100% 100%;
   height: 30px;
   width: 30px;
+  background-color: transparent;
 }
 
 .div{
@@ -396,6 +392,7 @@
   background-size: 100% 100%;
   height: 30px;
   width: 30px;
+  background-color: transparent;
 }
 
 .mul{
@@ -403,6 +400,7 @@
   background-size: 100% 100%;
   height: 30px;
   width: 30px;
+  background-color: transparent;
 }
 
 button{

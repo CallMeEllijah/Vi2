@@ -174,7 +174,7 @@ return {
     currentProgress: state.currentProgress,
     messages: state.messages,
     sessionID: state.sessionID,
-
+    questiontype: state.questiontype,
 
     problem : state.problem,
     inventoryOneName: state.inventoryOneName,

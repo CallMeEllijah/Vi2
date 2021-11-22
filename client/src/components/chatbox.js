@@ -227,7 +227,7 @@ function mapStateToProps(state){
         currentProgress: state.currentProgress,
         messages: state.messages,
         sessionID: state.sessionID,
-
+        questiontype: state.questiontype,
 
         problem : state.problem,
         inventoryOneName: state.inventoryOneName,
@@ -251,6 +251,9 @@ function mapDispatchToProps(dispatch){
         setSession: (userObject) => {
             dispatch({type: "SET_SESSION", payload: userObject})
         },
+        setQuestionType: (userObject) => {
+          dispatch({type: "SET_QUESTION_TYPE", payload: userObject})
+        },
 
 
         setProblem: (msgObject) => {
@@ -264,9 +267,6 @@ function mapDispatchToProps(dispatch){
         },
         setItemName: (userObject) => {
             dispatch({type: "SET_ITEMNAME", payload: userObject})
-        },
-        setUser: (userObject) => {
-          dispatch({type: "SET_QUESTION_TYPE", payload: userObject})
         },
 
         setUser: (userObject) => {

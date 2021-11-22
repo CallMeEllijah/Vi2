@@ -13,7 +13,6 @@ class numberSentence extends Component {
             divSelected: "operatorUnchosen",
             mulSelected: "operatorUnchosen",
 
-
             //operands and operator
             nsO1: "",
             nsOP: "",
@@ -31,36 +30,40 @@ class numberSentence extends Component {
     };
 
     //css manipulation for selected operator
-    changeAdd = () => {
-        this.setState({
+    changeAdd = async () => {
+        await this.setState({
             addSelected: "operatorChosen",
             subSelected: "operatorUnchosen",
             divSelected: "operatorUnchosen",
-            mulSelected: "operatorUnchosen"
+            mulSelected: "operatorUnchosen",
+            nsOP: "addition"
         })
     }
-    changeSub = () => {
-        this.setState({
+    changeSub = async () => {
+        await this.setState({
             addSelected: "operatorUnchosen",
             subSelected: "operatorChosen",
             divSelected: "operatorUnchosen",
-            mulSelected: "operatorUnchosen"
+            mulSelected: "operatorUnchosen",
+            nsOP: "subtraction"
         })
     }
-    changeDiv = () => {
-        this.setState({
+    changeDiv = async () => {
+        await this.setState({
             addSelected: "operatorUnchosen",
             subSelected: "operatorUnchosen",
             divSelected: "operatorChosen",
-            mulSelected: "operatorUnchosen"
+            mulSelected: "operatorUnchosen",
+            nsOP: "division"
         })
     }
-    changeMul = () => {
-        this.setState({
+    changeMul = async () => {
+        await this.setState({
             addSelected: "operatorUnchosen",
             subSelected: "operatorUnchosen",
             divSelected: "operatorUnchosen",
-            mulSelected: "operatorChosen"
+            mulSelected: "operatorChosen",
+            nsOP: "multiplication"
         })
     }
 
@@ -82,27 +85,26 @@ class numberSentence extends Component {
         var response
         console.log(this.state.nsO3)
         if(questionType === "operationbox"){
-        var operation
-
-        if(this.state.nsOP == "+")
+        /* var operation
+        if(this.state.nsOP === "+")
             operation = "addition"
-        else if(this.state.nsOP == "-")
+        else if(this.state.nsOP === "-")
             operation = "subtraction"
-        else if(this.state.nsOP == "x")
+        else if(this.state.nsOP === "x")
             operation = "multiplication"
-        else if(this.state.nsOP == "÷")
-            operation = "division"
-        console.log(operation)
-        response = await Axios.post('/api/dialogflow/textQuery',{"queryText":operation,"sessionId":this.props.sessionID})
+        else if(this.state.nsOP === "÷")
+            operation = "division" */
+            
+            response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsOP,"sessionId":this.props.sessionID})
         }
         else if(questionType === "firstnumberbox"){
-        response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsO1,"sessionId":this.props.sessionID})
+            response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsO1,"sessionId":this.props.sessionID})
         }
         else if(questionType === "secondnumberbox"){
-        response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsO2,"sessionId":this.props.sessionID})
+            response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsO2,"sessionId":this.props.sessionID})
         }
         else if(questionType === "finalanswerbox"){
-        response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsO3,"sessionId":this.props.sessionID})
+            response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsO3,"sessionId":this.props.sessionID})
         }
 
         const content = response.data.response.fulfillmentText
@@ -207,21 +209,24 @@ class numberSentence extends Component {
                     <input type="number" value={this.state.nsO1} id="nsO1" onChange={this.onChange}  placeholder="1st Number" className="numSenInput"/>
                 </div>
                 <div className="operatorContainer">
-                    <div className={"individualOperatorContainer " + this.state.addSelected}>
-                        <button className={"add " + this.state.addSelected} onClick={this.changeAdd}></button>
+                    <div className={"individualOperatorContainer " + this.state.addSelected}  onClick={this.changeAdd}>
+                        <button className={"add"}></button>
                     </div>
-                    <div className={"individualOperatorContainer " + this.state.subSelected}>
-                        <button className={"sub " + this.state.subSelected} onClick={this.changeSub}></button>
+                    <div className={"individualOperatorContainer " + this.state.subSelected}  onClick={this.changeSub}>
+                        <button className={"sub"}></button>
                     </div>
-                    <div className={"individualOperatorContainer " + this.state.divSelected}>
-                        <button className={"div " + this.state.divSelected} onClick={this.changeDiv}></button>
+                    <div className={"individualOperatorContainer " + this.state.divSelected} onClick={this.changeDiv}>
+                        <button className={"div"}></button>
                     </div>
-                    <div className={"individualOperatorContainer " + this.state.mulSelected}>
-                        <button className={"mul " + this.state.mulSelected} onClick={this.changeMul}></button>
+                    <div className={"individualOperatorContainer " + this.state.mulSelected}  onClick={this.changeMul}>
+                        <button className={"mul"}></button>
                     </div>
                 </div>
                 <div className="operandContainer">
                     <input type="number"value={this.state.nsO2} id="nsO2" onChange={this.onChange} placeholder="2nd Number"  className="numSenInput"/>
+                </div>
+                <div style={{fontSize: "50px"}}>
+                    =
                 </div>
                 <div className="operandContainer">
                     <input type="number" value={this.state.nsO3} id="nsO3" onChange={this.onChange} placeholder="Final Answer"  className="numSenInput"/>
@@ -240,7 +245,7 @@ return {
     currentProgress: state.currentProgress,
     messages: state.messages,
     sessionID: state.sessionID,
-
+    questiontype: state.questiontype,
 
     problem : state.problem,
     inventoryOneName: state.inventoryOneName,
