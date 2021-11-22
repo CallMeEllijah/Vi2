@@ -110,11 +110,11 @@ class interactables extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.messages !== this.props.messages){
-            if(this.props.messages[this.props.messages.length-1].message.includes("Next Problem")){
+            if(this.props.questionType === ""){
                 this.setState({
                     css: "interactContainerSelected"
                 })
-            } else if (this.props.messages[this.props.messages.length-1].message.includes("lets start new problem")) {
+            } else if (this.props.questionType === "") {
                 this.setState({
                     sampleAmount: [],
                     sampleAmount2: []
