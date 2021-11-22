@@ -50,20 +50,16 @@ class interactables extends Component {
         }
     }
 
-    submitAmount = () => {
-        console.log("sample amount 1 is " + this.state.sampleAmount.length + " and then sample amount 2 is " + this.state.sampleAmount2.length)
-    }
-    //----------------------------------function will contain passing of the dragabols data
-    dragCheck = async e => {
+    submitAmount = async e => {
         e.preventDefault();
         const questionType = this.props.questiontype
         if(questionType === "firstdragbox"){
         
-            const response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.list2.length, "sessionId":this.props.sessionID})
+            const response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.sampleAmount.length, "sessionId":this.props.sessionID})
             const content = response.data.response.fulfillmentText
             const message = {
             key: this.props.messages.length,
-            type: "bot",
+            type: "botMessageContainer",
             message: content
             }
             this.props.addMessage(message)
@@ -72,7 +68,7 @@ class interactables extends Component {
             const content1 = response1.data.response.fulfillmentText
             const message3 = {
                 key: this.props.messages.length,
-                type: "bot",
+                type: "botMessageContainer",
                 message: content1
             }
             this.props.addMessage(message3)
@@ -80,11 +76,11 @@ class interactables extends Component {
         }
         else if(questionType === "seconddragbox"){
 
-            const response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.list3.length, "sessionId":this.props.sessionID})
+            const response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.sampleAmount2.length, "sessionId":this.props.sessionID})
             const content = response.data.response.fulfillmentText
             const message = {
             key: this.props.messages.length,
-            type: "bot",
+            type: "botMessageContainer",
             message: content
             }
             this.props.addMessage(message)
@@ -93,14 +89,14 @@ class interactables extends Component {
             const content1 = response1.data.response.fulfillmentText
             const message3 = {
                 key: this.props.messages.length,
-                type: "bot",
+                type: "botMessageContainer",
                 message: content1
             }
             this.props.addMessage(message3)
             }
         }
     }
-    //-----------------------------------------
+    
     resetAmount = () => {
         this.setState({
             sampleAmount: [],
@@ -110,14 +106,16 @@ class interactables extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.messages !== this.props.messages){
-            if(this.props.questionType === ""){
+            console.log("inside component : " + this.props.questiontype)
+            if(this.props.questiontype === "firstdragbox" || this.props.questiontype === "seconddragbox"){
                 this.setState({
                     css: "interactContainerSelected"
                 })
-            } else if (this.props.questionType === "") {
+            } else if (this.props.questiontype === "New Problem") {
                 this.setState({
                     sampleAmount: [],
-                    sampleAmount2: []
+                    sampleAmount2: [],
+                    css: "interactContainer"
                 })
             } else {
                 this.setState({
@@ -185,6 +183,9 @@ return {
 
 function mapDispatchToProps(dispatch){
     return {
+        addMessage: (msgObject) => {
+            dispatch({type: "ADD_MESSAGE", payload: msgObject})
+        }
     }
 }
 

@@ -95,13 +95,14 @@ class chatbox extends Component {
             })
           }
           else if(intent === "Show Problem"){
+            await this.props.setQuestionType("New Problem")
             this.props.setProblem(response.data.response.outputContexts[0].parameters.fields.problem.stringValue)
             this.props.addMessage(message2)
             this.props.setProgress();
             this.props.setInventory1Name(response.data.response.outputContexts[0].parameters.fields.object1label.stringValue);
             this.props.setInventory2Name(response.data.response.outputContexts[0].parameters.fields.object2label.stringValue);
-            this.props.setItemName("fish");
-            console.log(response.data.response.outputContexts[0].parameters.fields.object.stringValue)
+            this.props.setItemName(response.data.response.outputContexts[0].parameters.fields.object.stringValue);
+            
 
             if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
               const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
@@ -169,7 +170,7 @@ class chatbox extends Component {
             }
           }
           else if(intent === "Ask Question"){
-            this.props.setQuestionType(response.data.response.outputContexts[0].parameters.fields.inputtype.stringValue)
+            await this.props.setQuestionType(response.data.response.outputContexts[0].parameters.fields.inputtype.stringValue)
             this.props.addMessage(message2)
           }
           else if(content.text.text[0] === "Congratulations!You solved the problem!"){

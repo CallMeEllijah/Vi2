@@ -68,33 +68,13 @@ class numberSentence extends Component {
     }
 
     //checking and erasing of data
-    checkInputs = () => {
-        //add nalang here what extra shit we need that calls the backend
-        if(this.state.nsO1 === "1"){
-            this.setState({
-                nsO1: "999"
-            })
-        }
-    }
-    //-------------------------------------------------------------------------------------
-    //function will contain passing of the number setnence data
-    numSenCheck = async e => {
+    checkInputs = async e => {
         e.preventDefault();
         const questionType = this.props.questiontype
-        console.log(questionType)
+        
         var response
-        console.log(this.state.nsO3)
+        
         if(questionType === "operationbox"){
-        /* var operation
-        if(this.state.nsOP === "+")
-            operation = "addition"
-        else if(this.state.nsOP === "-")
-            operation = "subtraction"
-        else if(this.state.nsOP === "x")
-            operation = "multiplication"
-        else if(this.state.nsOP === "÷")
-            operation = "division" */
-            
             response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsOP,"sessionId":this.props.sessionID})
         }
         else if(questionType === "firstnumberbox"){
@@ -110,7 +90,7 @@ class numberSentence extends Component {
         const content = response.data.response.fulfillmentText
         const message = {
         key: this.props.messages.length,
-        type: "bot",
+        type: "botMessageContainer",
         message: content
         }
         this.props.addMessage(message)
@@ -119,7 +99,7 @@ class numberSentence extends Component {
         const content1 = response1.data.response.fulfillmentText
         const message3 = {
             key: this.props.messages.length,
-            type: "bot",
+            type: "botMessageContainer",
             message: content1
         }
         this.props.addMessage(message3)
@@ -129,7 +109,7 @@ class numberSentence extends Component {
         const content1 = response1.data.response.fulfillmentText
         const message3 = {
             key: this.props.messages.length,
-            type: "bot",
+            type: "botMessageContainer",
             message: content1
         }
         
@@ -154,7 +134,7 @@ class numberSentence extends Component {
             const content2 = response2.data.response.fulfillmentText
             const message4 = {
             key: this.props.messages.length,
-            type: "bot",
+            type: "botMessageContainer",
             message: content2
             }
             this.props.addMessage(message4)
@@ -182,11 +162,11 @@ class numberSentence extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.messages !== this.props.messages){
-            if(this.props.messages[this.props.messages.length-1].message.includes("Next Problem")){
+            if(this.props.questiontype === "firstnumberbox" || this.props.questiontype === "secondnumberbox" || this.props.questiontype === "finalanswerbox" || this.props.questiontype === "operationbox"){
                 this.setState({
                     css: "numSenContainerSelected"
                 })
-            }  else if (this.props.messages[this.props.messages.length-1].message.includes("lets start new problem")) {
+            }  else if (this.props.questiontype === "New Problem") {
                 this.setState({
                     addSelected: "operatorUnchosen",
                     subSelected: "operatorUnchosen",
@@ -196,6 +176,7 @@ class numberSentence extends Component {
                     nsOP: "",
                     nsO2: "",
                     nsO3: "",
+                    css: "numSenContainer"
                 })
             } else {
                 this.setState({
@@ -263,6 +244,9 @@ return {
 
 function mapDispatchToProps(dispatch){
     return {
+        addMessage: (msgObject) => {
+            dispatch({type: "ADD_MESSAGE", payload: msgObject})
+        }
     }
 }
 
