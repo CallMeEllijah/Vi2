@@ -57,8 +57,6 @@ class interactables extends Component {
     dragCheck = async e => {
         e.preventDefault();
         const questionType = this.props.questiontype
-        console.log("pasok sa drag check")
-        console.log("question Type" + questionType)
         if(questionType === "firstdragbox"){
         
             const response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.list2.length, "sessionId":this.props.sessionID})
@@ -112,22 +110,20 @@ class interactables extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.messages !== this.props.messages){
-            // if(this.props.messages[this.props.messages.length-1].message === "Next Problem"){
-            //     this.setState({
-            //         sampleAmount: [],
-            //         sampleAmount2: [],
-            //         css: "interactContainerSelected"
-            //     })
-            // } else {
-            //     this.setState({
-            //         css: "interactContainer"
-            //     })
-            // }
-            this.setState({
-                sampleAmount: [],
-                sampleAmount2: [],
-                css: "interactContainerSelected"
-            })
+            if(this.props.messages[this.props.messages.length-1].message.includes("Next Problem")){
+                this.setState({
+                    css: "interactContainerSelected"
+                })
+            } else if (this.props.messages[this.props.messages.length-1].message.includes("lets start new problem")) {
+                this.setState({
+                    sampleAmount: [],
+                    sampleAmount2: []
+                })
+            } else {
+                this.setState({
+                    css: "interactContainer"
+                })
+            }
         }
     }
 

@@ -182,7 +182,11 @@ class numberSentence extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.messages !== this.props.messages){
-            if(this.props.messages[this.props.messages.length-1].message === "Next Problem"){
+            if(this.props.messages[this.props.messages.length-1].message.includes("Next Problem")){
+                this.setState({
+                    css: "numSenContainerSelected"
+                })
+            }  else if (this.props.messages[this.props.messages.length-1].message.includes("lets start new problem")) {
                 this.setState({
                     addSelected: "operatorUnchosen",
                     subSelected: "operatorUnchosen",
@@ -192,7 +196,6 @@ class numberSentence extends Component {
                     nsOP: "",
                     nsO2: "",
                     nsO3: "",
-                    css: "numSenContainerSelected"
                 })
             } else {
                 this.setState({
