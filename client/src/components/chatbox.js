@@ -216,6 +216,7 @@ class chatbox extends Component {
 
           if(this.state.tempString.includes("End")){
             this.props.setEnding("end");
+            this.props.setEndConfetti(true);
           }
         }
     }
@@ -304,6 +305,9 @@ function mapDispatchToProps(dispatch){
         },
         setEnding: (userObject) => {
           dispatch({type: "SET_END", payload: userObject})
+        },
+        setEndConfetti: (userObject) => {
+          dispatch({type: "SET_ENDCONFETTI", payload: userObject})
         },
     }
 }

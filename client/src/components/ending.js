@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import Confetti from "react-confetti";
 
 class ending extends Component {
 
     constructor(props){
         super(props);
+        this.state = {
+            height: window.height,
+            width: window.width
+        }
     }
 
     render() {
         return (
             <div className={this.props.ending}>
-                end
+                <div className="landingText">
+                    Congratulations! You have finished all the problems!
+                </div>
+                <div className="logo"></div>
+                 <Confetti
+                    width={this.state.width}
+                    height={this.state.height}
+                    run={this.props.endingConfetti}
+                    recycle={true}
+                    numberOfPieces={1000}
+                    gravity={0.05}
+                />
             </div>
         );
     }
@@ -19,6 +35,7 @@ class ending extends Component {
 function mapStateToProps(state){
 return {
     ending: state.ending,
+    endingConfetti: state.endingConfetti
   };
 }
 

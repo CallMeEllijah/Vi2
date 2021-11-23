@@ -28,7 +28,8 @@ const initialState = {
     //etc
     confettiShow: false,
     confettiRecycle: false,
-    ending: "notend"
+    ending: "notend",
+    endingConfetti: false
 }
 
 function reducer(state=initialState, action){
@@ -64,6 +65,11 @@ function reducer(state=initialState, action){
         return {
             ...state,
             ending: action.payload
+        }
+        case "SET_ENDCONFETTI":
+        return {
+            ...state,
+            endingConfetti: action.payload
         }
 
         //set inventory names for interactables

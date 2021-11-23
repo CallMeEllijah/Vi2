@@ -18,7 +18,8 @@ class landing extends Component {
     render() {
         return (
             <div className={this.state.ready}>
-                
+                <div className="landingText">Press Ready to start chatting with Vi2</div>
+                <div className="logo"></div>
                 <button className="landingButton" onClick={this.readyUp}>READY</button>
             </div>
         );
