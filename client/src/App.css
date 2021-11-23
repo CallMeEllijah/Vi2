@@ -499,10 +499,21 @@ button{
   width: 100%;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .landingButton {
   z-index: 1000;
+  background-color: white;
+  border: solid 5px black;
+  border-radius: 50%;
+  width: 111px;
+  height: 111px;
+  font-size: x-large;
+  font-weight: bolder;
+}
+.landingButton:hover{
+  background-color: khaki;
 }
 
 .notend{
