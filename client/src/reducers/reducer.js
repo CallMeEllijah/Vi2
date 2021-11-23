@@ -23,7 +23,12 @@ const initialState = {
     currentProgress: -1,
 
     //Used for unique sessions
-    sessionID: {}
+    sessionID: {},
+
+    //etc
+    confettiShow: false,
+    confettiRecycle: false,
+    ending: "notend"
 }
 
 function reducer(state=initialState, action){
@@ -44,6 +49,22 @@ function reducer(state=initialState, action){
             messages: [...state.messages, action.payload]
         }
 
+        //etc
+        case "SET_CONFETTI":
+        return {
+            ...state,
+            confettiShow: action.payload
+        }
+        case "SET_CONFETTIREC":
+        return {
+            ...state,
+            confettiRecycle: action.payload
+        }
+        case "SET_END":
+        return {
+            ...state,
+            ending: action.payload
+        }
 
         //set inventory names for interactables
         case "SET_INVENTORY1NAME":

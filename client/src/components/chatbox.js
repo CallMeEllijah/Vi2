@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import React, { Component, useRef, useEffect } from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 
 //initialize the unique id used for the chatting with the chatbot
 const { v4: uuidv4 } = require('uuid');
@@ -22,6 +22,7 @@ class chatbox extends Component {
         this.state = {
             name: "",
             message: "",
+            tempString: ""
           }
     }
 
@@ -198,11 +199,27 @@ class chatbox extends Component {
         console.log(this.props)
     }
 
-    componentDidUpdate(prevProps){
+    async componentDidUpdate(prevProps){
         if(prevProps.messages !== this.props.messages){
-            //change the problem and its variable names
+          var temp = this.props.messages.length-1;
+          await this.setState({
+            tempString: this.props.messages[temp].message
+          })
+          
+          if(this.state.tempString.includes("Congratulations")){
+            this.props.setConfettiRec(true);
+            this.props.setConfetti(true);
+            setTimeout(() => {
+              this.props.setConfettiRec(false);
+            }, 3000);
+          }
+
+          if(this.state.tempString.includes("End")){
+            this.props.setEnding("end");
+          }
         }
     }
+
 
     render() {
         return (
@@ -237,6 +254,9 @@ function mapStateToProps(state){
 
         currentUser: state.currentUser,
         userName : state.userName,
+        confettiShow: state.confettiShow,
+        confettiRecycle: state.Recycle,
+        ending: state.ending
     };
 }
 
@@ -275,6 +295,15 @@ function mapDispatchToProps(dispatch){
         },
         setName: (userObject) => {
             dispatch({type: "SET_NAME", payload: userObject})
+        },
+        setConfetti: (userObject) => {
+          dispatch({type: "SET_CONFETTI", payload: userObject})
+        },
+        setConfettiRec: (userObject) => {
+          dispatch({type: "SET_CONFETTIREC", payload: userObject})
+        },
+        setEnding: (userObject) => {
+          dispatch({type: "SET_END", payload: userObject})
         },
     }
 }

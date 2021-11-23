@@ -483,3 +483,41 @@ button{
   background-size: 100% 100%;
   margin: 3px 3px 3px 3px;
 }
+
+.ready{
+  position: absolute;
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+
+.notready{
+  background-color: white;
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.landingButton {
+  z-index: 1000;
+}
+
+.notend{
+  position: absolute;
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+
+.end{
+  background-color: white;
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
