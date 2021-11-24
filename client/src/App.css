@@ -503,14 +503,14 @@ button{
 }
 
 .landingButton {
- z-index: 1010;
+  z-index: 1000;
   background-color: rgb(177, 34, 177);
   border: solid 5px black;
-  width: 163px;
-  height: 89px;
-  border-radius: 25px;
-  font-size: large;
-  font-weight: bold;
+  border-radius: 50%;
+  width: 111px;
+  height: 111px;
+  font-size: x-large;
+  font-weight: bolder;
 }
 .landingButton:hover{
   background-color: khaki;
