@@ -9,6 +9,7 @@ import ChatboxComponent from '../src/components/chatbox'
 import InteractablesComponent from '../src/components/interactables'
 import NumberSentenceComponent from '../src/components/numberSentence'
 import Landing from '../src/components/landing'
+import Tutorial from '../src/components/tutorial'
 import Ending from '../src/components/ending'
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
   render(){
     return (
       <div style={{height: "100%", width: "100%", }}>
+      <Tutorial />
       <Landing />
       <Ending />
       <div className="mainContainer">

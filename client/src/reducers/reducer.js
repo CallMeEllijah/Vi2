@@ -29,7 +29,8 @@ const initialState = {
     confettiShow: false,
     confettiRecycle: false,
     ending: "notend",
-    endingConfetti: false
+    endingConfetti: false,
+    tutorialShow: "noTutorial"
 }
 
 function reducer(state=initialState, action){
@@ -70,6 +71,11 @@ function reducer(state=initialState, action){
         return {
             ...state,
             endingConfetti: action.payload
+        }
+        case "SET_TUTORIALSHOW":
+        return {
+            ...state,
+            tutorialShow: action.payload
         }
 
         //set inventory names for interactables
