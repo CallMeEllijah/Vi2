@@ -112,11 +112,6 @@ class numberSentence extends Component {
             type: "botMessageContainer",
             message: content1
         }
-        
-        this.setState({nsO1:""})
-        this.setState({nsOP:""})
-        this.setState({nsO2:""})
-        this.setState({nsO3:""})
 
         var mistakeC = response1.data.response.outputContexts[0].parameters.fields.mistakeC.numberValue
         var mistakeF = response1.data.response.outputContexts[0].parameters.fields.mistakeF.numberValue
@@ -217,7 +212,7 @@ class numberSentence extends Component {
                 </div>
                 <div className="nsActionContainer">
                     <button className="check" onClick={this.checkInputs}></button>
-                    <button className="cancel" onClick={this.eraseInputs}></button>
+                    {/* <button className="cancel" onClick={this.eraseInputs}></button> */}
                 </div>
             </div>
         );

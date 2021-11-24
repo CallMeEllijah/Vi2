@@ -33,7 +33,6 @@ class chatbox extends Component {
         }catch(err){}
   
         try {
-          console.log(this.props)
           const response = await Axios.post('/api/dialogflow/eventQuery',{"queryEvent":"IntroduceVi2", "sessionId":this.props.sessionID})
           const content = response.data.response
           const message2 = {
@@ -72,8 +71,8 @@ class chatbox extends Component {
           const response = await Axios.post('/api/dialogflow/textQuery',textQueryVariable)
           const content = response.data.response.fulfillmentText
           const intent = response.data.response.intent.displayName
-          console.log(content)
-          console.log(intent)
+          
+          console.log(response)
           
           const message2 = {
             key: this.props.messages.length,
@@ -88,10 +87,8 @@ class chatbox extends Component {
           }
           else if(intent === "Get Student Name" || intent === "Get Student Name All"){
             this.props.addMessage(message2)
-            console.log(response)
             this.props.setName(response.data.response.outputContexts[0].parameters.fields.name.stringValue)
             Axios.post("/addUser", {name: this.props.userName}).then(res => {
-              console.log("kek")
               this.props.setUser(res.data._id);
             })
           }
@@ -196,7 +193,6 @@ class chatbox extends Component {
         }
         
         this.setState({message: ""})
-        console.log(this.props)
     }
 
     async componentDidUpdate(prevProps){

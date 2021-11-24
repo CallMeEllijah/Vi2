@@ -106,7 +106,6 @@ class interactables extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.messages !== this.props.messages){
-            console.log("inside component : " + this.props.questiontype)
             if(this.props.questiontype === "firstdragbox" || this.props.questiontype === "seconddragbox"){
                 this.setState({
                     css: "interactContainerSelected"
