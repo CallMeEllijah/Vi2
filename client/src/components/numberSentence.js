@@ -75,25 +75,37 @@ class numberSentence extends Component {
         var response
         
         if(questionType === "operationbox"){
+            console.log("operation")
+            console.log(this.state.nsOP)
             response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsOP,"sessionId":this.props.sessionID})
         }
         else if(questionType === "firstnumberbox"){
+            console.log("first")
+            console.log(this.state.nsO1)
             response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsO1,"sessionId":this.props.sessionID})
         }
         else if(questionType === "secondnumberbox"){
+            console.log("second")
+            console.log(this.state.nsO2)
             response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsO2,"sessionId":this.props.sessionID})
         }
         else if(questionType === "finalanswerbox"){
+            console.log("final")
+            console.log(this.state.nsO3)
             response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.nsO3,"sessionId":this.props.sessionID})
         }
-
+        
+        
+        console.log(response)
         const content = response.data.response.fulfillmentText
         const message = {
         key: this.props.messages.length,
         type: "botMessageContainer",
         message: content
         }
-        this.props.addMessage(message)
+        
+        await this.props.addMessage(message)
+
         if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
         const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
         const content1 = response1.data.response.fulfillmentText
@@ -102,9 +114,10 @@ class numberSentence extends Component {
             type: "botMessageContainer",
             message: content1
         }
-        this.props.addMessage(message3)
+            await this.props.addMessage(message3)
         }
         else if(typeof response.data.response.outputContexts[0].parameters.fields.summary !== "undefined"){
+        console.log("kek the 1st")
         const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"summary", "sessionId":this.props.sessionID})
         const content1 = response1.data.response.fulfillmentText
         const message3 = {
@@ -112,6 +125,8 @@ class numberSentence extends Component {
             type: "botMessageContainer",
             message: content1
         }
+        console.log(response1)
+        console.log("kek the 2nd")
 
         var mistakeC = response1.data.response.outputContexts[0].parameters.fields.mistakeC.numberValue
         var mistakeF = response1.data.response.outputContexts[0].parameters.fields.mistakeF.numberValue
@@ -121,10 +136,10 @@ class numberSentence extends Component {
             console.log("updated assessment levels")
         })
 
-        this.props.addMessage(message3)
+        await this.props.addMessage(message3)
         
         if(typeof response1.data.response.outputContexts[0].parameters.fields.endlesson !== "undefined"){
-            console.log("kekw")
+            console.log("pasok sa end")
             const response2 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"end", "sessionId":this.props.sessionID})
             const content2 = response2.data.response.fulfillmentText
             const message4 = {
@@ -134,7 +149,7 @@ class numberSentence extends Component {
             }
             this.props.addMessage(message4)
             Axios.post("/addchatlog", {id: this.props.currentUser, messages: this.props.messages}).then(res => {
-            console.log("added chatlog")
+                console.log("added chatlog")
             })
         }
         }

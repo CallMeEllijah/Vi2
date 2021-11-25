@@ -54,7 +54,8 @@ class interactables extends Component {
         e.preventDefault();
         const questionType = this.props.questiontype
         if(questionType === "firstdragbox"){
-        
+            console.log("first")
+            console.log(this.state.sampleAmount.length)
             const response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.sampleAmount.length, "sessionId":this.props.sessionID})
             const content = response.data.response.fulfillmentText
             const message = {
@@ -62,7 +63,9 @@ class interactables extends Component {
             type: "botMessageContainer",
             message: content
             }
-            this.props.addMessage(message)
+            console.log(response)
+            await this.props.addMessage(message)
+
             if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
             const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
             const content1 = response1.data.response.fulfillmentText
@@ -75,7 +78,8 @@ class interactables extends Component {
             }
         }
         else if(questionType === "seconddragbox"){
-
+            console.log("second")
+            console.log(this.state.sampleAmount2.length)
             const response = await Axios.post('/api/dialogflow/textQuery',{"queryText":this.state.sampleAmount2.length, "sessionId":this.props.sessionID})
             const content = response.data.response.fulfillmentText
             const message = {
@@ -83,7 +87,9 @@ class interactables extends Component {
             type: "botMessageContainer",
             message: content
             }
-            this.props.addMessage(message)
+            console.log(response)
+            await this.props.addMessage(message)
+            
             if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
             const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
             const content1 = response1.data.response.fulfillmentText

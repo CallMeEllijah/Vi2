@@ -59,40 +59,31 @@ class chatbox extends Component {
           type: "userMessageContainer",
           message: this.state.message
         }
-        this.props.addMessage(message)
+        await this.props.addMessage(message)
         var input = this.state.message
         
-        const textQueryVariable = {
-          "queryText":input,
-          "sessionId":this.props.sessionID
-        }
-        
-        try {
-          const response = await Axios.post('/api/dialogflow/textQuery',textQueryVariable)
-          const content = response.data.response.fulfillmentText
-          const intent = response.data.response.intent.displayName
+        if(input === "PROBLEM1" || input === "PROBLEM2" || input === "PROBLEM3" || input === "PROBLEM4" || input === "PROBLEM5" || input === "PROBLEM6"){
+         
+         
+          var temp = input + " " + this.props.userName
           
-          console.log(response)
+          const textQueryVariable = {
+            "queryText":temp,
+            "sessionId":this.props.sessionID
+          }
+          console.log(temp)
+            const response = await Axios.post('/api/dialogflow/textQuery',textQueryVariable)
+            const content = response.data.response.fulfillmentText
+            const intent = response.data.response.intent.displayName
+            
+            const message2 = {
+              key: this.props.messages.length,
+              type: "botMessageContainer",
+              message: content
+            }
+            this.props.addMessage(message2)
           
-          const message2 = {
-            key: this.props.messages.length,
-            type: "botMessageContainer",
-            message: content
-          }
-          if (intent === "Not Ready To Proceed Question"|| intent === "Break From Question" || intent === "Break From Problem" || intent === "Not Ready To Proceed Problem" || intent === "Explain Problem"){
-            this.props.addMessage(message2)
-          }
-          else if (intent === "Default Fallback Intent"){
-            this.props.addMessage(message2)
-          }
-          else if(intent === "Get Student Name" || intent === "Get Student Name All"){
-            this.props.addMessage(message2)
-            this.props.setName(response.data.response.outputContexts[0].parameters.fields.name.stringValue)
-            Axios.post("/addUser", {name: this.props.userName}).then(res => {
-              this.props.setUser(res.data._id);
-            })
-          }
-          else if(intent === "Show Problem"){
+            if(intent === "Show Problem"){
             await this.props.setQuestionType("New Problem")
             this.props.setProblem(response.data.response.outputContexts[0].parameters.fields.problem.stringValue)
             this.props.addMessage(message2)
@@ -100,17 +91,51 @@ class chatbox extends Component {
             this.props.setInventory1Name(response.data.response.outputContexts[0].parameters.fields.object1label.stringValue);
             this.props.setInventory2Name(response.data.response.outputContexts[0].parameters.fields.object2label.stringValue);
             this.props.setItemName(response.data.response.outputContexts[0].parameters.fields.object.stringValue);
+          }
+        }
+        
+        else{
+          console.log("kek2")
+          const textQueryVariable = {
+            "queryText":input,
+            "sessionId":this.props.sessionID
+          }
+          
+          try {
+            const response = await Axios.post('/api/dialogflow/textQuery',textQueryVariable)
+            const content = response.data.response.fulfillmentText
+            const intent = response.data.response.intent.displayName
             
-
-            if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
-              const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
-              const content1 = response1.data.response.fulfillmentText
-              const message3 = {
-                key: this.props.messages.length,
-                type: "botMessageContainer",
-                message: content1
-              }
-              this.props.addMessage(message3)
+            const message2 = {
+              key: this.props.messages.length,
+              type: "botMessageContainer",
+              message: content
+            }
+            if (intent === "Not Ready To Proceed Question"|| intent === "Break From Question" || intent === "Break From Problem" || intent === "Not Ready To Proceed Problem" || intent === "Explain Problem"){
+              this.props.addMessage(message2)
+            }
+            else if (intent === "Default Fallback Intent"){
+              this.props.addMessage(message2)
+            }
+            else if(intent === "Get Student Name" || intent === "Get Student Name All"){
+              this.props.addMessage(message2)
+              this.props.setName(response.data.response.outputContexts[0].parameters.fields.name.stringValue)
+              Axios.post("/addUser", {name: this.props.userName}).then(res => {
+                this.props.setUser(res.data._id);
+              })
+            }
+            else if(intent === "Show Problem"){
+              await this.props.setQuestionType("New Problem")
+              this.props.setProblem(response.data.response.outputContexts[0].parameters.fields.problem.stringValue)
+              this.props.addMessage(message2)
+              this.props.setProgress();
+              this.props.setInventory1Name(response.data.response.outputContexts[0].parameters.fields.object1label.stringValue);
+              this.props.setInventory2Name(response.data.response.outputContexts[0].parameters.fields.object2label.stringValue);
+              this.props.setItemName(response.data.response.outputContexts[0].parameters.fields.object.stringValue);
+            }
+            else if(intent === "Check Question Answer"){
+              this.props.addMessage(message2)
+              
               if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
                 const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
                 const content1 = response1.data.response.fulfillmentText
@@ -119,77 +144,44 @@ class chatbox extends Component {
                   type: "botMessageContainer",
                   message: content1
                 }
+                
                 this.props.addMessage(message3)
               }
-              else if(typeof response.data.response.outputContexts[0].parameters.fields.summary !== "undefined"){
-                const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"summary", "sessionId":this.props.sessionID})
-                const content1 = response1.data.response.fulfillmentText
-                const message3 = {
-                  key: this.props.messages.length,
-                  type: "botMessageContainer",
-                  message: content1
-                }
-                this.props.addMessage(message3)
-              }
+              // else if(typeof response.data.response.outputContexts[0].parameters.fields.summary !== "undefined"){
+              //   const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"summary", "sessionId":this.props.sessionID})
+              //   const content1 = response1.data.response.fulfillmentText
+              //   const message3 = {
+              //     key: this.props.messages.length,
+              //     type: "botMessageContainer",
+              //     message: content1
+              //   }
+              //   this.props.addMessage(message3)
+              // }
             }
-            else if(typeof response.data.response.outputContexts[0].parameters.fields.summary !== "undefined"){
-              const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"summary", "sessionId":this.props.sessionID})
-              const content1 = response1.data.response.fulfillmentText
-              const message3 = {
-                key: this.props.messages.length,
-                type: "botMessageContainer",
-                message: content1
-              }
-              this.props.addMessage(message3)
+            else if(intent === "Ask Question"){
+              await this.props.setQuestionType(response.data.response.outputContexts[0].parameters.fields.inputtype.stringValue)
+              this.props.addMessage(message2)
             }
-          }
-          else if(intent === "Check Question Answer"){
-            this.props.addMessage(message2)
-            if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
-              const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
-              const content1 = response1.data.response.fulfillmentText
-              const message3 = {
-                key: this.props.messages.length,
-                type: "botMessageContainer",
-                message: content1
-              }
-              
-              this.props.addMessage(message3)
+            // else if(content.text.text[0] === "Congratulations!You solved the problem!"){
+            //   this.props.addMessage(message2)
+            //   const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"summary", "sessionId":this.props.sessionID})
+            //   const content1 = response1.data.response.fulfillmentText
+            //   const message3 = {
+            //     key: this.props.messages.length,
+            //     type: "botMessageContainer",
+            //     message: content1
+            //   }
+            //   this.props.addMessage(message3)
+            //   this.props.setMistake(response1.data.outputContexts[0].parameters.fields.mistake.numberValue)
+            // }
+            else{
+              this.props.addMessage(message2)
             }
-            else if(typeof response.data.response.outputContexts[0].parameters.fields.summary !== "undefined"){
-              const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"summary", "sessionId":this.props.sessionID})
-              const content1 = response1.data.response.fulfillmentText
-              const message3 = {
-                key: this.props.messages.length,
-                type: "botMessageContainer",
-                message: content1
-              }
-              this.props.addMessage(message3)
-            }
+            
+            
+          } catch (error) {
+            
           }
-          else if(intent === "Ask Question"){
-            await this.props.setQuestionType(response.data.response.outputContexts[0].parameters.fields.inputtype.stringValue)
-            this.props.addMessage(message2)
-          }
-          else if(content.text.text[0] === "Congratulations!You solved the problem!"){
-            this.props.addMessage(message2)
-            const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"summary", "sessionId":this.props.sessionID})
-            const content1 = response1.data.response.fulfillmentText
-            const message3 = {
-              key: this.props.messages.length,
-              type: "botMessageContainer",
-              message: content1
-            }
-            this.props.addMessage(message3)
-            this.props.setMistake(response1.data.outputContexts[0].parameters.fields.mistake.numberValue)
-          }
-          else{
-            this.props.addMessage(message2)
-          }
-          
-          
-        } catch (error) {
-          
         }
         
         this.setState({message: ""})
