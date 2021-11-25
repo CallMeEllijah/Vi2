@@ -11,12 +11,8 @@ const ChatlogSchema = new Schema({
   messages: {
     type: Array,
     required: true
-  },
-
-  __v: {
-    type: Number,
-    required :true
   }
+  
 });
 
 module.exports = Chatlog = mongoose.model("chatlogs", ChatlogSchema);
