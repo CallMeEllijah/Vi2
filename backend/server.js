@@ -191,36 +191,47 @@ app.post('/getProblem',(req,res)=>{
 })
 
 app.post('/addUser',(req,res)=>{
+  var d = new Date();
+  var time = d.toLocaleTimeString();
   const newUser = new User({
     name: req.body.name,
     assessmentLevel1cu: "",
     assessmentLevel1pf: "",
     assessmentLevel1sc: "",
+    assessmentLevel1time: "",
   
   
     assessmentLevel2cu: "",
     assessmentLevel2pf: "",
     assessmentLevel2sc: "",
+    assessmentLevel2time: "",
   
   
     assessmentLevel3cu: "",
     assessmentLevel3pf: "",
     assessmentLevel3sc: "",
+    assessmentLevel3time: "",
   
   
     assessmentLevel4cu: "",
     assessmentLevel4pf: "",
     assessmentLevel4sc: "",
+    assessmentLevel4time: "",
 
   
     assessmentLevel5cu: "",
     assessmentLevel5pf: "",
     assessmentLevel5sc: "",
+    assessmentLevel5time: "",
   
   
     assessmentLevel6cu: "",
     assessmentLevel6pf: "",
     assessmentLevel6sc: "",
+    assessmentLevel6time: "",
+
+    time: time,
+    endTime: ""
   });
 
   newUser.save()
@@ -248,6 +259,9 @@ app.post('/updateAssessmentLevel',(req,res)=>{
       var cuMistakes = req.body.mistakesU;
       var pcMistakes = req.body.mistakesF;
       var scMistakes = req.body.mistakesC;
+      
+      var d = new Date();
+      var time = d.toLocaleTimeString();
 
       console.log(cuMistakes)
       console.log(pcMistakes)
@@ -290,14 +304,15 @@ app.post('/updateAssessmentLevel',(req,res)=>{
             $set:{
             assessmentLevel1cu: levelu,
             assessmentLevel1pf: levelf,
-            assessmentLevel1sc: levelc
+            assessmentLevel1sc: levelc,
+            assessmentLevel1time: time
             }
           }, function(err, result){
             if(err){
                 console.log("oof")
             }
             else{
-              console.log("nice")
+              res.send(200)
             }
           })
           break; 
@@ -306,14 +321,15 @@ app.post('/updateAssessmentLevel',(req,res)=>{
             $set:{
             assessmentLevel2cu: levelu,
             assessmentLevel2pf: levelf,
-            assessmentLevel2sc: levelc
+            assessmentLevel2sc: levelc,
+            assessmentLevel2time: time
             }
           }, function(err, result){
             if(err){
                 console.log("oof")
             }
             else{
-              console.log("nice")
+              res.send(200)
             }
           })
           break; 
@@ -322,14 +338,15 @@ app.post('/updateAssessmentLevel',(req,res)=>{
             $set:{
             assessmentLevel3cu: levelu,
             assessmentLevel3pf: levelf,
-            assessmentLevel3sc: levelc
+            assessmentLevel3sc: levelc,
+            assessmentLevel3time: time
             }
           }, function(err, result){
             if(err){
                 console.log("oof")
             }
             else{
-              console.log("nice")
+              res.send(200)
             }
           })
           break; 
@@ -338,14 +355,15 @@ app.post('/updateAssessmentLevel',(req,res)=>{
             $set:{
             assessmentLevel4cu: levelu,
             assessmentLevel4pf: levelf,
-            assessmentLevel4sc: levelc
+            assessmentLevel4sc: levelc,
+            assessmentLevel4time: time
             }
           }, function(err, result){
             if(err){
                 console.log("oof")
             }
             else{
-              console.log("nice")
+              res.send(200)
             }
           })
           break; 
@@ -354,14 +372,15 @@ app.post('/updateAssessmentLevel',(req,res)=>{
             $set:{
             assessmentLevel5cu: levelu,
             assessmentLevel5pf: levelf,
-            assessmentLevel5sc: levelc
+            assessmentLevel5sc: levelc,
+            assessmentLevel5time: time
             }
           }, function(err, result){
             if(err){
                 console.log("oof")
             }
             else{
-              console.log("nice")
+              res.send(200)
             }
           })
           break; 
@@ -370,14 +389,16 @@ app.post('/updateAssessmentLevel',(req,res)=>{
             $set:{
             assessmentLevel6cu: levelu,
             assessmentLevel6pf: levelf,
-            assessmentLevel6sc: levelc
+            assessmentLevel6sc: levelc,
+            assessmentLevel6time: time,
+            endTime: time
             }
           }, function(err, result){
             if(err){
                 console.log("oof")
             }
             else{
-              console.log("nice")
+              res.send(200)
             }
           })
           break; 

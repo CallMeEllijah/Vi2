@@ -19,6 +19,10 @@ const UserSchema = new Schema({
     type: String,
     required: false
   },
+  assessmentLevel1time: {
+    type: String,
+    required: false
+  },
 
 
   assessmentLevel2cu: {
@@ -30,6 +34,10 @@ const UserSchema = new Schema({
     required: false
   },
   assessmentLevel2sc: {
+    type: String,
+    required: false
+  },
+  assessmentLevel2time: {
     type: String,
     required: false
   },
@@ -47,6 +55,10 @@ const UserSchema = new Schema({
     type: String,
     required: false
   },
+  assessmentLevel3time: {
+    type: String,
+    required: false
+  },
 
 
   assessmentLevel4cu: {
@@ -58,6 +70,10 @@ const UserSchema = new Schema({
     required: false
   },
   assessmentLevel4sc: {
+    type: String,
+    required: false
+  },
+  assessmentLevel4time: {
     type: String,
     required: false
   },
@@ -75,6 +91,10 @@ const UserSchema = new Schema({
     type: String,
     required: false
   },
+  assessmentLevel5time: {
+    type: String,
+    required: false
+  },
 
 
   assessmentLevel6cu: {
@@ -86,6 +106,20 @@ const UserSchema = new Schema({
     required: false
   },
   assessmentLevel6sc: {
+    type: String,
+    required: false
+  },
+  assessmentLevel6time: {
+    type: String,
+    required: false
+  },
+
+  
+  time: {
+    type: String,
+    required: true
+  },
+  endTime: {
     type: String,
     required: false
   },
