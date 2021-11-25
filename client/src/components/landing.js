@@ -28,7 +28,7 @@ class landing extends Component {
         return (
             <div className={this.state.ready}>
                 <div className="landingText">Hi, I'm Vi2. I am your peer tutor.</div>
-                <div className="topLandingText">I can help you learn more about math!</div>
+                <div className="topLandingText">I'm here to help you solve math word problems!</div>
                 <div className="logo"></div>
                 <div className="bottomLandingText">Are you ready to start?</div>
                 <div className="landingVerticalContainer">

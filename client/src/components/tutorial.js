@@ -5,7 +5,7 @@ class tutorial extends Component {
 
     constructor(props){
         super(props);
-        this.state = {
+        this.state = { //will execute once upon inheriting react component
             tutorialPic: "tutorialPic1",
             pageNum: "1 of 6"
         }
@@ -90,7 +90,7 @@ class tutorial extends Component {
             <div className={this.props.tutorialShow}>
                 <div className="tutorialText">Tutorial!</div>
                 <div className="tutorialText">{this.state.pageNum}</div>
-                <div className={this.state.tutorialPic} />
+                <div className={this.state.tutorialPic} /> 
                 <div className="tutorialVerticalContainer">
                     <button className="landingButton b2" onClick={this.exitTutorial}>EXIT</button>
                     <div>
