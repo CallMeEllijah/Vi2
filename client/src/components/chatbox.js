@@ -61,7 +61,7 @@ class chatbox extends Component {
         }
         await this.props.addMessage(message)
         var input = this.state.message
-        
+        //jumpts into the desired word problem 
         if(input === "PROBLEM1" || input === "PROBLEM2" || input === "PROBLEM3" || input === "PROBLEM4" || input === "PROBLEM5" || input === "PROBLEM6"){
          
          
@@ -219,7 +219,7 @@ class chatbox extends Component {
                     <AlwaysScrollToBottom />
                 </div>
                 <form className="chatTextContainer" onSubmit={this.onSubmitMessage}>
-                    <input autoComplete="off" required type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message" placeholder="Type your message here!"/>
+                    <input autoComplete="off" required type="text" className="messageInput" onChange={this.onChange} value={this.state.message} id="message" placeholder="Type your message here..."/>
                     <div className="messageSend">
                         <button className="send"></button>
                     </div>

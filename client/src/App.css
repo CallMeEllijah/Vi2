@@ -538,7 +538,7 @@ button{
   font-size: x-large;
   font-weight: bolder;
   z-index: 1000;
-  border-radius: 5px;
+  border-radius: 16px;
 }
 
 .topLandingText {
@@ -606,6 +606,7 @@ button{
    border-radius: 25px;
    font-size: large;
    font-weight: bold;
+   box-shadow: 5px 5px black, 5px 5px black, 5px 5px black, 1px 1px black;
  }
  .landingButton:hover{
    background-color: khaki;

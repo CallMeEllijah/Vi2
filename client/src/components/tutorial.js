@@ -92,7 +92,7 @@ class tutorial extends Component {
                 <div className="tutorialText">{this.state.pageNum}</div>
                 <div className={this.state.tutorialPic} /> 
                 <div className="tutorialVerticalContainer">
-                    <button className="landingButton b2" onClick={this.exitTutorial}>EXIT</button>
+                    <button className="landingButton b2" onClick={this.exitTutorial}>EXIT TUTORIAL</button>
                     <div>
                         <button className="landingButton b1" onClick={this.prevSlide}>BACK</button>
                         <button className="landingButton b3" onClick={this.nextSlide}>NEXT</button>
