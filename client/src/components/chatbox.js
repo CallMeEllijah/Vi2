@@ -201,7 +201,7 @@ class chatbox extends Component {
             }, 3000);
           }
 
-          if(this.state.tempString.includes("End")){
+          if(this.state.tempString.includes("You have answered all the problems.")){
             this.props.setEnding("end");
             this.props.setEndConfetti(true);
           }
