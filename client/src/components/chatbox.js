@@ -127,7 +127,6 @@ class chatbox extends Component {
               await this.props.setQuestionType("New Problem")
               this.props.setProblem(response.data.response.outputContexts[0].parameters.fields.problem.stringValue)
               this.props.addMessage(message2)
-              this.props.setProgress();
               this.props.setInventory1Name(response.data.response.outputContexts[0].parameters.fields.object1label.stringValue);
               this.props.setInventory2Name(response.data.response.outputContexts[0].parameters.fields.object2label.stringValue);
               this.props.setItemName(response.data.response.outputContexts[0].parameters.fields.object.stringValue);

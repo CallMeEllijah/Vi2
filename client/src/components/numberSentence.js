@@ -230,7 +230,7 @@ class numberSentence extends Component {
                 </div>
                 <div className="nsActionContainer">
                     <button className="check" onClick={this.checkInputs}></button>
-                    {/* <button className="cancel" onClick={this.eraseInputs}></button> */}
+                    <button className="cancel" onClick={this.eraseInputs}></button>
                 </div>
             </div>
         );
