@@ -127,6 +127,7 @@ class numberSentence extends Component {
             }
             console.log(response1)
             console.log("kek the 2nd")
+            this.props.setProgress();
     
             var mistakeC = response1.data.response.outputContexts[0].parameters.fields.mistakeC.numberValue
             var mistakeF = response1.data.response.outputContexts[0].parameters.fields.mistakeF.numberValue
@@ -258,6 +259,9 @@ function mapDispatchToProps(dispatch){
     return {
         addMessage: (msgObject) => {
             dispatch({type: "ADD_MESSAGE", payload: msgObject})
+        },
+        setProgress: (msgObject) => {
+            dispatch({type: "SET_PROGRESS", payload: msgObject})
         }
     }
 }
