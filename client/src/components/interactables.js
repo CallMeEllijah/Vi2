@@ -65,16 +65,17 @@ class interactables extends Component {
             }
             console.log(response)
             await this.props.addMessage(message)
-
-            if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
-            const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
-            const content1 = response1.data.response.fulfillmentText
-            const message3 = {
-                key: this.props.messages.length,
-                type: "botMessageContainer",
-                message: content1
-            }
-            this.props.addMessage(message3)
+            if(typeof response.data.response.outputContexts[0].parameters!== "undefined"){
+                if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
+                    const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
+                    const content1 = response1.data.response.fulfillmentText
+                    const message3 = {
+                        key: this.props.messages.length,
+                        type: "botMessageContainer",
+                        message: content1
+                    }
+                    this.props.addMessage(message3)
+                    }
             }
         }
         else if(questionType === "seconddragbox"){
@@ -89,16 +90,17 @@ class interactables extends Component {
             }
             console.log(response)
             await this.props.addMessage(message)
-            
-            if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
-            const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
-            const content1 = response1.data.response.fulfillmentText
-            const message3 = {
-                key: this.props.messages.length,
-                type: "botMessageContainer",
-                message: content1
-            }
-            this.props.addMessage(message3)
+            if(typeof response.data.response.outputContexts[0].parameters!== "undefined"){
+                if(typeof response.data.response.outputContexts[0].parameters.fields.requestion !== "undefined"){
+                    const response1 = await Axios.post('/api/dialogflow/textQuery',{"queryText":"RE", "sessionId":this.props.sessionID})
+                    const content1 = response1.data.response.fulfillmentText
+                    const message3 = {
+                        key: this.props.messages.length,
+                        type: "botMessageContainer",
+                        message: content1
+                    }
+                    this.props.addMessage(message3)
+                }
             }
         }
     }
