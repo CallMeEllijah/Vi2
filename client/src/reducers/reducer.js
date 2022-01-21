@@ -20,7 +20,7 @@ const initialState = {
     itemName: "",
     
     //tracker for progress of student in questions
-    currentProgress: -1,
+    currentProgress: 0,
 
     //Used for unique sessions
     sessionID: {},
