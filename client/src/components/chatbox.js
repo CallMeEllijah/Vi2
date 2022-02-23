@@ -104,7 +104,34 @@ class chatbox extends Component {
             const response = await Axios.post('/api/dialogflow/textQuery',textQueryVariable)
             const content = response.data.response.fulfillmentText
             const intent = response.data.response.intent.displayName
-            
+
+            //assessment module related takes saves the number of mistakes
+            switch(response.data.response.outputContexts[0].parameters.fields.currentquestion.numberValue){
+              case 7:
+                this.props.setq1cu(response.data.response.outputContexts[0].parameters.fields.tries.numberValue);
+                break;
+              case 8:
+                this.props.setq2cu(response.data.response.outputContexts[0].parameters.fields.tries.numberValue);;
+                break;
+
+              case 9:
+                this.props.setq1pf(response.data.response.outputContexts[0].parameters.fields.tries.numberValue);;
+                break;
+              case 10:
+                this.props.setq2pf(response.data.response.outputContexts[0].parameters.fields.tries.numberValue);;
+                break;
+
+              case 4:
+                this.props.setq1sc(response.data.response.outputContexts[0].parameters.fields.tries.numberValue);;
+                break;
+              case 6:
+                this.props.setq2sc(response.data.response.outputContexts[0].parameters.fields.tries.numberValue);;
+                break;
+              case 11:
+                this.props.setq3sc(response.data.response.outputContexts[0].parameters.fields.tries.numberValue);;
+                break;
+            }
+            //----------------------------------------------------------
             const message2 = {
               key: this.props.messages.length,
               type: "botMessageContainer",
@@ -200,7 +227,6 @@ class chatbox extends Component {
               this.props.setConfettiRec(false);
             }, 3000);
           }
-
           if(this.state.tempString.includes("You have answered all the problems.")){
             this.props.setEnding("end");
             this.props.setEndConfetti(true);
@@ -263,8 +289,29 @@ function mapDispatchToProps(dispatch){
         setQuestionType: (userObject) => {
           dispatch({type: "SET_QUESTION_TYPE", payload: userObject})
         },
-
-
+        //mistakes
+        setq1cu: (msgObject) => {
+          dispatch({type: "SET_Q1CU", payload: msgObject})
+        },
+        setq2cu: (msgObject) => {
+          dispatch({type: "SET_Q2CU", payload: msgObject})
+        },
+        setq1pf: (msgObject) => {
+          dispatch({type: "SET_Q1PF", payload: msgObject})
+        },
+        setq2pf: (msgObject) => {
+          dispatch({type: "SET_Q2PF", payload: msgObject})
+        },
+        setq1sc: (msgObject) => {
+          dispatch({type: "SET_Q1SC", payload: msgObject})
+        },
+        setq2sc: (msgObject) => {
+          dispatch({type: "SET_Q2SC", payload: msgObject})
+        },
+        setq3sc: (msgObject) => {
+          dispatch({type: "SET_Q3sc", payload: msgObject})
+        },
+//=-----------------------------------------------------------
         setProblem: (msgObject) => {
           dispatch({type: "SET_PROBLEM", payload: msgObject})
         },

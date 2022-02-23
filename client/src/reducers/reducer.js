@@ -12,6 +12,15 @@ const initialState = {
     messages: [],
     draggables: {},
     
+    //mistakes
+    q1cu:{},
+    q2cu:{},
+    q1pf:{},
+    q2pf:{},
+    q1sc:{},
+    q2sc:{},
+    q3sc:{},
+
 
     //definition of problem variables
     problem: "Talk to Vi2 at the chatbox below",
@@ -99,9 +108,44 @@ function reducer(state=initialState, action){
             ...state,
             questiontype: action.payload
         }
-
-
-
+        
+        //mistakes
+        case "SET_Q1CU":
+        return {
+            ...state,
+            q1cu: action.payload
+        }
+        case "SET_Q2CU":
+        return {
+            ...state,
+            q2cu: action.payload
+        }
+        case "SET_Q1PF":
+        return {
+            ...state,
+            q1pf: action.payload
+        }
+        case "SET_Q2PF":
+        return {
+            ...state,
+            q2pf: action.payload
+        }
+        case "SET_Q1SC":
+        return {
+            ...state,
+            q1sc: action.payload
+        }
+        case "SET_Q2SC":
+        return {
+            ...state,
+            q2sc: action.payload
+        }
+        case "SET_Q3SC":
+        return {
+            ...state,
+            q3sc: action.payload
+        }
+        //-----------------------------------
         case "SET_USER":
         return {
             ...state,

@@ -133,7 +133,17 @@ class numberSentence extends Component {
             var mistakeF = response1.data.response.outputContexts[0].parameters.fields.mistakeF.numberValue
             var mistakeU = response1.data.response.outputContexts[0].parameters.fields.mistakeU.numberValue
     
-            Axios.post("/updateAssessmentLevel", {id: this.props.currentUser, problemno : response1.data.response.outputContexts[0].parameters.fields.problemnumber.numberValue - 1, mistakesU: mistakeU, mistakesF: mistakeF, mistakesC: mistakeC}).then(res => {
+            Axios.post("/updateAssessmentLevel", {
+                id: this.props.currentUser, 
+                problemno : response1.data.response.outputContexts[0].parameters.fields.problemnumber.numberValue - 1, 
+                q1cu: this.props.q1cu, 
+                q2cu: this.props.q2cu, 
+                q1pf: this.props.q1pf, 
+                q2pf: this.props.q2pf, 
+                q1sc: this.props.q1sc, 
+                q2sc: this.props.q2sc, 
+                q3sc: this.props.q3sc
+            }).then(res => {
                 console.log("updated assessment levels")
             })
     
@@ -243,6 +253,15 @@ return {
     messages: state.messages,
     sessionID: state.sessionID,
     questiontype: state.questiontype,
+
+    //mistakes
+    q1cu: state.q1cu,
+    q2cu: state.q2cu,
+    q1pf: state.q1pf,
+    q2pf: state.q2pf,
+    q1sc: state.q1sc,
+    q2sc: state.q2sc,
+    q3sc: state.q3sc,
 
     problem : state.problem,
     inventoryOneName: state.inventoryOneName,

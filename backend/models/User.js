@@ -7,6 +7,36 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+
+  
+  problem1q1cu: {
+    type: Number,
+    required: false
+  },
+  problem1q2cu: {
+    type: Number,
+    required: false
+  },
+  problem1q1pf: {
+    type: Number,
+    required: false
+  },
+  problem1q2pf: {
+    type: Number,
+    required: false
+  },
+  problem1q1sc: {
+    type: Number,
+    required: false
+  },
+  problem1q2sc: {
+    type: Number,
+    required: false
+  },
+  problem1q3sc: {
+    type: Number,
+    required: false
+  },
   assessmentLevel1cu: {
     type: String,
     required: false
@@ -24,7 +54,34 @@ const UserSchema = new Schema({
     required: false
   },
 
-
+  problem2q1cu: {
+    type: Number,
+    required: false
+  },
+  problem2q2cu: {
+    type: Number,
+    required: false
+  },
+  problem2q1pf: {
+    type: Number,
+    required: false
+  },
+  problem2q2pf: {
+    type: Number,
+    required: false
+  },
+  problem2q1sc: {
+    type: Number,
+    required: false
+  },
+  problem2q2sc: {
+    type: Number,
+    required: false
+  },
+  problem2q3sc: {
+    type: Number,
+    required: false
+  },
   assessmentLevel2cu: {
     type: String,
     required: false
@@ -42,7 +99,34 @@ const UserSchema = new Schema({
     required: false
   },
 
-
+  problem3q1cu: {
+    type: Number,
+    required: false
+  },
+  problem3q2cu: {
+    type: Number,
+    required: false
+  },
+  problem3q1pf: {
+    type: Number,
+    required: false
+  },
+  problem3q2pf: {
+    type: Number,
+    required: false
+  },
+  problem3q1sc: {
+    type: Number,
+    required: false
+  },
+  problem3q2sc: {
+    type: Number,
+    required: false
+  },
+  problem3q3sc: {
+    type: Number,
+    required: false
+  },
   assessmentLevel3cu: {
     type: String,
     required: false
@@ -60,7 +144,34 @@ const UserSchema = new Schema({
     required: false
   },
 
-
+  problem4q1cu: {
+    type: Number,
+    required: false
+  },
+  problem4q2cu: {
+    type: Number,
+    required: false
+  },
+  problem4q1pf: {
+    type: Number,
+    required: false
+  },
+  problem4q2pf: {
+    type: Number,
+    required: false
+  },
+  problem4q1sc: {
+    type: Number,
+    required: false
+  },
+  problem4q2sc: {
+    type: Number,
+    required: false
+  },
+  problem4q3sc: {
+    type: Number,
+    required: false
+  },
   assessmentLevel4cu: {
     type: String,
     required: false
@@ -78,7 +189,34 @@ const UserSchema = new Schema({
     required: false
   },
 
-
+  problem5q1cu: {
+    type: Number,
+    required: false
+  },
+  problem5q2cu: {
+    type: Number,
+    required: false
+  },
+  problem5q1pf: {
+    type: Number,
+    required: false
+  },
+  problem5q2pf: {
+    type: Number,
+    required: false
+  },
+  problem5q1sc: {
+    type: Number,
+    required: false
+  },
+  proble51q2sc: {
+    type: Number,
+    required: false
+  },
+  problem5q3sc: {
+    type: Number,
+    required: false
+  },
   assessmentLevel5cu: {
     type: String,
     required: false
@@ -96,7 +234,34 @@ const UserSchema = new Schema({
     required: false
   },
 
-
+  problem5q1cu: {
+    type: Number,
+    required: false
+  },
+  problem5q2cu: {
+    type: Number,
+    required: false
+  },
+  problem5q1pf: {
+    type: Number,
+    required: false
+  },
+  problem5q2pf: {
+    type: Number,
+    required: false
+  },
+  problem5q1sc: {
+    type: Number,
+    required: false
+  },
+  problem5q2sc: {
+    type: Number,
+    required: false
+  },
+  problem5q3sc: {
+    type: Number,
+    required: false
+  },
   assessmentLevel6cu: {
     type: String,
     required: false

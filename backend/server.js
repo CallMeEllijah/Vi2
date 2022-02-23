@@ -195,36 +195,78 @@ app.post('/addUser',(req,res)=>{
   var time = d.toLocaleTimeString();
   const newUser = new User({
     name: req.body.name,
+    problem1q1cu: 0,
+    problem1q2cu: 0,
+    problem1q1pf: 0,
+    problem1q2pf: 0,
+    problem1q1sc: 0,
+    problem1q2sc: 0,
+    problem1q3sc: 0,
     assessmentLevel1cu: "",
     assessmentLevel1pf: "",
     assessmentLevel1sc: "",
     assessmentLevel1time: "",
   
   
+    problem2q1cu: 0,
+    problem2q2cu: 0,
+    problem2q1pf: 0,
+    problem2q2pf: 0,
+    problem2q1sc: 0,
+    problem2q2sc: 0,
+    problem2q3sc: 0,
     assessmentLevel2cu: "",
     assessmentLevel2pf: "",
     assessmentLevel2sc: "",
     assessmentLevel2time: "",
   
   
+    problem3q1cu: 0,
+    problem3q2cu: 0,
+    problem3q1pf: 0,
+    problem3q2pf: 0,
+    problem3q1sc: 0,
+    problem3q2sc: 0,
+    problem3q3sc: 0,
     assessmentLevel3cu: "",
     assessmentLevel3pf: "",
     assessmentLevel3sc: "",
     assessmentLevel3time: "",
   
   
+    problem4q1cu: 0,
+    problem4q2cu: 0,
+    problem4q1pf: 0,
+    problem4q2pf: 0,
+    problem4q1sc: 0,
+    problem4q2sc: 0,
+    problem4q3sc: 0,
     assessmentLevel4cu: "",
     assessmentLevel4pf: "",
     assessmentLevel4sc: "",
     assessmentLevel4time: "",
 
   
+    problem5q1cu: 0,
+    problem5q2cu: 0,
+    problem5q1pf: 0,
+    problem5q2pf: 0,
+    problem5q1sc: 0,
+    problem5q2sc: 0,
+    problem5q3sc: 0,
     assessmentLevel5cu: "",
     assessmentLevel5pf: "",
     assessmentLevel5sc: "",
     assessmentLevel5time: "",
   
   
+    problem6q1cu: 0,
+    problem6q2cu: 0,
+    problem6q1pf: 0,
+    problem6q2pf: 0,
+    problem6q1sc: 0,
+    problem6q2sc: 0,
+    problem6q3sc: 0,
     assessmentLevel6cu: "",
     assessmentLevel6pf: "",
     assessmentLevel6sc: "",
@@ -256,52 +298,52 @@ app.post('/updateAssessmentLevel',(req,res)=>{
       var levelu = "";
       var levelf = "";
       var levelc = "";
-      var cuMistakes = req.body.mistakesU;
-      var pcMistakes = req.body.mistakesF;
-      var scMistakes = req.body.mistakesC;
       
       var d = new Date();
       var time = d.toLocaleTimeString();
 
-      console.log(cuMistakes)
-      console.log(pcMistakes)
-      console.log(scMistakes)
-
-      if(scMistakes >=0 && scMistakes <=2){
-        levelc = "expert";
+      if(req.body.q1sc == 0 && req.body.q2sc == 2 && req.body.q3sc == 0){
+        levelc = "exemplary";
       }
-      else if(scMistakes > 2 && scMistakes <=4){
-        levelc = "intermediate";
+      else if(req.body.q1sc > 1 || req.body.q2sc > 1 || req.body.q3sc > 1){
+        levelc = "beginning";
       }
-      else if(scMistakes > 4){
-        levelc = "beginner";
+      else if(req.body.q1sc > 0 || req.body.q2sc > 0 || req.body.q3sc > 0){
+        levelc = "developing";
       }
 
-      if(cuMistakes >= 0 && cuMistakes <=1){
+      if(req.body.q1cu == 0 && req.body.q1cu ==0){
         levelu = "expert";
       }
-      else if(cuMistakes == 2){
-        levelu = "intermediate";
+      else if(req.body.q1cu > 1 || req.body.q1cu > 1){
+        levelu = "beginning";
       }
-      else if(cuMistakes > 2){
-        levelu = "beginner";
+      else if(req.body.q1cu > 0 || req.body.q1cu > 0){
+        levelu = "developing";
       }
 
-      if(pcMistakes >= 0 && pcMistakes <=1){
+      if(req.body.q1pf == 0 && req.body.q1pf ==0){
         levelf = "expert";
       }
-      else if(pcMistakes == 2){
-        levelf = "intermediate";
+      else if(req.body.q1pf > 1 || req.body.q1pf > 1){
+        levelf = "beginning";
       }
-      else if(pcMistakes > 2){
-        levelf = "beginner";
+      else if(req.body.q1pf > 0 || req.body.q1pf > 0){
+        levelf = "developing";
       }
       
       //-------------------start update db assessment level----------
       switch(req.body.problemno){
         case 1:
-          USER.findByIdAndUpdate({_id: req.body.id}, {
+          USER.findByIdAndUpdate(req.body.id, {
             $set:{
+              problem1q1cu: req.body.q1cu,
+              problem1q2cu: req.body.q2cu,
+              problem1q1pf: req.body.q1pf,
+              problem1q2pf: req.body.q2pf,
+              problem1q1sc: req.body.q1sc,
+              problem1q2sc: req.body.q2sc,
+              problem1q3sc: req.body.q3sc,
             assessmentLevel1cu: levelu,
             assessmentLevel1pf: levelf,
             assessmentLevel1sc: levelc,
@@ -317,8 +359,15 @@ app.post('/updateAssessmentLevel',(req,res)=>{
           })
           break; 
         case 2:
-          USER.findByIdAndUpdate({_id: req.body.id}, {
+          USER.findOneAndUpdate({_id: req.body.id}, {
             $set:{
+              problem2q1cu: req.body.q1cu,
+              problem2q2cu: req.body.q2cu,
+              problem2q1pf: req.body.q1pf,
+              problem2q2pf: req.body.q2pf,
+              problem2q1sc: req.body.q1sc,
+              problem2q2sc: req.body.q2sc,
+              problem2q3sc: req.body.q3sc,
             assessmentLevel2cu: levelu,
             assessmentLevel2pf: levelf,
             assessmentLevel2sc: levelc,
@@ -336,6 +385,13 @@ app.post('/updateAssessmentLevel',(req,res)=>{
         case 3:
           USER.findByIdAndUpdate({_id: req.body.id}, {
             $set:{
+              problem3q1cu: req.body.q1cu,
+              problem3q2cu: req.body.q2cu,
+              problem3q1pf: req.body.q1pf,
+              problem3q2pf: req.body.q2pf,
+              problem3q1sc: req.body.q1sc,
+              problem3q2sc: req.body.q2sc,
+              problem3q3sc: req.body.q3sc,
             assessmentLevel3cu: levelu,
             assessmentLevel3pf: levelf,
             assessmentLevel3sc: levelc,
@@ -353,6 +409,13 @@ app.post('/updateAssessmentLevel',(req,res)=>{
         case 4:
           USER.findByIdAndUpdate({_id: req.body.id}, {
             $set:{
+              problem4q1cu: req.body.q1cu,
+              problem4q2cu: req.body.q2cu,
+              problem4q1pf: req.body.q1pf,
+              problem4q2pf: req.body.q2pf,
+              problem4q1sc: req.body.q1sc,
+              problem4q2sc: req.body.q2sc,
+              problem4q3sc: req.body.q3sc,
             assessmentLevel4cu: levelu,
             assessmentLevel4pf: levelf,
             assessmentLevel4sc: levelc,
@@ -370,6 +433,13 @@ app.post('/updateAssessmentLevel',(req,res)=>{
         case 5:
           USER.findByIdAndUpdate({_id: req.body.id}, {
             $set:{
+              problem5q1cu: req.body.q1cu,
+              problem5q2cu: req.body.q2cu,
+              problem5q1pf: req.body.q1pf,
+              problem5q2pf: req.body.q2pf,
+              problem5q1sc: req.body.q1sc,
+              problem5q2sc: req.body.q2sc,
+              problem5q3sc: req.body.q3sc,
             assessmentLevel5cu: levelu,
             assessmentLevel5pf: levelf,
             assessmentLevel5sc: levelc,
@@ -387,6 +457,13 @@ app.post('/updateAssessmentLevel',(req,res)=>{
         case 6:
           USER.findByIdAndUpdate({_id: req.body.id}, {
             $set:{
+              problem6q1cu: req.body.q1cu,
+              problem6q2cu: req.body.q2cu,
+              problem6q1pf: req.body.q1pf,
+              problem6q2pf: req.body.q2pf,
+              problem6q1sc: req.body.q1sc,
+              problem6q2sc: req.body.q2sc,
+              problem6q3sc: req.body.q3sc,
             assessmentLevel6cu: levelu,
             assessmentLevel6pf: levelf,
             assessmentLevel6sc: levelc,
