@@ -1,7 +1,7 @@
 const initialState = {
     currentUser: {},
+    userName:{},
     questiontype: {},
-    problem: "Talk to Vi at the chatbox on the lower right of the screen to start!",
     value1: {},
     value2: {},
     person1: {},
@@ -10,20 +10,151 @@ const initialState = {
     mistakesF: {},
     mistakesC: {},
     messages: [],
-    draggables: {}
+    draggables: {},
+    
+    //mistakes
+    q1cu:{},
+    q2cu:{},
+    q1pf:{},
+    q2pf:{},
+    q1sc:{},
+    q2sc:{},
+    q3sc:{},
+
+
+    //definition of problem variables
+    problem: "Talk to Vi2 at the chatbox below",
+    inventoryOneName: "",
+    inventoryTwoName: "",
+    itemName: "",
+    
+    //tracker for progress of student in questions
+    currentProgress: 0,
+
+    //Used for unique sessions
+    sessionID: {},
+
+    //etc
+    confettiShow: false,
+    confettiRecycle: false,
+    ending: "notend",
+    endingConfetti: false,
+    tutorialShow: "noTutorial"
 }
 
 function reducer(state=initialState, action){
     switch(action.type){
-        case "SET_USER":
+        case "SET_PROGRESS":
         return {
             ...state,
-            currentUser: action.payload
+            currentProgress: state.currentProgress+1
+        }
+        case "SET_SESSION":
+        return {
+            ...state,
+            sessionID: action.payload
+        }
+        case "ADD_MESSAGE":
+        return {
+            ...state,
+            messages: [...state.messages, action.payload]
+        }
+
+        //etc
+        case "SET_CONFETTI":
+        return {
+            ...state,
+            confettiShow: action.payload
+        }
+        case "SET_CONFETTIREC":
+        return {
+            ...state,
+            confettiRecycle: action.payload
+        }
+        case "SET_END":
+        return {
+            ...state,
+            ending: action.payload
+        }
+        case "SET_ENDCONFETTI":
+        return {
+            ...state,
+            endingConfetti: action.payload
+        }
+        case "SET_TUTORIALSHOW":
+        return {
+            ...state,
+            tutorialShow: action.payload
+        }
+
+        //set inventory names for interactables
+        case "SET_INVENTORY1NAME":
+        return {
+            ...state,
+            inventoryOneName: action.payload
+        }
+        case "SET_INVENTORY2NAME":
+        return {
+            ...state,
+            inventoryTwoName: action.payload
+        }
+        case "SET_ITEMNAME":
+        return {
+            ...state,
+            itemName: action.payload
         }
         case "SET_QUESTION_TYPE":
         return {
             ...state,
             questiontype: action.payload
+        }
+        
+        //mistakes
+        case "SET_Q1CU":
+        return {
+            ...state,
+            q1cu: action.payload
+        }
+        case "SET_Q2CU":
+        return {
+            ...state,
+            q2cu: action.payload
+        }
+        case "SET_Q1PF":
+        return {
+            ...state,
+            q1pf: action.payload
+        }
+        case "SET_Q2PF":
+        return {
+            ...state,
+            q2pf: action.payload
+        }
+        case "SET_Q1SC":
+        return {
+            ...state,
+            q1sc: action.payload
+        }
+        case "SET_Q2SC":
+        return {
+            ...state,
+            q2sc: action.payload
+        }
+        case "SET_Q3SC":
+        return {
+            ...state,
+            q3sc: action.payload
+        }
+        //-----------------------------------
+        case "SET_USER":
+        return {
+            ...state,
+            currentUser: action.payload
+        }
+        case "SET_NAME":
+        return {
+            ...state,
+            userName: action.payload
         }
         case "SET_PROBLEM":
         return {
@@ -49,11 +180,6 @@ function reducer(state=initialState, action){
         return {
             ...state,
             person2: action.payload
-        }
-        case "ADD_MESSAGE":
-        return {
-            ...state,
-            messages: [...state.messages, action.payload]
         }
         case "SET_MISTAKEU":
         return {

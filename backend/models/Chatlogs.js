@@ -7,10 +7,12 @@ const ChatlogSchema = new Schema({
     type: String,
     required: true
   },
+  
   messages: {
     type: Array,
     required: true
   }
+  
 });
 
 module.exports = Chatlog = mongoose.model("chatlogs", ChatlogSchema);

@@ -1,6 +1,6 @@
 # Vi2 Tutoring Chatbot
 
-Run the ff to setup: `npm install` then `cd client && npm install`
+Run the ff to setup: `npm install`
 
 Do the ff to start:
 1. `npm run start` for the front end
